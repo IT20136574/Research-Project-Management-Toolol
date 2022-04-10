@@ -5,7 +5,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
 require("dotenv").config();
-
+app.use(express.json());
 
 const PORT = process.env.PORT || 8070;
 
@@ -25,6 +25,15 @@ connection.once("open", () => {
 console.log("Mongodb connection success!!!");
 
 })
+
+// @import routes
+const studentRouter = require("./routes/DH_routes/student");
+
+
+
+
+// rotues
+app.use("/student",studentRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is up and running on port number: ${PORT}`)
