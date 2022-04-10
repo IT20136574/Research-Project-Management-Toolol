@@ -10,13 +10,29 @@ const studentSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  nic: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   student_id: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  faculty: {
     type: String,
     required: true,
     trim: true,
   },
   batch: {
     type: String,
+    required: true,
+    trim: true,
+  },
+  specialization: {
+    type: String,
+    required: true,
     trim: true,
   },
 
