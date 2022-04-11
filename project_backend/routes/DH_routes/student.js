@@ -34,6 +34,12 @@ router.post("/signup", async (req, res) => {
       throw new Error("User already exists");
     }
 
+    let student2 = await student.findOne({ student_id });
+    if (student2) {
+      throw new Error("User already exists");
+    }
+
+
       student1 = {
         name: name,
         nic: nic,
@@ -60,6 +66,26 @@ router.post("/signup", async (req, res) => {
       res.status(500).send({error: error.message});
     }
   });
+  
+
+
+      //login
+
+    router.post('/login', async (req, res) => {
+      try {
+        const {student_id, pwd} = req.body
+        const Std = await student.findByCredentials(student_id, pwd)
+        const token = await Std.generateAuthToken()
+        res.status(200).send({token: token, Std: Std})
+  
+      } catch (error) {
+        res.status(500).send({ error: error.message });
+        console.log(error);
+      }
+  
+    })
+
+    
 
 
 
