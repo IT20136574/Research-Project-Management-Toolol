@@ -68,11 +68,7 @@ const adminSchema = new mongoose.Schema({
 
     imageUrl: {
         type: String,
-      },
-
-    imageUrl2: {
-        type: String,
-    }
+      }
 });
 
 const admin = mongoose.model("admin",adminSchema);
