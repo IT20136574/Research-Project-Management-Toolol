@@ -68,6 +68,10 @@ const adminSchema = new mongoose.Schema({
 
     imageUrl: {
         type: String,
+      },
+
+      imageUr2: {
+        type: String,
       }
 
 });
