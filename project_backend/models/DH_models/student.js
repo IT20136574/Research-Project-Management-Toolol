@@ -2,9 +2,16 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+//const {roles} = require('../../middleware/constants')
 
 
 const studentSchema = new mongoose.Schema({
+  // role: {
+  //   type: String,
+  //  required: true,
+  //   enum: [roles.admin, roles.student, roles.supervisor, roles.co_supervisor, roles.pannel_member],
+  //   default: STUDENT
+  // },
   name: {
     type: String,
     required: true,

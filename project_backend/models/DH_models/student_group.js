@@ -12,25 +12,122 @@ const studentGroupSchema = new mongoose.Schema({
     trim: true,
   },
 
-  group_members: [{
-    objectId: {
+  groupMembers: [{
+    id: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "products"
+      ref: "students"
     },
+
     student_id: {
       type: String,
-      require: true
+     //require: true
     },
     name: {
       type: String,
-      required: true
+      //required: true
     },
     email: {
       type: String,
-      required: false
+      //required: true
     },
+    phone: {
+      type: String,
+      required: false
+    }
   }],
+
+ 
+    // member1_student_id: {
+    //   type: String,
+    //   require: true
+    // },
+
+    // member1_name: {
+    //   type: String,
+    //   required: true
+    // },
+
+    // member1_email: {
+    //   type: String,
+    //   required: false
+    // },
+
+    // member1_phone: {
+    //   type: String,
+    //   required: false
+    // },
+
+
+
+
+    // member2_student_id: {
+    //   type: String,
+    //   require: true
+    // },
+
+    // member2_name: {
+    //   type: String,
+    //   required: true
+    // },
+
+    // member2_email: {
+    //   type: String,
+    //   required: false
+    // },
+
+    // member2_phone: {
+    //   type: String,
+    //   required: false
+    // },
+
+
+
+
+    // member3_student_id: {
+    //   type: String,
+    //   require: true
+    // },
+
+    // member3_name: {
+    //   type: String,
+    //   required: true
+    // },
+
+    // member3_email: {
+    //   type: String,
+    //   required: false
+    // },
+
+    // member3_phone: {
+    //   type: String,
+    //   required: false
+    // },
+
+
+
+
+
+    // member4_student_id: {
+    //   type: String,
+    //   require: true
+    // },
+
+    // member4_name: {
+    //   type: String,
+    //   required: true
+    // },
+
+    // member4_email: {
+    //   type: String,
+    //   required: false
+    // },
+
+    // member4_phone: {
+    //   type: String,
+    //   required: false
+    // },
+
 
 });
 
