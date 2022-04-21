@@ -98,94 +98,11 @@ router.post("/signup", async (req, res) => {
           group_name,
 
         } = req.body;
-    
-      
-      //   let student1 = await group.findOne({ member1_student_id,member2_student_id,member3_student_id,member4_student_id });
-      // if (student1) {
-      //   throw new Error("Group member 1 already exists in a group...");
-      // }
-  
-      // let student2 = await group.findOne({ member1_student_id,member2_student_id,member3_student_id,member4_student_id });
-      // if (student2) {
-      //   throw new Error("Group member 2 already exists in a group...");
-      // }
 
-      // let student3 = await group.findOne({ member1_student_id,member2_student_id,member3_student_id,member4_student_id });
-      // if (student3) {
-      //   throw new Error("Group member 3 already exists in a group...");
-      // }
-
-      // let student4 = await group.findOne({ member1_student_id,member2_student_id,member3_student_id,member4_student_id });
-      // if (student4) {
-      //   throw new Error("Group member 4 already exists in a group...");
-      // }
-
-      // const id1 = await student.find({ student_id: member1_student_id},{"_id":1});
-      // const mem1 = await student.findById(id1);
-
-      // const id2 = await student.find({ student_id: member2_student_id},{"_id":1});
-      // const mem2 = await student.findById(id2);  
-
-      // const id3 = await student.find({ student_id: member3_student_id},{"_id":1});
-      // const mem3 = await student.findById(id3);
-
-      // const id4 = await student.find({ student_id: member4_student_id},{"_id":1});
-      // const mem4 = await student.findById(id4);
-
-      // let groupMember1 = {
-      //   student_id: mem1.student_id,
-      //   name: mem1.name,
-      //   email: mem1.email,
-      //   phone: mem1.phone,
-      // };
-
-      // let groupMember2 = {
-      //   student_id: mem2.student_id,
-      //   name: mem2.name,
-      //   email: mem2.email,
-      //   phone: mem2.phone,
-      // };
-
-      // let groupMember3 = {
-      //   student_id: mem3.student_id,
-      //   name: mem3.name,
-      //   email: mem3.email,
-      //   phone: mem3.phone,
-      // };
-
-      // let groupMember4 = {
-      //   student_id: mem4.student_id,
-      //   name: mem4.name,
-      //   email: mem4.email,
-      //   phone: mem4.phone,
-      // };
-
-
-  
         group1 = {
       
             group_name: group_name,
 
-          // member1_student_id: mem1.student_id,
-          // member1_name: mem1.name,
-          // member1_email: mem1.email,
-          // member1_phone: mem1.phone,
-      
-          // member2_student_id: mem2.student_id,
-          // member2_name: mem2.name,
-          // member2_email: mem2.email,
-          // member2_phone: mem2.phone,
-      
-          // member3_student_id: mem3.student_id,
-          // member3_name: mem3.name,
-          // member3_email: mem3.email,
-          // member3_phone: mem3.phone,
-    
-          // member4_student_id: mem1.student_id,
-          // member4_name: mem4.name,
-          // member4_email: mem4.email,
-          // member4_phone: mem4.phone,
-      
         };
 
         let groupName = await group.findOne({ group_name });
@@ -269,29 +186,7 @@ router.post("/signup", async (req, res) => {
             email: mem1.email,
             phone: mem1.phone,
           };
-
-          // let groupMember2 = {
-          //   student_id: mem2.student_id,
-          //   name: mem2.name,
-          //   email: mem2.email,
-          //   phone: mem2.phone,
-          // };
-
-          // let groupMember3 = {
-          //   student_id: mem3.student_id,
-          //   name: mem3.name,
-          //   email: mem3.email,
-          //   phone: mem3.phone,
-          // };
-
-          // let groupMember4 = {
-          //  student_id: mem4.student_id,
-          //  name: mem4.name,
-          //  email: mem4.email,
-          //  phone: mem4.phone,
-          // };
-
-        
+ 
             await group.findOneAndUpdate(
               { _id: groupId },
               { $push: { groupMembers: groupMember1}},
