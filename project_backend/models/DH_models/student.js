@@ -70,11 +70,23 @@ const studentSchema = new mongoose.Schema({
       }
     },
   },
+
   pwd: {
     type: String,
     required: true,
     trim: true,
   },
+
+  status: {
+    type: String,
+    trim: true,
+  },
+
+  grp_id: {
+    type: String,
+    trim: true,
+  },
+  
   imageUrl: {
     type: String,
   },

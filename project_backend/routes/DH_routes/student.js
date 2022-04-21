@@ -224,78 +224,92 @@ router.post("/signup", async (req, res) => {
         } = req.body;
 
 
+      //check whether the registering student's student id is valid or not.
       let student1 = await student.findOne({ student_id: member1_student_id},{"student_id":1});
       if (!student1) {
         throw new Error("Invalid Student ID...!!!");
       }
 
+
+      //check wether the student is regstered to a group or not.
+      let status = await student1.find({ status: "Registered"})
+      if (status) {
+        throw new Error("Student already registered in a group...!!!");
+      }
+
+
+      ////check wether the student group is full or not.
         const arrLength = group1.groupMembers.length;
 
         if(arrLength >= 4){
-
           throw new Error('This group already have 4 members..!!!')
-
         }else{
 
-
-      let student1 = await group.find({'groupMembers.student_id': "IT20128700" });
-      console.log(student1);
-      if (student1) {
-        throw new Error("Group member already exists in a group...!!!");
-      }
-
-      
   
+      //update registering member status
+          const grp_status = "Registered";
+          const gID = groupId;
+          
+          student1.status = grp_status;
+          student1.grp_id = gID;
 
-      const id1 = await student.find({ student_id: member1_student_id},{"_id":1});
-      const mem1 = await student.findById(id1);
+          await student1.save()
 
-      let groupMember1 = {
-        id: mem1._id,
-        student_id: mem1.student_id,
-        name: mem1.name,
-        email: mem1.email,
-        phone: mem1.phone,
-      };
+          
+      
+        //add registering member details to student group db 
+          const id1 = await student.find({ student_id: member1_student_id},{"_id":1});
+          const mem1 = await student.findById(id1);
 
-      // let groupMember2 = {
-      //   student_id: mem2.student_id,
-      //   name: mem2.name,
-      //   email: mem2.email,
-      //   phone: mem2.phone,
-      // };
+          let groupMember1 = {
+            id: mem1._id,
+            student_id: mem1.student_id,
+            name: mem1.name,
+            email: mem1.email,
+            phone: mem1.phone,
+          };
 
-      // let groupMember3 = {
-      //   student_id: mem3.student_id,
-      //   name: mem3.name,
-      //   email: mem3.email,
-      //   phone: mem3.phone,
-      // };
+          // let groupMember2 = {
+          //   student_id: mem2.student_id,
+          //   name: mem2.name,
+          //   email: mem2.email,
+          //   phone: mem2.phone,
+          // };
 
-      // let groupMember4 = {
-      //  student_id: mem4.student_id,
-      //  name: mem4.name,
-      //  email: mem4.email,
-      //  phone: mem4.phone,
-      // };
+          // let groupMember3 = {
+          //   student_id: mem3.student_id,
+          //   name: mem3.name,
+          //   email: mem3.email,
+          //   phone: mem3.phone,
+          // };
 
-    
-        await group.findOneAndUpdate(
-          { _id: groupId },
-          { $push: { groupMembers: groupMember1}},
-          { new: true, upsert: true }
-        )
-        res.status(200).send({ status: "Group Member Registered.."});
+          // let groupMember4 = {
+          //  student_id: mem4.student_id,
+          //  name: mem4.name,
+          //  email: mem4.email,
+          //  phone: mem4.phone,
+          // };
 
-        }   
+        
+            await group.findOneAndUpdate(
+              { _id: groupId },
+              { $push: { groupMembers: groupMember1}},
+              { new: true, upsert: true }
+            )
+            res.status(200).send({ status: "Group Member Registered.."});
 
-      } catch (error) {
-        console.log(error.message);
-        res.status(500).send({ error: error.message });
-      }
-    
+            }   
+
+          } catch (error) {
+            console.log(error.message);
+            res.status(500).send({ error: error.message });
+          }
+        
 
     });
+
+
+
 
 
 module.exports = router;
