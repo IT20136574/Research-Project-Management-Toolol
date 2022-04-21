@@ -5,7 +5,7 @@ let group = require("../../models/DH_models/student_group");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const studentGroup = require("../../models/DH_models/student_group");
+const auth = require("../../middleware/auth");
 
 
 
@@ -225,17 +225,18 @@ router.post("/signup", async (req, res) => {
 
 
       //check whether the registering student's student id is valid or not.
-      let student1 = await student.findOne({ student_id: member1_student_id},{"student_id":1});
+      let student1 = await student.findOne({ student_id: member1_student_id});
       if (!student1) {
         throw new Error("Invalid Student ID...!!!");
       }
 
+      console.log(student1.status)
 
       //check wether the student is regstered to a group or not.
-      let status = await student1.find({ status: "Registered"})
-      if (status) {
+      if (student1.status == "Registered") {
         throw new Error("Student already registered in a group...!!!");
       }
+    
 
 
       ////check wether the student group is full or not.
@@ -309,6 +310,51 @@ router.post("/signup", async (req, res) => {
     });
 
 
+    //Register research topic
+    router.post("/regResearchTopic", auth, async (req, res) => {
+      
+      try {
+        const Student = await student.findById(req.Std._id)
+        const gid = await Student.grp_id;
+        const Group = await group.findById(gid);
+        const arrLength = Group.researchTopic_Info.length;
+
+        if (!Student) {
+          throw new Error('There is no Student')
+        }
+    
+        if (!Group) {
+          throw new Error('You are not registered in a group...!')
+        }
+
+        if(arrLength >= 1){
+          throw new Error('You can only register 1 topic..!!!')
+        }
+
+
+        const {
+          research_Topic,
+          field,
+          tags
+        } = req.body;
+
+        let r_topicItems = {
+          research_Topic: research_Topic,
+          field: field,
+          tags: tags,
+        };
+    
+        await group.findOneAndUpdate(
+          { _id: gid },
+          { $push: { researchTopic_Info: r_topicItems } },
+          { new: true, upsert: true }
+        )
+        res.status(200).send({ status: "Research topic registered...!", researchTopic_Info: r_topicItems });
+      } catch (error) {
+        console.log(error.message);
+        res.status(500).send({ error: error.message });
+      }
+    });
 
 
 

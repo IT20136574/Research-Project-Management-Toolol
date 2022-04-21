@@ -80,13 +80,14 @@ const studentSchema = new mongoose.Schema({
   status: {
     type: String,
     trim: true,
+    default: "Pending"
   },
 
   grp_id: {
     type: String,
     trim: true,
   },
-  
+
   imageUrl: {
     type: String,
   },
