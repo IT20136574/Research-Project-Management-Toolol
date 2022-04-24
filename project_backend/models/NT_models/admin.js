@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
+<<<<<<< HEAD
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+=======
+const config = require("config");
+>>>>>>> a318dacb8d810e9a8f7d9582e165fea53cedc26e
 
 const adminSchema = new mongoose.Schema({
 
