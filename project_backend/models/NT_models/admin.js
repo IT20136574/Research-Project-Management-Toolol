@@ -79,7 +79,7 @@ adminSchema.methods.generateAuthToken = async function () {
     admin.tokens = admin.tokens.concat({ token });
     await admin.save();
     return token;
-};
+  };
  
   adminSchema.statics.findByCredentials = async (sliitid, password) => {
     const admin1 = await admin.findOne({ sliitid});
@@ -91,7 +91,7 @@ adminSchema.methods.generateAuthToken = async function () {
       throw new Error("Password is not matched");
     }
     return admin1;
-};
+  };
 
 const admin = mongoose.model("admin",adminSchema);
 module.exports = admin;
