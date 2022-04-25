@@ -123,6 +123,7 @@ router.post("/signup", async (req, res) => {
     });
 
 
+
     //register members
 
     router.post("/grpReg/:id", async (req, res) => {
@@ -147,7 +148,6 @@ router.post("/signup", async (req, res) => {
         throw new Error("Invalid Student ID...!!!");
       }
 
-      console.log(student1.status)
 
       //check wether the student is regstered to a group or not.
       if (student1.status == "Registered") {
@@ -250,6 +250,9 @@ router.post("/signup", async (req, res) => {
         res.status(500).send({ error: error.message });
       }
     });
+
+
+    //
 
 
 
