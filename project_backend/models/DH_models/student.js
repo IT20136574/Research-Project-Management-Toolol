@@ -2,9 +2,16 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+//const {roles} = require('../../middleware/constants')
 
 
 const studentSchema = new mongoose.Schema({
+  // role: {
+  //   type: String,
+  //  required: true,
+  //   enum: [roles.admin, roles.student, roles.supervisor, roles.co_supervisor, roles.pannel_member],
+  //   default: STUDENT
+  // },
   name: {
     type: String,
     required: true,
@@ -63,11 +70,24 @@ const studentSchema = new mongoose.Schema({
       }
     },
   },
+
   pwd: {
     type: String,
     required: true,
     trim: true,
   },
+
+  status: {
+    type: String,
+    trim: true,
+    default: "Pending"
+  },
+
+  grp_id: {
+    type: String,
+    trim: true,
+  },
+
   imageUrl: {
     type: String,
   },
@@ -102,10 +122,10 @@ return token;
 };
 
 // @Action - Find student by credentials
-studentSchema.statics.findByCredentials = async (email, pwd) => {
-const student1 = await student.findOne({ email });
+studentSchema.statics.findByCredentials = async (student_id, pwd) => {
+const student1 = await student.findOne({ student_id });
 if (!student1) {
-  throw new Error("Please enter authorized email");
+  throw new Error("Please enter authorized student ID");
 }
 const isMatch = await bcrypt.compare(pwd, student1.pwd);
 if (!isMatch) {
