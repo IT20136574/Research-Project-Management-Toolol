@@ -103,6 +103,10 @@ export default class AdminAccount extends Component {
     adminRegister(){
         window.location.href="/regadmin"
     }
+
+    updateAdmin(){
+        window.location.href="/updateadmin/"
+    }
   render() {
     return (
       <div>
@@ -117,7 +121,7 @@ export default class AdminAccount extends Component {
           <p>SliitID : {this.state.sliitid}</p>
           <p>email : {this.state.email}</p><br/>
           <button onClick={this.adminRegister}>Admin Register</button> &nbsp;
-          <button>Edit</button> &nbsp;
+          <button onClick={this.updateAdmin}>Edit</button> &nbsp;
           <button onClick={this.deleteAdmin}>Delete</button> &nbsp;
           <button onClick={this.adminLogout}>Admin Logout</button>
           

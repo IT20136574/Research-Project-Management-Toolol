@@ -35,6 +35,7 @@ import UpdateStaffMember from './components/NT_Components/user-management/Staff-
 import AdminLogin from './components/NT_Components/admin/AdminLogin';
 import AdminAccount from './components/NT_Components/admin/AdminAccount';
 import RegisterAdmin from './components/NT_Components/admin/RegisterAdmin';
+import UpdateAdmin from './components/NT_Components/admin/UpdateAdmin';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
               <Route path="/updatestaff/:id" component={UpdateStaffMember}/>
               <Route path="/adminaccount" component={AdminAccount}/>
               <Route path="/regadmin" component={RegisterAdmin}/>
+              <Route path="/updateadmin" component={UpdateAdmin}/>
               
              </div>
       </Switch>

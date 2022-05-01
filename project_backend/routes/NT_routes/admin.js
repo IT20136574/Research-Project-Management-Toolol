@@ -21,7 +21,7 @@ router.post('/add', async (req, res) => {
       if(admin3){
         throw new Error('Username Already Exists')
       }
-      admin1 = {
+        admin1 = {
         fname : fname,
         mname : mname,
         lname : lname,
@@ -91,8 +91,36 @@ router.delete("/delete", auth, async (req, res) => {
   }
 });
 
-  
+//admin update
+router.put('/update', auth, async (req, res) => {
+ 
+  const {fname, mname, lname, username, pno, nic, sliitid, email, imageUrl} = req.body
+  try {
+    const updateValus={
+      fname : fname,
+      mname : mname,
+      lname : lname,
+      username :username,
+      pno : pno,
+      nic : nic,
+      sliitid : sliitid,
+      email : email,
+      imageUrl : imageUrl
+    };
 
+    let admin1 = await admin.findOne({username})
+ 
+    if (!admin1) {
+      throw new Error('There is no Admin account')
+    }
 
+    const adminUpdate = await admin.findByIdAndUpdate(req.admin1.id,updateValus)
+ 
+    res.status(200).send({status: 'Admin Profile Updated', admin1: adminUpdate})
+  } catch (error) {
+    res.status(500).send({error: error.message})
+    console.log(error)
+  }
+})
 
-  module.exports = router;
+module.exports = router;
