@@ -21,6 +21,23 @@ router.get("/view/:role",(req,res)=>{
     });
 });
 
+router.route('/updateStaff/:id').put((req,res)=>{
+    staff.findByIdAndUpdate(
+        req.params.id,{
+            $set:req.body
+        },
+        (err,staff)=>{
+            
+            if(err){
+                return res.status(400).json({error:err});
+            }
+            
+            return res.status(200).json({
+                success: "Update Successfully",staff
+            });
+        });
+});
+
 //Delete Staff
 router.delete("/deleteStaff/:id", async (req, res)=>{
    
@@ -99,7 +116,7 @@ router.route('/updateStudent/:id').put((req,res)=>{
                 success: "Update Successfully"
             });
         });
-    });
+});
 
 
 
