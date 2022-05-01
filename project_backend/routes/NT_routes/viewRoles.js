@@ -7,19 +7,40 @@ const router = require("express").Router();
 //Display Staff roles
 router.get("/view/:role",(req,res)=>{
     let role = req.params.role;
-
-    staff.find({role : role}).exec((err,staff)=>{
-        if(err){
-            return res.status(400).json({
-                error:err
+    if(role == "supervisor" || role == "panal_member" || role == "co-supervisor" ){ 
+        staff.find({role : role}).exec((err,staff)=>{
+            if(err){
+                return res.status(400).json({
+                    error:err
+                });
+            }
+            return res.status(200).json({
+                success:true,
+                selectedStaff : staff,
             });
+        });
+    }else{
+        return res.status(400).json({
+            error : "Data fletch error"
+        });
+    }
+});
+
+//get uniqe Staff member
+router.route("/staffview/:id").get((req,res)=>{
+ 
+    let id = req.params.id;
+ 
+    staff.findById(id,(err,staff)=>{
+        if(err){
+            return res.status(400).json({success:false,err});
         }
         return res.status(200).json({
             success:true,
-            selectedStaff : staff,
+            staff
         });
     });
-});
+ })
 
 router.route('/updateStaff/:id').put((req,res)=>{
     staff.findByIdAndUpdate(
@@ -76,6 +97,22 @@ router.get("/view",(req,res)=>{
         });
     });
 });
+
+//Display uniqe Student Details
+router.route("/stview/:id").get((req,res)=>{
+ 
+    let id = req.params.id;
+ 
+    student.findById(id,(err,student)=>{
+        if(err){
+            return res.status(400).json({success:false,err});
+        }
+        return res.status(200).json({
+            success:true,
+            student
+        });
+    });
+ })
 
 //Student Delete function
 router.delete("/deleteStudent/:id", async (req, res)=>{
