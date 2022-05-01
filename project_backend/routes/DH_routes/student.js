@@ -71,6 +71,9 @@ router.post("/signup", async (req, res) => {
   
 
 
+
+
+
     //login
 
     router.post('/login', async (req, res) => {
@@ -86,6 +89,10 @@ router.post("/signup", async (req, res) => {
       }
   
     })
+
+
+
+
 
 
 
@@ -112,15 +119,24 @@ router.post("/signup", async (req, res) => {
     
         const newgroup = new group(group1);
         await newgroup.save()
-        res
-          .status(201)
-          .send({ status: "group Created", group: newgroup });
-         // console.log(group1);
+        // return res
+        //   .status(201)
+        //   .send({ status: "group Created", id: newgroup._id });
+        //  // console.log(group1);
+        return res.status(200).json({
+          success:true,
+          id: newgroup._id
+      });
       } catch (error) {
         console.log(error.message);
         res.status(500).send({error: error.message});
       }
     });
+
+
+
+
+
 
 
 
@@ -252,7 +268,6 @@ router.post("/signup", async (req, res) => {
     });
 
 
-    //
 
 
 

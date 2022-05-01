@@ -55,10 +55,7 @@ export default class StdLogin extends Component {
     render() {
       return (
         
-          
-          
-        
-               
+             
              <div>
 
                     <form onSubmit={this.userLoginSubmit} name="form"> 
@@ -68,7 +65,7 @@ export default class StdLogin extends Component {
                       <label  >Password</label> 
                       <input  type="password" name="password" placeholder="Enter your Password" onChange={e => this.setState({ pwd: e.target.value })} required/> 
                       <br/>   
-                       
+                        
                       <button type="submit" >Login</button> 
                       
                         
@@ -77,7 +74,7 @@ export default class StdLogin extends Component {
               <center><label >Not Registered?</label> </center>
               <center><li><a href="/signup" >Sign Up</a></li></center>
               
-         
+            
               </div>
          
 
