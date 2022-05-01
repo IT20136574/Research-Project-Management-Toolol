@@ -1,24 +1,25 @@
 const { setInternalBufferSize } = require("bson");
 const express = require("express");
 const student = require("../../models/DH_models/student");
+const staff = require("../../models/RS_models/satff")
 const router = require("express").Router();
 
 //Display Staff roles
-// router.get("/view/:role",(req,res)=>{
-//     let role = req.params.role;
+router.get("/view/:role",(req,res)=>{
+    let role = req.params.role;
 
-//     staff.find({role : role}).exec((err,staff)=>{
-//         if(err){
-//             return res.status(400).json({
-//                 error:err
-//             });
-//         }
-//         return res.status(200).json({
-//             success:true,
-//             selectedStaff : staff,
-//         });
-//     });
-// });
+    staff.find({role : role}).exec((err,staff)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            selectedStaff : staff,
+        });
+    });
+});
 
 //Delete Staff
 // router.delete("/deleteStaff/:id", async (req, res)=>{
