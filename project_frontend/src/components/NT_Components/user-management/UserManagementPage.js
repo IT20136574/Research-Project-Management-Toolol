@@ -4,7 +4,12 @@ export default class UserManagementPage extends Component {
   render() {
     return (
       <div>
-          <ul>
+          <ul><li>
+                   <a href="/adminpage"> Dashboard</a>
+                </li>
+                <li>
+                   <a href="/adminaccount"> Admin Account</a>
+                </li>
                 <li>
                    <a href="/student"> Student management</a>
                 </li>

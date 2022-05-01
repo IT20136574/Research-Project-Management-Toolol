@@ -9,7 +9,7 @@ let admin= require("../../models/NT_models/admin");
 //Admin Register to Web application
 router.post('/add', async (req, res) => {
     try {
-      const {fname, mname, lname, pno, nic, sliitid, email, password, imageUrl} = req.body
+      const {fname, mname, lname, username, pno, nic, sliitid, email, password, imageUrl} = req.body
 
       //Check application has already created account using given email or SLIIT staff id  
       let admin1 = await admin.findOne({email})
@@ -17,10 +17,15 @@ router.post('/add', async (req, res) => {
       if (admin1 || admin2) {
         throw new Error('Admin Account Already Exists')
       }
+      let admin3 = await admin.findOne({username})
+      if(admin3){
+        throw new Error('Username Already Exists')
+      }
       admin1 = {
         fname : fname,
         mname : mname,
         lname : lname,
+        username :username,
         pno : pno,
         nic : nic,
         sliitid : sliitid,
@@ -43,8 +48,8 @@ router.post('/add', async (req, res) => {
 //admin login function    
 router.post('/login', async (req, res) => {
     try {
-      const {sliitid,password} = req.body
-      const admin1 = await admin.findByCredentials(sliitid, password)
+      const {username,password} = req.body
+      const admin1 = await admin.findByCredentials(username, password)
 
       if(admin1){
         const token = await admin1.generateAuthToken()
@@ -57,6 +62,34 @@ router.post('/login', async (req, res) => {
       console.log(error);
     }
   });
+
+//admin profile
+router.get("/profile", auth, async (req, res) => {
+  try {
+    res.status(201)
+    res.send({ success: "User fetched", admin1: req.admin1});
+  } catch (error) {
+    res.status(500)
+    res.send({ status: "Error with /profile", error: error.message });
+  }
+});
+ 
+
+// delete admin
+router.delete("/delete", auth, async (req, res) => {
+  try {
+    const admin1 = await admin.findById(req.admin1.id);
+    if (!admin1) {
+      throw new Error("There is no Admin to delete");
+    }
+    const deleteProfile = await admin.findByIdAndDelete(req.admin1.id);
+    res.status(200).send({ status: "user deleted", admin1 : deleteProfile });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ status: "error with id", error: error.message });
+  }
+});
 
   
 

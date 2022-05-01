@@ -23,6 +23,12 @@ const adminSchema = new mongoose.Schema({
         trim:true
     },
 
+    username: {
+        type : String,
+        require:true,
+        trim:true
+    },
+
     pno: {
         type: String,
         require : true,
@@ -82,8 +88,8 @@ adminSchema.methods.generateAuthToken = async function () {
     return token;
   };
  
-  adminSchema.statics.findByCredentials = async (sliitid, password) => {
-    const admin1 = await admin.findOne({ sliitid});
+  adminSchema.statics.findByCredentials = async (username, password) => {
+    const admin1 = await admin.findOne({ username});
     if (!admin1) {
       throw new Error("Please enter acorrect user name");
     }

@@ -32,18 +32,27 @@ import UpdateStudentDetails from './components/NT_Components/user-management/stu
 import StaffManagement from './components/NT_Components/user-management/Staff-management/StaffManagement';
 import DisplayStaffMember from './components/NT_Components/user-management/Staff-management/DisplayStaffMember';
 import UpdateStaffMember from './components/NT_Components/user-management/Staff-management/UpdateStaffMember';
+import AdminLogin from './components/NT_Components/admin/AdminLogin';
+import AdminAccount from './components/NT_Components/admin/AdminAccount';
+import RegisterAdmin from './components/NT_Components/admin/RegisterAdmin';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-             <Route path="/" component={UserManagementPage} exact/>
-             <Route path="/student" component={Studentmanagement}/>
-             <Route path="/showstudent/:id" component={DisplayStudentDetails}/>
-             <Route path="/updatestudent/:id" component={UpdateStudentDetails}/>
-             <Route path="/staff/:role" component={StaffManagement}/>
-             <Route path="/showstaff/:id" component={DisplayStaffMember}/>
-             <Route path="/updatestaff/:id" component={UpdateStaffMember}/>
+             <Route path="/" component={AdminLogin} exact/>  
+             <div>
+              <Route path="/adminpage" component={UserManagementPage}/>
+              <Route path="/student" component={Studentmanagement}/>
+              <Route path="/showstudent/:id" component={DisplayStudentDetails}/>
+              <Route path="/updatestudent/:id" component={UpdateStudentDetails}/>
+              <Route path="/staff/:role" component={StaffManagement}/>
+              <Route path="/showstaff/:id" component={DisplayStaffMember}/>
+              <Route path="/updatestaff/:id" component={UpdateStaffMember}/>
+              <Route path="/adminaccount" component={AdminAccount}/>
+              <Route path="/regadmin" component={RegisterAdmin}/>
+              
+             </div>
       </Switch>
     </BrowserRouter>
 
