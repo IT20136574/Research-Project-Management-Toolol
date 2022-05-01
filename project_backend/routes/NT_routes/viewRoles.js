@@ -22,26 +22,26 @@ router.get("/view/:role",(req,res)=>{
 });
 
 //Delete Staff
-// router.delete("/deleteStaff/:id", async (req, res)=>{
+router.delete("/deleteStaff/:id", async (req, res)=>{
    
-//     const staffexist = await  staff.findById(req.params.id)
+    const staffexist = await  staff.findById(req.params.id)
 
-//     if(!staffexist){
-//         return res.json({
-//             message:"There is no staff to delete"
-//         })
-//     }
+    if(!staffexist){
+        return res.json({
+            message:"There is no staff to delete"
+        })
+    }
  
-//     staff.findByIdAndRemove(req.params.id).exec((err,deletedstaff)=>{
+    staff.findByIdAndRemove(req.params.id).exec((err,deletedstaff)=>{
 
-//         if(err) return res.status(400).json({
-//             message: "Delete unsuccessfull",err
-//         });
-//         return res.json({
-//             message:"Delete successful",deletedstaff
-//         });
-//     });
-// })
+        if(err) return res.status(400).json({
+            message: "Delete unsuccessfull",err
+        });
+        return res.json({
+            message:"Delete successful",deletedstaff
+        });
+    });
+})
 
 
 //Student  Account Management
