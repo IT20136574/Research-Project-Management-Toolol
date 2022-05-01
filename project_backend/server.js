@@ -36,12 +36,17 @@ console.log("Mongodb connection success!!!");
 
 // @import routes
 const studentRouter = require("./routes/DH_routes/student");
+const adminRouter = require("./routes/NT_routes/admin");
+const viewRoleRouter = require("./routes/NT_routes/viewRoles");
 
 
 
 
 // rotues
 app.use("/student",studentRouter);
+app.use("/admin",adminRouter);
+app.use("/viewRole",viewRoleRouter);
+
 
 
 app.listen(PORT, () => {
