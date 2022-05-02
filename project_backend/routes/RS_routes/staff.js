@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs')
 //create
 router.post('/add', async (req, res) => {
     try {
-      const {fname, lname, email, username, password, nic, field, phone, description, profileImage, role} = req.body
+      const {fname, lname, email, username, password, nic, staffid,  field, phone, description, profileImage, role} = req.body
  
       let staff1 = await staff.findOne({email})
       let staff2 = await staff.findOne({username})
@@ -23,6 +23,7 @@ router.post('/add', async (req, res) => {
         username : username,
         password: password,
         nic: nic,
+        staffid: staffid,
         field:field,
         phone:phone,
         description: description,

@@ -36,6 +36,11 @@ const staffSchema = new mongoose.Schema({
         type :String,
         require:true,
     },
+
+    staffid:{
+        type :String,
+        require:true,
+    },
     
     field:{
         type :String,
