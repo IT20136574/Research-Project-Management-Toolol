@@ -14,7 +14,8 @@ export default class DisplayStaffMember extends Component {
             phone:"",
             description:"",
             profileImage:"",
-            Role:""
+            Role:"",
+            staffid:""
         }
     }
 
@@ -27,6 +28,7 @@ export default class DisplayStaffMember extends Component {
                 this.setState({
                     fname:res.data.staff.fname,
                     lname:res.data.staff.lname,
+                    staffid:res.data.staff.staffid,
                     email:res.data.staff.email,
                     username:res.data.staff.username,
                     nic:res.data.staff.nic,
@@ -48,6 +50,7 @@ export default class DisplayStaffMember extends Component {
       <div>
           <p>Fname : {this.state.fname}</p>
           <p>Lname : {this.state.lname}</p>
+          <p>staffid : {this.state.staffid}</p>
           <p>username : {this.state.username}</p>
           <p>Email : {this.state.email}</p>
           <p>nic : {this.state.nic}</p>

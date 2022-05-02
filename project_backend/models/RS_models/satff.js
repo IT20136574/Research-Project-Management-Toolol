@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-
- 
  
  
 const staffSchema = new mongoose.Schema({
@@ -38,17 +36,22 @@ const staffSchema = new mongoose.Schema({
         type :String,
         require:true,
     },
-    
+ 
+    staffid:{
+        type :String,
+        require:true,
+    },
+   
     field:{
         type :String,
         require:true
     },
-
+ 
     phone:{
         type :String,
         require:true
     },
-    
+   
     description:{
         type :String,
         require:true
@@ -60,7 +63,7 @@ const staffSchema = new mongoose.Schema({
     },
     role: {
         type:String,
-        
+       
     },
     tokens: [{
         token: {

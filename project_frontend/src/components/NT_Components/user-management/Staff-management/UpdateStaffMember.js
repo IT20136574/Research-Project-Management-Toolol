@@ -6,6 +6,7 @@ export default class UpdateStaffMember extends Component {
         this.state = {
             fname:"",
             lname:"",
+            staffid:"",
             email:"",
             username:"",
             nic:"",
@@ -37,6 +38,7 @@ export default class UpdateStaffMember extends Component {
                     fname:res.data.staff.fname,
                     lname:res.data.staff.lname,
                     email:res.data.staff.email,
+                    staffid:res.data.staff.staffid,
                     username:res.data.staff.username,
                     nic:res.data.staff.nic,
                     field:res.data.staff.field,
@@ -57,10 +59,11 @@ export default class UpdateStaffMember extends Component {
         e.preventDefault();
         const id = this.props.match.params.id;
         
-        const{fname,lname,email,username,nic,field,phone,description,profileImage,Role} = this.state;
+        const{fname,lname,email,username,nic,field,phone,description,profileImage,Role,staffid} = this.state;
         const data = {
             fname:fname,
             lname:lname,
+            staffid:staffid,
             email:email,
             username:username,
             nic:nic,
@@ -71,16 +74,17 @@ export default class UpdateStaffMember extends Component {
             Role:Role
            
         }
-        console.log(data)
-       
         //console.log(data)
+       
+       
         axios.put(`http://localhost:8070/viewRole/updateStaff/${id}`,data).then((res)=>{
-           
+            console.log(res.data)
            if(res.data){      
              
             this.setState({
                 fname:"",
                 lname:"",
+                staffid:"",
                 email:"",
                 username:"",
                 nic:"",
@@ -103,6 +107,7 @@ export default class UpdateStaffMember extends Component {
         <div>
             fname : <input type="text" name='fname' value={this.state.fname} onChange={this.handleInputChange}/> <br/><br/>
             lname : <input type="text" name='lname' value={this.state.lname} onChange={this.handleInputChange}/> <br/><br/>
+            staffid : <input type="text" name='staffid' value={this.state.staffid} onChange={this.handleInputChange}/> <br/><br/>
             email : <input type="text" name='email' value={this.state.email} onChange={this.handleInputChange}/> <br/><br/>
             username : <input type="text" name='username' value={this.state.username} onChange={this.handleInputChange}/> <br/><br/>
             nic : <input type="text" name='nic' value={this.state.nic} onChange={this.handleInputChange}/> <br/><br/>

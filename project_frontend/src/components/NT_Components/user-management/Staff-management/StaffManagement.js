@@ -99,7 +99,7 @@ export default class StaffManagement extends Component {
                   <tr>
                     <th>{index +1}</th>
                     <td>{staffMembers.fname+" "+ staffMembers.lname}</td>
-                    <td></td>
+                    <td>{staffMembers.staffid}</td>
                     <td>{staffMembers.username}</td>
                     <td>{staffMembers.nic}</td>
                     <td>{staffMembers.field}</td>
