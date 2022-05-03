@@ -29,13 +29,14 @@ import UserManagementPage from './components/NT_Components/user-management/UserM
 import Studentmanagement from './components/NT_Components/user-management/student-management/Studentmanagement';
 import DisplayStudentDetails from './components/NT_Components/user-management/student-management/DisplayStudentDetails';
 import UpdateStudentDetails from './components/NT_Components/user-management/student-management/UpdateStudentDetails';
-import StaffManagement from './components/NT_Components/user-management/Staff-management/StaffManagement';
-import DisplayStaffMember from './components/NT_Components/user-management/Staff-management/DisplayStaffMember';
-import UpdateStaffMember from './components/NT_Components/user-management/Staff-management/UpdateStaffMember';
+import StaffManagement from './components/NT_Components/user-management/staff-management/StaffManagement';
+import DisplayStaffMember from './components/NT_Components/user-management/staff-management/DisplayStaffMember';
+import UpdateStaffMember from './components/NT_Components/user-management/staff-management/UpdateStaffMember';
 import AdminLogin from './components/NT_Components/admin/AdminLogin';
 import AdminAccount from './components/NT_Components/admin/AdminAccount';
 import RegisterAdmin from './components/NT_Components/admin/RegisterAdmin';
 import UpdateAdmin from './components/NT_Components/admin/UpdateAdmin';
+import AsignPanelMemberPage from './components/NT_Components/user-management/asign-panel-member/AsignPanelMemberPage';
 
 function App() {
   return (
@@ -53,6 +54,8 @@ function App() {
               <Route path="/adminaccount" component={AdminAccount}/>
               <Route path="/regadmin" component={RegisterAdmin}/>
               <Route path="/updateadmin" component={UpdateAdmin}/>
+              <Route path="/asignpanelpage/:status" component={AsignPanelMemberPage}/>
+              
               
              </div>
       </Switch>
