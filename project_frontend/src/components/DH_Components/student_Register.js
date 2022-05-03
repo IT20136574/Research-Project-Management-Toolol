@@ -1,9 +1,6 @@
 import React,{useState} from "react";
 import axios from "axios";
-import {toast} from 'react-toastify';
 
-
-toast.configure()
 
 export default function Signup(){
 
@@ -40,14 +37,12 @@ export default function Signup(){
         axios.post("http://localhost:8070/student/signup",newStudent)
         .then(()=>{
             alert("Registration Success")
-            //toast.success('Registration Success',{position:toast.POSITION.TOP_CENTER});
             //window.location = "/login"
         }).catch((err)=>{
             alert(err)
         })
         }else{
             alert("Password dismatch")
-            //toast.warning('Password dismatch',{position:toast.POSITION.TOP_CENTER});
         }
 
         setname("");
