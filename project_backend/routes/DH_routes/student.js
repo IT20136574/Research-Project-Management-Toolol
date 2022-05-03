@@ -386,7 +386,7 @@ router.route('/supervisor/:id').get((req,res)=>{
 
 
 
-//request supervisor
+//request supervisor/co-supervisor
 router.post("/requestSupervisor/:id", auth, async (req, res) => {
       
   try {
@@ -475,8 +475,6 @@ router.get("/displayCoSuper",auth, async (req, res) => {
      res.status(500).send({ status: "Error with retrieve", error: error.message });
    }
 });
-
-
 
 
 
