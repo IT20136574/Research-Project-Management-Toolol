@@ -70,9 +70,16 @@ const staffSchema = new mongoose.Schema({
           type: String,
           required: true,
         }
-      }]  
- 
-});
+      }],
+      groups: [{
+        _id: {
+          type: String,
+          required: true,
+          ref: "staff"
+        }
+    }]
+}
+);
  
 //password encryption
 staffSchema.pre('save', async function(next){

@@ -36,7 +36,7 @@ import AdminLogin from './components/NT_Components/admin/AdminLogin';
 import AdminAccount from './components/NT_Components/admin/AdminAccount';
 import RegisterAdmin from './components/NT_Components/admin/RegisterAdmin';
 import UpdateAdmin from './components/NT_Components/admin/UpdateAdmin';
-import AsignPanelMemberPage from './components/NT_Components/user-management/asign-panel-member/AsignPanelMemberPage';
+import ShowGroup from './components/NT_Components/user-management/asign-panel-member/ShowGroup';
 
 function App() {
   return (
@@ -54,7 +54,7 @@ function App() {
               <Route path="/adminaccount" component={AdminAccount}/>
               <Route path="/regadmin" component={RegisterAdmin}/>
               <Route path="/updateadmin" component={UpdateAdmin}/>
-              <Route path="/asignpanelpage/:status" component={AsignPanelMemberPage}/>
+              <Route path="/showgroups/:status" component={ShowGroup}/>
               
               
              </div>

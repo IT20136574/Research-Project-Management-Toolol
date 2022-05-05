@@ -11,7 +11,7 @@ export default class UserManagementPage extends Component {
                    <a href="/adminaccount"> Admin Account</a>
                 </li>
                 <li>
-                   <a href={`/asignpanelpage/${"Accepted"}`}> Allocate Panel member</a>
+                   <a href={`/showgroups/${"Accepted"}`}> Allocate Panel member</a>
                 </li>
                 <li>
                    Submition Types Management

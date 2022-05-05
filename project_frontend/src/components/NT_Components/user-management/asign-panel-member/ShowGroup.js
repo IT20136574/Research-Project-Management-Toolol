@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react'
 
-export default class AsignPanelMemberPage extends Component {
+export default class ShowGroup extends Component {
     constructor(props){
         super(props);
         this.state={
