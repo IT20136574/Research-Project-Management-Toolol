@@ -28,9 +28,14 @@ const studentGroupSchema = new mongoose.Schema({
     }
   }],
 
+  researchTopic_Status:{
+    type: String,
+    trim: true
+  },
+
   groupMembers: [{
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
+    _id: {
+      type: String,
       required: true,
       ref: "students"
     },
@@ -53,7 +58,6 @@ const studentGroupSchema = new mongoose.Schema({
     }
   }],
 
- 
 
 
 });
