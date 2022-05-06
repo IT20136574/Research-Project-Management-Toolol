@@ -10,8 +10,6 @@ const auth = require("../../middleware/auth");
 
 
 
-
-
 //sign up
 
 router.post("/signup", async (req, res) => {

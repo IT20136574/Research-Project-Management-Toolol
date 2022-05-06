@@ -1,6 +1,7 @@
 const express = require("express");
 const router = require("express").Router();
 let staff= require("../../models/RS_models/staff");
+let staff = require("../../models/DH_models/student_group");
 const validator= require("validator");
 const jwt = require('jsonwebtoken');
 // const auth = require('../../middleware/staff_middleware/auth')
@@ -122,5 +123,23 @@ router.post('/login3', async (req, res) => {
   }
 })
  
+
+
+//get topics
+router.route('/displaytopics').get((req,res) =>{
+  topics.find().exec((err,topics)=>{
+     
+      if(err){
+          return res.status(400),json({
+              error:err
+          });
+      }
+     
+      return res.status(200).json({
+          success:true,
+          existingtopics:topics
+      });
+  });
+});
  
 module.exports = router;
