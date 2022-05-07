@@ -71,6 +71,14 @@ const staffSchema = new mongoose.Schema({
           required: true,
         }
       }],
+      researchTopic_Info: [
+        {
+          _id: {
+              type: String,
+              ref: "studentgroups"
+          }
+        }
+    ],
       groups: [{
         _id: {
           type: String,
