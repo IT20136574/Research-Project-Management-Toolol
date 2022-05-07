@@ -36,6 +36,11 @@ const staffSchema = new mongoose.Schema({
         type :String,
         require:true,
     },
+
+    staffid:{
+        type :String,
+        require:true,
+    },
     
     field:{
         type :String,
@@ -60,6 +65,16 @@ const staffSchema = new mongoose.Schema({
         type:String,
         
     },
+
+    researchTopic_Info: [
+        {
+          _id: {
+              type: String,
+              ref: "studentgroups"
+          }
+        }
+
+  ],
     tokens: [{
         token: {
           type: String,
