@@ -35,13 +35,15 @@ console.log("Mongodb connection success!!!");
 })
 
 // @import routes
-const studentRouter = require("./routes/DH_routes/student");
+// const studentRouter = require("./routes/DH_routes/student");
+const staffRouter = require("./routes/RS_routes/staff");
 
 
 
 
 // rotues
-app.use("/student",studentRouter);
+// app.use("/student",studentRouter);
+app.use("/staff",staffRouter);
 
 
 app.listen(PORT, () => {

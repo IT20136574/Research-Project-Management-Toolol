@@ -1,15 +1,18 @@
 const express = require("express");
 const router = require("express").Router();
 let staff= require("../../models/RS_models/staff");
+let student_group = require("../../models/DH_models/student_group");
 const validator= require("validator");
 const jwt = require('jsonwebtoken');
 // const auth = require('../../middleware/staff_middleware/auth')
 const bcrypt = require('bcryptjs')
+const auth = require("../../middleware/staff/staffauth");
  
+
 //create
 router.post('/add', async (req, res) => {
     try {
-      const {fname, lname, email, username, password, nic, field, phone, description, profileImage, role} = req.body
+      const {fname, lname, email, username, password, nic, staffid,  field, phone, description, profileImage, role} = req.body
  
       let staff1 = await staff.findOne({email})
       let staff2 = await staff.findOne({username})
@@ -23,6 +26,7 @@ router.post('/add', async (req, res) => {
         username : username,
         password: password,
         nic: nic,
+        staffid: staffid,
         field:field,
         phone:phone,
         description: description,
@@ -40,24 +44,24 @@ router.post('/add', async (req, res) => {
     }
   })
 
-//-------------3 separate Logins---------//
 
-  //login supervisor
-router.post('/login1', async (req, res) => {
+
+
+
+
+
+  //login Staff Member
+ router.post('/login', async (req, res) => {
   try {
     
     const {username, password} = req.body
 
-    const id1 = await staff.find({ username: username},{"_id":1});
-    const mem1 = await staff.findById(id1);
-    const role1 = mem1.role;
-    if(role1 == "supervisor" ){
-      const staff1 = await staff.findByCredentials(username, password)
-      const token = await staff1.generateAuthToken()
-      res.status(200).send({token: token, staff1: staff1})
-
+    const staff1 = await staff.findByCredentials(username, password)
+    if(staff1){
+      const token = await staff1.generateAuthToken();
+      res.status(200).send({token: token, staff1: staff1, message: "LOgin Success"})
     }else {
-      throw new Error("U must be a supervisor");
+      throw new Error("Invalid Credencials")
     }
 
 
@@ -69,56 +73,66 @@ router.post('/login1', async (req, res) => {
 
 
 
- //login co-supervisor
- router.post('/login2', async (req, res) => {
+//-------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+
+
+//fetch supervisur detailes topics 
+
+
+router.get("/desplaysupertopics",auth, async (req, res) => {
+
   try {
-    
-    const {username, password} = req.body
+    const sup = await staff.findById(req.staff1.id);
 
-    const id1 = await staff.find({ username: username},{"_id":1});
-    const mem1 = await staff.findById(id1);
-    const role1 = mem1.role;
-    if(role1 == "co-supervisor" ){
-      const staff1 = await staff.findByCredentials(username, password)
-      const token = await staff1.generateAuthToken()
-      res.status(200).send({token: token, staff1: staff1})
-
-    }else {
-      throw new Error("U must be a co-supervisor");
-    }
-
-
+    res.status(200).send({ status: "Supervisor data retrieved", researchTopic_Info: sup.researchTopic_Info });
   } catch (error) {
-    res.status(500).send({ error: error.message });
-    console.log(error);
-  }
-})
+     res.status(500).send({ status: "Error with retrieve", error: error.message });
+   }
+});
 
 
-//login panal_member
-router.post('/login3', async (req, res) => {
-  try {
-    
-    const {username, password} = req.body
-
-    const id1 = await staff.find({ username: username},{"_id":1});
-    const mem1 = await staff.findById(id1);
-    const role1 = mem1.role;
-    if(role1 == "panal_member" ){
-      const staff1 = await staff.findByCredentials(username, password)
-      const token = await staff1.generateAuthToken()
-      res.status(200).send({token: token, staff1: staff1})
-
-    }else {
-      throw new Error("U must be a panal member");
-    }
 
 
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-    console.log(error);
-  }
-})
- 
- 
+
+//get topics 
+
+// router.get("/viewtopic",(req,res)=>{
+//   student_group.find().exec((err,student_group)=>{
+//       if(err){
+//           return res.status(400).json({
+//               error:err
+//           });
+//       }
+//       return res.status(200).json({
+//           success:true,
+//           showstudent_groups :student_group,
+//       });
+//   });
+// });
+//----------------------------------------------------------------
+
+
+// //get topics specific staff id
+
+// router.route("/viewtopic/:id").get((req,res)=>{
+//   let id= req.params.id;
+//   staff.findById(id,(err,staff)=>{
+//     if(err){
+//         return res.status(400).json({success:false,err});
+//     }
+//     return res.status(200).json({
+//       success:true,
+//       staff
+//     });
+//   });
+// });
+
+
+
+
+
+
+
+
 module.exports = router;
