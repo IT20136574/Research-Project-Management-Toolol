@@ -2,15 +2,13 @@ const express = require("express");
 const router = require("express").Router();
 let student = require("../../models/DH_models/student");
 let group = require("../../models/DH_models/student_group");
+let staff = require("../../models/RS_models/satff");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("../../middleware/auth");
 
-
-
-
-
+ 
 
 //sign up
 
@@ -71,6 +69,9 @@ router.post("/signup", async (req, res) => {
   
 
 
+
+
+
     //login
 
     router.post('/login', async (req, res) => {
@@ -86,6 +87,10 @@ router.post("/signup", async (req, res) => {
       }
   
     })
+
+
+
+
 
 
 
@@ -112,15 +117,21 @@ router.post("/signup", async (req, res) => {
     
         const newgroup = new group(group1);
         await newgroup.save()
-        res
-          .status(201)
-          .send({ status: "group Created", group: newgroup });
-         // console.log(group1);
+        // return res
+        //   .status(201)
+        //   .send({ status: "group Created", id: newgroup._id });
+        //  // console.log(group1);
+        return res.status(200).json({
+          success:true,
+          id: newgroup._id
+      });
       } catch (error) {
         console.log(error.message);
         res.status(500).send({error: error.message});
       }
     });
+
+
 
 
 
@@ -158,7 +169,7 @@ router.post("/signup", async (req, res) => {
 
       ////check wether the student group is full or not.
         const arrLength = group1.groupMembers.length;
-
+ 
         if(arrLength >= 4){
           throw new Error('This group already have 4 members..!!!')
         }else{
@@ -180,7 +191,7 @@ router.post("/signup", async (req, res) => {
           const mem1 = await student.findById(id1);
 
           let groupMember1 = {
-            id: mem1._id,
+            _id: mem1._id,
             student_id: mem1.student_id,
             name: mem1.name,
             email: mem1.email,
@@ -252,7 +263,218 @@ router.post("/signup", async (req, res) => {
     });
 
 
-    //
+    
+
+
+
+//get group members
+  router.get("/display/:id", async (req, res) => {
+    const groupId = req.params.id;
+    try {
+      const group1 = await group.findById(groupId)
+
+      if (!group1) {
+        throw new Error('There is no group..!!!')
+      }
+ 
+      res.status(200).send({ status: "Group members retrieved", groupMembers: group1.groupMembers });
+    } catch (error) {
+      res.status(500).send({ status: "Error with retrieve", error: error.message });
+    }
+  });
+
+
+
+  //remove group member
+router.delete("/deleteMem/:id", async (req, res)=>{
+    
+  try{
+
+    const stdId = req.params.id;
+    const member = await  student.findById(stdId);
+    const MembergroupID = member.grp_id;
+    const Membergroup = await  group.findById(MembergroupID);
+    const groupMems = await  Membergroup.groupMembers;
+    
+    
+     for(var i = 0; i< groupMems.length; i++){
+      
+      var arr1 = groupMems[i];
+
+      if(arr1._id == stdId){
+
+        group.findOneAndUpdate(
+          { _id: MembergroupID },
+          { $pull: { groupMembers: arr1 } },
+          { new: true }
+        )
+          .then(arr1 => console.log(arr1))
+          .catch(err => console.log(err));
+  
+      }
+     }
+
+               //update group status
+               const status = "Not registered..";
+
+               member.status = status;
+      
+               await member.save();
+
+    res.status(200).send({ status: "Group member removed...!", member: arr1 });
+
+    } catch (error) {
+      
+      res.status(500).send({ status: "Error with delete", error: error.message });
+    }
+
+  
+  })
+
+
+
+//fetch supervisors in same field
+router.get("/displaySuper",auth, async (req, res) => {
+
+  try {
+    const std = await student.findById(req.Std._id);
+    const group1 = await group.findById(std.grp_id);
+
+    if (!group1) {
+      throw new Error('There is no group..!!!')
+    }
+   
+    const topic = group1.researchTopic_Info;
+
+    if (topic.length == 0) {
+      throw new Error('Research topic not registered yet..!!!')
+    }
+
+    const arr = topic[0];
+
+    const field1 = arr.field
+   
+
+    const supervisors = await staff.find({ field: field1, role:"supervisor"});
+    console.log(supervisors)
+
+    res.status(200).send({ status: "Supervisors retrieved", supervisors: supervisors });
+  } catch (error) {
+     res.status(500).send({ status: "Error with retrieve", error: error.message });
+   }
+});
+
+
+
+
+//get a specific supervisor/co-supervisor
+router.route('/supervisor/:id').get((req,res)=>{
+  let supervisorID = req.params.id;
+
+  staff.findById(supervisorID,(err,staff)=>{
+      if(err){
+          return res.status(400).json({success:false,err});
+      }
+      return res.status(200).json({
+          success:true,
+          staff: staff
+      });
+  });
+});
+
+
+
+
+
+//request supervisor/co-supervisor
+router.post("/requestSupervisor/:id", auth, async (req, res) => {
+      
+  try {
+    const Student = await student.findById(req.Std._id);
+    const supervisor = await staff.findById(req.params.id);
+    const gid = Student.grp_id;
+    const Group = await group.findById(gid);
+
+
+    if (!Student) {
+      throw new Error('There is no Student')
+    }
+
+    if (!Group) {
+      throw new Error('You are not registered in a group...!')
+    }
+
+    const status = Group.researchTopic_Status;
+
+    if (status == "Requested" || status == "Accepted" || status == "Rejected"){
+      throw new Error('Your group already requested a supervisor...!')
+    }
+
+
+    let researchTopic_Info = {
+      _id: gid,
+    };
+
+    await staff.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { researchTopic_Info: researchTopic_Info } },
+      { new: true, upsert: true }
+    )
+
+          //update research topic status
+          const grp_status = "Requested";
+
+          Group.researchTopic_Status = grp_status;
+ 
+          await Group.save()
+
+    res.status(200).send({ status: "Requested...!", researchTopic_Info: researchTopic_Info });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ error: error.message });
+  }
+});
+
+
+
+
+
+//fetch co-supervisors in same field
+router.get("/displayCoSuper",auth, async (req, res) => {
+
+  try {
+    const std = await student.findById(req.Std._id);
+    const group1 = await group.findById(std.grp_id);
+
+    if (!group1) {
+      throw new Error('There is no group..!!!')
+    }
+
+    const status = group1.researchTopic_Status;
+
+    if (status == "Requested" || status == "Rejected"){
+      throw new Error('Your group research topic is not accepted...!')
+    }
+   
+    const topic = group1.researchTopic_Info;
+    
+    if (topic.length == 0) {
+      throw new Error('Research topic not registered yet..!!!')
+    }
+
+    const arr = topic[0];
+
+    const field1 = arr.field
+
+
+    const co_supervisors = await staff.find({ field: field1, role:"co-supervisor"});
+
+
+    res.status(200).send({ status: "Co-Supervisors retrieved", co_supervisors: co_supervisors });
+  } catch (error) {
+     res.status(500).send({ status: "Error with retrieve", error: error.message });
+   }
+});
 
 
 
