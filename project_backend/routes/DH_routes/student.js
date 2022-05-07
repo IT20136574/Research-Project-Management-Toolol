@@ -263,6 +263,8 @@ router.post("/signup", async (req, res) => {
     });
 
 
+    
+
 
 
 //get group members
@@ -298,9 +300,6 @@ router.delete("/deleteMem/:id", async (req, res)=>{
      for(var i = 0; i< groupMems.length; i++){
       
       var arr1 = groupMems[i];
-      console.log(arr1._id)
-      console.log(stdId)
-      console.log(groupMems.length)
 
       if(arr1._id == stdId){
 
@@ -354,9 +353,10 @@ router.get("/displaySuper",auth, async (req, res) => {
     const arr = topic[0];
 
     const field1 = arr.field
+   
 
     const supervisors = await staff.find({ field: field1, role:"supervisor"});
- 
+    console.log(supervisors)
 
     res.status(200).send({ status: "Supervisors retrieved", supervisors: supervisors });
   } catch (error) {
@@ -377,7 +377,7 @@ router.route('/supervisor/:id').get((req,res)=>{
       }
       return res.status(200).json({
           success:true,
-          staff
+          staff: staff
       });
   });
 });
@@ -439,7 +439,7 @@ router.post("/requestSupervisor/:id", auth, async (req, res) => {
 
 
 
-//fetch co-supervisors interest in same field
+//fetch co-supervisors in same field
 router.get("/displayCoSuper",auth, async (req, res) => {
 
   try {
@@ -475,7 +475,6 @@ router.get("/displayCoSuper",auth, async (req, res) => {
      res.status(500).send({ status: "Error with retrieve", error: error.message });
    }
 });
-
 
 
 

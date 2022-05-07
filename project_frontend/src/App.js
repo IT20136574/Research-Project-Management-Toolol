@@ -6,29 +6,22 @@ import Signup from './components/DH_Components/student_Register';
 import Login from './components/DH_Components/student_login';
 import Group from './components/DH_Components/grp_topic';
 import Members from './components/DH_Components/grp_members';
+import Supervisors from './components/DH_Components/supervisors';
+import DisplaySupervisors from './components/DH_Components/displaySupervisor';
 
 
 
 function App() {
   return (
-    // <BrowserRouter>
-
-    //   <Routes>
-    //          <Route path="/" element={<Signup />} />
-            //  <Route path="/login" element={<Login />} />
-            //  <Route path="/grpreg" element={<Group />} />
-            //  <Route path="/grpmem/:data" element={<Members />} />
-    //   </Routes>
-
-    // </BrowserRouter>
-
 <BrowserRouter>
   <Switch>
 
-    <Route path ='/' component={Signup} exact/>
+    <Route path ='/aa' component={Signup} />
     <Route path="/login" component={Login} />
     <Route path="/grpreg" component={Group} />
     <Route path="/grpmem/:data" component={Members} />
+    <Route path="/supervisors" component={Supervisors} />
+    <Route path="/displaySupervisor/:id" component={DisplaySupervisors} />
 
   </Switch>
 </BrowserRouter>

@@ -1,11 +1,10 @@
 import React from "react";
 import { Component } from 'react';
-//import { useParams } from 'react-router-dom';
 import axios from "axios";
 
 
 
-export default class grpRegister extends Component {
+export default class Member extends Component {
 
     constructor(props){
       super(props);
@@ -49,7 +48,7 @@ export default class grpRegister extends Component {
 
   displaygroupMembers(){
     const id = this.props.match.params.data;
-    console.log(id);
+  
     axios.get(`http://localhost:8070/student/display/${id}`).then(res =>{
     if(res.data.status){
             this.setState({
@@ -139,7 +138,7 @@ componentDidMount(){
                                         <td>{groupMembers.phone}</td>
                                         <td>
  
-                                        <button type="submit"style={{background: "#C3FDB8", width: 10+"%", align:"center"}} onClick={()=>this.onDelete(groupMembers._id)} >Remove</button>
+                                        <button type="submit" onClick={()=>this.onDelete(groupMembers._id)} >Remove</button>
                
                                         </td>
                                     </tr>

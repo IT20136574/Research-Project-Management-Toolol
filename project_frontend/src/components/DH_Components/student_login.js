@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 
-export default class StdLogin extends Component {
+export default class Login extends Component {
     constructor(props) {
       super(props);
       this.userLoginSubmit = this.userLoginSubmit.bind(this)
@@ -33,7 +33,7 @@ export default class StdLogin extends Component {
           token: res.data.token
         })
         localStorage.setItem("Authorization", res.data.token)
-       // window.location = "/home1"
+        //window.location = "/displayCoSuper"
         alert('loging successfull');
       })
       .catch((err) => {
