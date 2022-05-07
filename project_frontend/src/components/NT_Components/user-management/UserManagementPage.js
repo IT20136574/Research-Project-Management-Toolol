@@ -11,6 +11,18 @@ export default class UserManagementPage extends Component {
                    <a href="/adminaccount"> Admin Account</a>
                 </li>
                 <li>
+                   <a href={`/showgroups/${"Accepted"}`}> Allocate Panel member</a>
+                </li>
+                <li>
+                   Submition Types Management
+                </li>
+                <li>
+                    Marking Schemes Management
+                </li>
+                <li>
+                   <a href="/student"> Asign Panel member</a>
+                </li>
+                <li>
                    <a href="/student"> Student management</a>
                 </li>
 
