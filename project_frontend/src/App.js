@@ -37,7 +37,7 @@ import AdminAccount from './components/NT_Components/admin/AdminAccount';
 import RegisterAdmin from './components/NT_Components/admin/RegisterAdmin';
 import UpdateAdmin from './components/NT_Components/admin/UpdateAdmin';
 import ShowGroup from './components/NT_Components/user-management/asign-panel-member/ShowGroup';
-
+import AddPanelMember from './components/NT_Components/user-management/asign-panel-member/AddPanalMember'
 function App() {
   return (
     <BrowserRouter>
@@ -55,6 +55,7 @@ function App() {
               <Route path="/regadmin" component={RegisterAdmin}/>
               <Route path="/updateadmin" component={UpdateAdmin}/>
               <Route path="/showgroups/:status" component={ShowGroup}/>
+              <Route path="/addpanel/:id" component={AddPanelMember}/>
               
               
              </div>

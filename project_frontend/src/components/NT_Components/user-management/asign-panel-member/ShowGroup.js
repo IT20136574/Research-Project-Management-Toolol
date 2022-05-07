@@ -12,6 +12,10 @@ export default class ShowGroup extends Component {
         this.getGroups();
     }
 
+    onRedirectAddPanel(id){
+      window.location.href=`/addpanel/${id}`
+    }
+
     getGroups(){
         const status = this.props.match.params.status
         console.log(status)
@@ -21,7 +25,7 @@ export default class ShowGroup extends Component {
               this.setState({
                 groups : res.data.selectedgroups
               })
-              console.log(this.state)
+              console.log(this.state.groups)
             }
           }).catch((e)=>{
             console.log(e)
@@ -54,7 +58,7 @@ export default class ShowGroup extends Component {
                   <td>{groups.researchTopic_Info[0].tags}</td>
 
                   <td>
-                  &nbsp;<button>Asign Panal Member</button> &nbsp;
+                  &nbsp;<button onClick={()=>this.onRedirectAddPanel(groups._id)}>Asign Panal Member</button> &nbsp;
 
                   </td>
                  </tr>                                  
