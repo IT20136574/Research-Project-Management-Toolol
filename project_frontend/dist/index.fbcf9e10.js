@@ -25085,26 +25085,38 @@ var _bootstrapMinCss = require("bootstrap/dist/css/bootstrap.min.css");
 var _appCss = require("./App.css");
 var _studentRegister = require("./components/DH_Components/student_Register");
 var _studentRegisterDefault = parcelHelpers.interopDefault(_studentRegister);
+var _studentLogin = require("./components/DH_Components/student_login");
+var _studentLoginDefault = parcelHelpers.interopDefault(_studentLogin);
 class App extends _react.Component {
     render() {
         return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Switch, {
-                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
-                    path: "/",
-                    component: _studentRegisterDefault.default
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 14,
-                    columnNumber: 15
-                }, this)
-            }, void 0, false, {
+                children: [
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
+                        path: "/aa",
+                        component: _studentRegisterDefault.default
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 15,
+                        columnNumber: 15
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
+                        path: "/login",
+                        component: _studentLoginDefault.default
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 16,
+                        columnNumber: 15
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 13,
+                lineNumber: 14,
                 columnNumber: 13
             }, this)
         }, void 0, false, {
             fileName: "src/App.js",
-            lineNumber: 12,
+            lineNumber: 13,
             columnNumber: 9
         }, this);
     }
@@ -25116,7 +25128,7 @@ exports.default = App;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"cHIiW","bootstrap/dist/css/bootstrap.min.css":"i5LP7","./App.css":"6n0o6","./components/DH_Components/student_Register":"j5Lhz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cHIiW":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"cHIiW","bootstrap/dist/css/bootstrap.min.css":"i5LP7","./App.css":"6n0o6","./components/DH_Components/student_Register":"j5Lhz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/DH_Components/student_login":"a8Ht8"}],"cHIiW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MemoryRouter", ()=>_reactRouter.MemoryRouter
@@ -31960,6 +31972,189 @@ function registerExportsForReactRefresh(module) {
     }
 }
 
-},{"react-refresh/runtime":"786KC"}]},["kn9T2","8JrDF","8R4iA"], "8R4iA", "parcelRequirea5b3")
+},{"react-refresh/runtime":"786KC"}],"a8Ht8":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$0276 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$0276.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+class Login extends _react.Component {
+    constructor(props){
+        super(props);
+        this.userLoginSubmit = this.userLoginSubmit.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.state = {
+            student_id: "",
+            pwd: "",
+            token: "",
+            open: false
+        };
+    }
+    async userLoginSubmit(e) {
+        e.preventDefault();
+        const userData = {
+            student_id: this.state.student_id,
+            pwd: this.state.pwd
+        };
+        await _axiosDefault.default.post("http://localhost:8070/student/login", userData).then((res)=>{
+            this.setState({
+                token: res.data.token
+            });
+            localStorage.setItem("Authorization", res.data.token);
+            //window.location = "/displayCoSuper"
+            alert('loging successfull');
+        }).catch((err)=>{
+            console.log(err);
+            this.setState({
+                open: true
+            });
+            alert('loging unsucces', err);
+        });
+    }
+    handleClose(reason) {
+        if (reason === 'clickaway') return;
+        this.setState({
+            open: false
+        });
+    }
+    render() {
+        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+            children: [
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("form", {
+                    onSubmit: this.userLoginSubmit,
+                    name: "form",
+                    children: [
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
+                            children: "Student ID"
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/student_login.js",
+                            lineNumber: 63,
+                            columnNumber: 23
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "text",
+                            name: "username",
+                            placeholder: "Enter your student_id",
+                            onChange: (e)=>this.setState({
+                                    student_id: e.target.value
+                                })
+                            ,
+                            required: true
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/student_login.js",
+                            lineNumber: 64,
+                            columnNumber: 23
+                        }, this),
+                        " ",
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
+                            fileName: "src/components/DH_Components/student_login.js",
+                            lineNumber: 64,
+                            columnNumber: 168
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
+                            fileName: "src/components/DH_Components/student_login.js",
+                            lineNumber: 64,
+                            columnNumber: 173
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
+                            children: "Password"
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/student_login.js",
+                            lineNumber: 65,
+                            columnNumber: 23
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "password",
+                            name: "password",
+                            placeholder: "Enter your Password",
+                            onChange: (e)=>this.setState({
+                                    pwd: e.target.value
+                                })
+                            ,
+                            required: true
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/student_login.js",
+                            lineNumber: 66,
+                            columnNumber: 23
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
+                            fileName: "src/components/DH_Components/student_login.js",
+                            lineNumber: 67,
+                            columnNumber: 23
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
+                            type: "submit",
+                            children: "Login"
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/student_login.js",
+                            lineNumber: 69,
+                            columnNumber: 23
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/DH_Components/student_login.js",
+                    lineNumber: 61,
+                    columnNumber: 21
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("center", {
+                    children: [
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
+                            children: "Not Registered?"
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/student_login.js",
+                            lineNumber: 74,
+                            columnNumber: 23
+                        }, this),
+                        " "
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/DH_Components/student_login.js",
+                    lineNumber: 74,
+                    columnNumber: 15
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("center", {
+                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("li", {
+                        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("a", {
+                            href: "/signup",
+                            children: "Sign Up"
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/student_login.js",
+                            lineNumber: 75,
+                            columnNumber: 27
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "src/components/DH_Components/student_login.js",
+                        lineNumber: 75,
+                        columnNumber: 23
+                    }, this)
+                }, void 0, false, {
+                    fileName: "src/components/DH_Components/student_login.js",
+                    lineNumber: 75,
+                    columnNumber: 15
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "src/components/DH_Components/student_login.js",
+            lineNumber: 59,
+            columnNumber: 14
+        }, this);
+    }
+}
+exports.default = Login;
+
+  $parcel$ReactRefreshHelpers$0276.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["kn9T2","8JrDF","8R4iA"], "8R4iA", "parcelRequirea5b3")
 
 //# sourceMappingURL=index.fbcf9e10.js.map

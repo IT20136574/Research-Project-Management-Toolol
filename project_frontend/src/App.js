@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
 import Signup from './components/DH_Components/student_Register';
+import Login from './components/DH_Components/student_login';
 
 
 export default class App extends Component {
@@ -11,7 +12,9 @@ export default class App extends Component {
     return (
         <Router>
             <Switch>
-              <Route path ='/' component={Signup} />
+              <Route path ='/aa' component={Signup} />
+              <Route path="/login" component={Login} />
+
             </Switch>
         </Router>
     )
