@@ -25087,6 +25087,8 @@ var _studentRegister = require("./components/DH_Components/student_Register");
 var _studentRegisterDefault = parcelHelpers.interopDefault(_studentRegister);
 var _studentLogin = require("./components/DH_Components/student_login");
 var _studentLoginDefault = parcelHelpers.interopDefault(_studentLogin);
+var _grpTopic = require("./components/DH_Components/grp_topic");
+var _grpTopicDefault = parcelHelpers.interopDefault(_grpTopic);
 class App extends _react.Component {
     render() {
         return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
@@ -25097,7 +25099,7 @@ class App extends _react.Component {
                         component: _studentRegisterDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 15,
+                        lineNumber: 16,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25105,18 +25107,26 @@ class App extends _react.Component {
                         component: _studentLoginDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 16,
+                        lineNumber: 17,
+                        columnNumber: 15
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
+                        path: "/grpreg",
+                        component: _grpTopicDefault.default
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 18,
                         columnNumber: 15
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 14,
+                lineNumber: 15,
                 columnNumber: 13
             }, this)
         }, void 0, false, {
             fileName: "src/App.js",
-            lineNumber: 13,
+            lineNumber: 14,
             columnNumber: 9
         }, this);
     }
@@ -25128,7 +25138,7 @@ exports.default = App;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"cHIiW","bootstrap/dist/css/bootstrap.min.css":"i5LP7","./App.css":"6n0o6","./components/DH_Components/student_Register":"j5Lhz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/DH_Components/student_login":"a8Ht8"}],"cHIiW":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"cHIiW","bootstrap/dist/css/bootstrap.min.css":"i5LP7","./App.css":"6n0o6","./components/DH_Components/student_Register":"j5Lhz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/DH_Components/student_login":"a8Ht8","./components/DH_Components/grp_topic":"2nNbg"}],"cHIiW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MemoryRouter", ()=>_reactRouter.MemoryRouter
@@ -32151,6 +32161,107 @@ class Login extends _react.Component {
 exports.default = Login;
 
   $parcel$ReactRefreshHelpers$0276.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"2nNbg":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$5517 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$5517.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _s = $RefreshSig$();
+function GrpReg() {
+    _s();
+    const [group_name, setgroup_name] = _react.useState("");
+    const sendData = async (e)=>{
+        e.preventDefault();
+        let newGrp = {
+            group_name: group_name
+        };
+        _axiosDefault.default.post("http://localhost:8070/student/grpReg", newGrp).then((res)=>{
+            alert("Group Name Registered");
+            let data = res.data.id;
+            console.log(data);
+            //toast.success('Registration Success',{position:toast.POSITION.TOP_CENTER});
+            window.location = `/grpmem/${data}`;
+        }).catch((err)=>{
+            alert(err);
+        });
+        setgroup_name("");
+    };
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("form", {
+            action: "",
+            method: "post",
+            name: "form",
+            onSubmit: sendData,
+            children: [
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
+                    children: "Group Name"
+                }, void 0, false, {
+                    fileName: "src/components/DH_Components/grp_topic.js",
+                    lineNumber: 43,
+                    columnNumber: 33
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                    type: "text",
+                    placeholder: "Phone Number",
+                    onChange: (e)=>setgroup_name(e.target.value)
+                    ,
+                    required: true
+                }, void 0, false, {
+                    fileName: "src/components/DH_Components/grp_topic.js",
+                    lineNumber: 44,
+                    columnNumber: 37
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
+                    fileName: "src/components/DH_Components/grp_topic.js",
+                    lineNumber: 49,
+                    columnNumber: 33
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("center", {
+                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
+                        type: "submit",
+                        children: "Next"
+                    }, void 0, false, {
+                        fileName: "src/components/DH_Components/grp_topic.js",
+                        lineNumber: 50,
+                        columnNumber: 41
+                    }, this)
+                }, void 0, false, {
+                    fileName: "src/components/DH_Components/grp_topic.js",
+                    lineNumber: 50,
+                    columnNumber: 33
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "src/components/DH_Components/grp_topic.js",
+            lineNumber: 41,
+            columnNumber: 29
+        }, this)
+    }, void 0, false, {
+        fileName: "src/components/DH_Components/grp_topic.js",
+        lineNumber: 40,
+        columnNumber: 7
+    }, this);
+}
+exports.default = GrpReg;
+_s(GrpReg, "t8BLLSAFUAas8qshMlMjtvS/HQE=");
+_c = GrpReg;
+var _c;
+$RefreshReg$(_c, "GrpReg");
+
+  $parcel$ReactRefreshHelpers$5517.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;

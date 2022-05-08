@@ -5,6 +5,7 @@ import './App.css'
 
 import Signup from './components/DH_Components/student_Register';
 import Login from './components/DH_Components/student_login';
+import Group from './components/DH_Components/grp_topic';
 
 
 export default class App extends Component {
@@ -14,6 +15,7 @@ export default class App extends Component {
             <Switch>
               <Route path ='/aa' component={Signup} />
               <Route path="/login" component={Login} />
+              <Route path="/grpreg" component={Group} />
 
             </Switch>
         </Router>
