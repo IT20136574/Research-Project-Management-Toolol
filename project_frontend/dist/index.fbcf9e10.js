@@ -25089,6 +25089,10 @@ var _studentLogin = require("./components/DH_Components/student_login");
 var _studentLoginDefault = parcelHelpers.interopDefault(_studentLogin);
 var _grpTopic = require("./components/DH_Components/grp_topic");
 var _grpTopicDefault = parcelHelpers.interopDefault(_grpTopic);
+var _grpMembers = require("./components/DH_Components/grp_members");
+var _grpMembersDefault = parcelHelpers.interopDefault(_grpMembers);
+var _supervisors = require("./components/DH_Components/supervisors");
+var _supervisorsDefault = parcelHelpers.interopDefault(_supervisors);
 class App extends _react.Component {
     render() {
         return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
@@ -25099,7 +25103,7 @@ class App extends _react.Component {
                         component: _studentRegisterDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 16,
+                        lineNumber: 18,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25107,7 +25111,7 @@ class App extends _react.Component {
                         component: _studentLoginDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 17,
+                        lineNumber: 19,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25115,18 +25119,34 @@ class App extends _react.Component {
                         component: _grpTopicDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 18,
+                        lineNumber: 20,
+                        columnNumber: 15
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
+                        path: "/grpmem/:data",
+                        component: _grpMembersDefault.default
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 21,
+                        columnNumber: 15
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
+                        path: "/supervisors",
+                        component: _supervisorsDefault.default
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 22,
                         columnNumber: 15
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 15,
+                lineNumber: 17,
                 columnNumber: 13
             }, this)
         }, void 0, false, {
             fileName: "src/App.js",
-            lineNumber: 14,
+            lineNumber: 16,
             columnNumber: 9
         }, this);
     }
@@ -25138,7 +25158,7 @@ exports.default = App;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"cHIiW","bootstrap/dist/css/bootstrap.min.css":"i5LP7","./App.css":"6n0o6","./components/DH_Components/student_Register":"j5Lhz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/DH_Components/student_login":"a8Ht8","./components/DH_Components/grp_topic":"2nNbg"}],"cHIiW":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"cHIiW","bootstrap/dist/css/bootstrap.min.css":"i5LP7","./App.css":"6n0o6","./components/DH_Components/student_Register":"j5Lhz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/DH_Components/student_login":"a8Ht8","./components/DH_Components/grp_topic":"2nNbg","./components/DH_Components/grp_members":"hPwm8","./components/DH_Components/supervisors":"1JRIL"}],"cHIiW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MemoryRouter", ()=>_reactRouter.MemoryRouter
@@ -32262,6 +32282,511 @@ var _c;
 $RefreshReg$(_c, "GrpReg");
 
   $parcel$ReactRefreshHelpers$5517.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hPwm8":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$311e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$311e.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+class Member extends _react.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            member1_student_id: "",
+            groupMembers: [],
+            visible: 0
+        };
+    }
+    handleInputChange = (e)=>{
+        const { name , value  } = e.target;
+        this.setState({
+            ...this.state,
+            [name]: value
+        });
+    };
+    onSubmit = (e)=>{
+        e.preventDefault();
+        const { member1_student_id  } = this.state;
+        const data = {
+            member1_student_id
+        };
+        console.log(data);
+        const id = this.props.match.params.data;
+        console.log(id);
+        _axiosDefault.default.post(`http://localhost:8070/student/grpReg/${id}`, data).then((res)=>{
+            alert("Group Member Registered");
+            window.location.reload();
+        }).catch((err)=>{
+            alert(JSON.stringify(err));
+        });
+    };
+    displaygroupMembers() {
+        const id = this.props.match.params.data;
+        _axiosDefault.default.get(`http://localhost:8070/student/display/${id}`).then((res)=>{
+            if (res.data.status) {
+                this.setState({
+                    groupMembers: res.data.groupMembers
+                });
+                console.log(this.state.groupMembers);
+                const size = this.state.groupMembers.length;
+                console.log(size);
+                if (size <= 4) {
+                    this.setState({
+                        visible: 4
+                    });
+                    console.log(this.state);
+                }
+            }
+        });
+    }
+    onDelete = (id)=>{
+        if (window.confirm('Are you sure you wish to remove this member?')) _axiosDefault.default.delete(`http://localhost:8070/student/deleteMem/${id}`).then((res)=>{
+            //alert("Delete successful");
+            alert('Removed successfully');
+            window.location.reload();
+        });
+    };
+    componentDidMount() {
+        this.displaygroupMembers();
+    }
+    render() {
+        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+            children: [
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("form", {
+                    name: "form",
+                    onSubmit: this.onSubmit,
+                    children: [
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
+                            children: "Student ID"
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/grp_members.js",
+                            lineNumber: 98,
+                            columnNumber: 32
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "text",
+                            name: "member1_student_id",
+                            placeholder: "student id",
+                            onChange: this.handleInputChange,
+                            value: this.setState.member1_student_id,
+                            required: true
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/grp_members.js",
+                            lineNumber: 99,
+                            columnNumber: 36
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
+                            fileName: "src/components/DH_Components/grp_members.js",
+                            lineNumber: 104,
+                            columnNumber: 32
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("center", {
+                            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
+                                type: "submit",
+                                children: "Next"
+                            }, void 0, false, {
+                                fileName: "src/components/DH_Components/grp_members.js",
+                                lineNumber: 105,
+                                columnNumber: 40
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/grp_members.js",
+                            lineNumber: 105,
+                            columnNumber: 32
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/DH_Components/grp_members.js",
+                    lineNumber: 96,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                        children: [
+                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("center", {
+                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h4", {
+                                        children: "Registerd Group Members"
+                                    }, void 0, false, {
+                                        fileName: "src/components/DH_Components/grp_members.js",
+                                        lineNumber: 114,
+                                        columnNumber: 33
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "src/components/DH_Components/grp_members.js",
+                                    lineNumber: 114,
+                                    columnNumber: 25
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "src/components/DH_Components/grp_members.js",
+                                lineNumber: 113,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("table", {
+                                className: "table table-hover",
+                                style: {
+                                    marginTop: '40px',
+                                    background: "#F0FFFF"
+                                },
+                                children: [
+                                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("thead", {
+                                        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tr", {
+                                            bgcolor: "#D5D6EA",
+                                            children: [
+                                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
+                                                    scope: "col",
+                                                    children: "No"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/DH_Components/grp_members.js",
+                                                    lineNumber: 123,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
+                                                    scope: "col",
+                                                    children: "student_id"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/DH_Components/grp_members.js",
+                                                    lineNumber: 124,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
+                                                    scope: "col",
+                                                    children: "name"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/DH_Components/grp_members.js",
+                                                    lineNumber: 125,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
+                                                    scope: "col",
+                                                    children: "email"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/DH_Components/grp_members.js",
+                                                    lineNumber: 126,
+                                                    columnNumber: 33
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
+                                                    scope: "col",
+                                                    children: "phone"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/DH_Components/grp_members.js",
+                                                    lineNumber: 127,
+                                                    columnNumber: 33
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "src/components/DH_Components/grp_members.js",
+                                            lineNumber: 122,
+                                            columnNumber: 33
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "src/components/DH_Components/grp_members.js",
+                                        lineNumber: 121,
+                                        columnNumber: 29
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tbody", {
+                                        children: this.state.groupMembers.map((groupMembers, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("tr", {
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
+                                                        scope: "row",
+                                                        children: index + 1
+                                                    }, void 0, false, {
+                                                        fileName: "src/components/DH_Components/grp_members.js",
+                                                        lineNumber: 134,
+                                                        columnNumber: 41
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                                        children: groupMembers.student_id
+                                                    }, void 0, false, {
+                                                        fileName: "src/components/DH_Components/grp_members.js",
+                                                        lineNumber: 135,
+                                                        columnNumber: 41
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                                        children: groupMembers.name
+                                                    }, void 0, false, {
+                                                        fileName: "src/components/DH_Components/grp_members.js",
+                                                        lineNumber: 136,
+                                                        columnNumber: 41
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                                        children: groupMembers.email
+                                                    }, void 0, false, {
+                                                        fileName: "src/components/DH_Components/grp_members.js",
+                                                        lineNumber: 137,
+                                                        columnNumber: 41
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                                        children: groupMembers.phone
+                                                    }, void 0, false, {
+                                                        fileName: "src/components/DH_Components/grp_members.js",
+                                                        lineNumber: 138,
+                                                        columnNumber: 41
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                                        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
+                                                            type: "submit",
+                                                            onClick: ()=>this.onDelete(groupMembers._id)
+                                                            ,
+                                                            children: "Remove"
+                                                        }, void 0, false, {
+                                                            fileName: "src/components/DH_Components/grp_members.js",
+                                                            lineNumber: 141,
+                                                            columnNumber: 41
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "src/components/DH_Components/grp_members.js",
+                                                        lineNumber: 139,
+                                                        columnNumber: 41
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "src/components/DH_Components/grp_members.js",
+                                                lineNumber: 133,
+                                                columnNumber: 36
+                                            }, this)
+                                        )
+                                    }, void 0, false, {
+                                        fileName: "src/components/DH_Components/grp_members.js",
+                                        lineNumber: 131,
+                                        columnNumber: 29
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/DH_Components/grp_members.js",
+                                lineNumber: 120,
+                                columnNumber: 25
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/DH_Components/grp_members.js",
+                        lineNumber: 112,
+                        columnNumber: 21
+                    }, this)
+                }, void 0, false, {
+                    fileName: "src/components/DH_Components/grp_members.js",
+                    lineNumber: 111,
+                    columnNumber: 29
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "src/components/DH_Components/grp_members.js",
+            lineNumber: 94,
+            columnNumber: 13
+        }, this);
+    }
+}
+exports.default = Member;
+
+  $parcel$ReactRefreshHelpers$311e.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1JRIL":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$73e4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$73e4.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+//import { useParams } from 'react-router-dom';
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+class Supervisors extends _react.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            supervisors: []
+        };
+    }
+    displaysupervisors() {
+        const config = {
+            headers: {
+                Authorization: localStorage.getItem("Authorization")
+            }
+        };
+        console.log(config);
+        _axiosDefault.default.get(`http://localhost:8070/student/displaySuper`, config).then((res)=>{
+            if (res.data.status) {
+                this.setState({
+                    supervisors: res.data.supervisors
+                });
+                console.log(this.state.supervisors);
+            }
+            console.log(this.supervisors);
+        });
+    }
+    componentDidMount() {
+        this.displaysupervisors();
+    }
+    render() {
+        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                children: [
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("center", {
+                            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h4", {
+                                children: "Supervisors on your field"
+                            }, void 0, false, {
+                                fileName: "src/components/DH_Components/supervisors.js",
+                                lineNumber: 57,
+                                columnNumber: 33
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/supervisors.js",
+                            lineNumber: 57,
+                            columnNumber: 25
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "src/components/DH_Components/supervisors.js",
+                        lineNumber: 56,
+                        columnNumber: 22
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("table", {
+                        children: [
+                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("thead", {
+                                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tr", {
+                                    bgcolor: "#D5D6EA",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
+                                            scope: "col",
+                                            children: "Name"
+                                        }, void 0, false, {
+                                            fileName: "src/components/DH_Components/supervisors.js",
+                                            lineNumber: 67,
+                                            columnNumber: 33
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
+                                            scope: "col",
+                                            children: "Field"
+                                        }, void 0, false, {
+                                            fileName: "src/components/DH_Components/supervisors.js",
+                                            lineNumber: 68,
+                                            columnNumber: 33
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
+                                            scope: "col",
+                                            children: "Email"
+                                        }, void 0, false, {
+                                            fileName: "src/components/DH_Components/supervisors.js",
+                                            lineNumber: 69,
+                                            columnNumber: 33
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/DH_Components/supervisors.js",
+                                    lineNumber: 65,
+                                    columnNumber: 33
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "src/components/DH_Components/supervisors.js",
+                                lineNumber: 64,
+                                columnNumber: 29
+                            }, this),
+                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tbody", {
+                                children: this.state.supervisors.map((supervisors)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("tr", {
+                                        children: [
+                                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                                children: supervisors._id
+                                            }, void 0, false, {
+                                                fileName: "src/components/DH_Components/supervisors.js",
+                                                lineNumber: 77,
+                                                columnNumber: 40
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                                children: supervisors.fname
+                                            }, void 0, false, {
+                                                fileName: "src/components/DH_Components/supervisors.js",
+                                                lineNumber: 79,
+                                                columnNumber: 41
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                                children: supervisors.field
+                                            }, void 0, false, {
+                                                fileName: "src/components/DH_Components/supervisors.js",
+                                                lineNumber: 80,
+                                                columnNumber: 41
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                                children: supervisors.email
+                                            }, void 0, false, {
+                                                fileName: "src/components/DH_Components/supervisors.js",
+                                                lineNumber: 81,
+                                                columnNumber: 41
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("a", {
+                                                    href: `/displaySupervisor/${supervisors._id}`,
+                                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
+                                                        type: "submit",
+                                                        children: "Select"
+                                                    }, void 0, false, {
+                                                        fileName: "src/components/DH_Components/supervisors.js",
+                                                        lineNumber: 85,
+                                                        columnNumber: 41
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "src/components/DH_Components/supervisors.js",
+                                                    lineNumber: 84,
+                                                    columnNumber: 41
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "src/components/DH_Components/supervisors.js",
+                                                lineNumber: 83,
+                                                columnNumber: 41
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/DH_Components/supervisors.js",
+                                        lineNumber: 76,
+                                        columnNumber: 36
+                                    }, this)
+                                )
+                            }, void 0, false, {
+                                fileName: "src/components/DH_Components/supervisors.js",
+                                lineNumber: 74,
+                                columnNumber: 29
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/DH_Components/supervisors.js",
+                        lineNumber: 63,
+                        columnNumber: 25
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/DH_Components/supervisors.js",
+                lineNumber: 55,
+                columnNumber: 21
+            }, this)
+        }, void 0, false, {
+            fileName: "src/components/DH_Components/supervisors.js",
+            lineNumber: 54,
+            columnNumber: 17
+        }, this);
+    }
+}
+exports.default = Supervisors;
+
+  $parcel$ReactRefreshHelpers$73e4.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
