@@ -7,6 +7,7 @@ import Signup from './components/DH_Components/student_Register';
 import Login from './components/DH_Components/student_login';
 import Group from './components/DH_Components/grp_topic';
 import Members from './components/DH_Components/grp_members';
+import Topic from './components/DH_Components/grp_topic';
 import Supervisors from './components/DH_Components/supervisors';
 
 
@@ -20,6 +21,7 @@ export default class App extends Component {
               <Route path="/grpreg" component={Group} />
               <Route path="/grpmem/:data" component={Members} />
               <Route path="/supervisors" component={Supervisors} />
+              <Route path="/topic" component={Topic} />
 
             </Switch>
         </Router>

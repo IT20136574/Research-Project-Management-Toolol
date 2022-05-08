@@ -25103,7 +25103,7 @@ class App extends _react.Component {
                         component: _studentRegisterDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 18,
+                        lineNumber: 19,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25111,7 +25111,7 @@ class App extends _react.Component {
                         component: _studentLoginDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 19,
+                        lineNumber: 20,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25119,7 +25119,7 @@ class App extends _react.Component {
                         component: _grpTopicDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 20,
+                        lineNumber: 21,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25127,7 +25127,7 @@ class App extends _react.Component {
                         component: _grpMembersDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 21,
+                        lineNumber: 22,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25135,18 +25135,26 @@ class App extends _react.Component {
                         component: _supervisorsDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 22,
+                        lineNumber: 23,
+                        columnNumber: 15
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
+                        path: "/topic",
+                        component: _grpTopicDefault.default
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 24,
                         columnNumber: 15
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 17,
+                lineNumber: 18,
                 columnNumber: 13
             }, this)
         }, void 0, false, {
             fileName: "src/App.js",
-            lineNumber: 16,
+            lineNumber: 17,
             columnNumber: 9
         }, this);
     }
