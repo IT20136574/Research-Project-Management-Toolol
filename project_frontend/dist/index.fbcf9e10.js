@@ -25093,6 +25093,8 @@ var _grpMembers = require("./components/DH_Components/grp_members");
 var _grpMembersDefault = parcelHelpers.interopDefault(_grpMembers);
 var _supervisors = require("./components/DH_Components/supervisors");
 var _supervisorsDefault = parcelHelpers.interopDefault(_supervisors);
+var _displaySupervisor = require("./components/DH_Components/displaySupervisor");
+var _displaySupervisorDefault = parcelHelpers.interopDefault(_displaySupervisor);
 class App extends _react.Component {
     render() {
         return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
@@ -25103,7 +25105,7 @@ class App extends _react.Component {
                         component: _studentRegisterDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 19,
+                        lineNumber: 20,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25111,7 +25113,7 @@ class App extends _react.Component {
                         component: _studentLoginDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 20,
+                        lineNumber: 21,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25119,7 +25121,7 @@ class App extends _react.Component {
                         component: _grpTopicDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 21,
+                        lineNumber: 22,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25127,7 +25129,7 @@ class App extends _react.Component {
                         component: _grpMembersDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 22,
+                        lineNumber: 23,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25135,7 +25137,7 @@ class App extends _react.Component {
                         component: _supervisorsDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 23,
+                        lineNumber: 24,
                         columnNumber: 15
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -25143,18 +25145,26 @@ class App extends _react.Component {
                         component: _grpTopicDefault.default
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 24,
+                        lineNumber: 25,
+                        columnNumber: 15
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
+                        path: "/displaySupervisor/:id",
+                        component: _displaySupervisorDefault.default
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 26,
                         columnNumber: 15
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 18,
+                lineNumber: 19,
                 columnNumber: 13
             }, this)
         }, void 0, false, {
             fileName: "src/App.js",
-            lineNumber: 17,
+            lineNumber: 18,
             columnNumber: 9
         }, this);
     }
@@ -25166,7 +25176,7 @@ exports.default = App;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"cHIiW","bootstrap/dist/css/bootstrap.min.css":"i5LP7","./App.css":"6n0o6","./components/DH_Components/student_Register":"j5Lhz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/DH_Components/student_login":"a8Ht8","./components/DH_Components/grp_topic":"2nNbg","./components/DH_Components/grp_members":"hPwm8","./components/DH_Components/supervisors":"1JRIL"}],"cHIiW":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"cHIiW","bootstrap/dist/css/bootstrap.min.css":"i5LP7","./App.css":"6n0o6","./components/DH_Components/student_Register":"j5Lhz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/DH_Components/student_login":"a8Ht8","./components/DH_Components/grp_topic":"2nNbg","./components/DH_Components/grp_members":"hPwm8","./components/DH_Components/supervisors":"1JRIL","./components/DH_Components/displaySupervisor":"iB4cD"}],"cHIiW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MemoryRouter", ()=>_reactRouter.MemoryRouter
@@ -32795,6 +32805,136 @@ class Supervisors extends _react.Component {
 exports.default = Supervisors;
 
   $parcel$ReactRefreshHelpers$73e4.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iB4cD":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$bc4c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$bc4c.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+//import { useParams } from 'react-router-dom';
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+class DisplaySupervisors extends _react.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            staff: {}
+        };
+    }
+    displaysupervisor() {
+        const id = this.props.match.params.id;
+        _axiosDefault.default.get(`http://localhost:8070/student/supervisor/${id}`).then((res)=>{
+            if (res.data.success) this.setState({
+                staff: res.data.staff
+            });
+            console.log(this.state.staff);
+        });
+    }
+    request() {
+        const config = {
+            headers: {
+                Authorization: localStorage.getItem("Authorization")
+            }
+        };
+        //console.log(config)
+        const id = this.props.match.params.id;
+        if (window.confirm('Are you sure you want to request this supervisor?')) _axiosDefault.default.post(`http://localhost:8070/student/requestSupervisor/${id}`, config).then((res)=>{
+            console.log(config);
+            alert("requested successfully");
+            window.location.reload();
+        });
+    }
+    componentDidMount() {
+        this.displaysupervisor();
+    }
+    render() {
+        const { fname , email , phone , field  } = this.state.staff;
+        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                children: [
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("center", {
+                            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h4", {
+                                children: "staff on your field"
+                            }, void 0, false, {
+                                fileName: "src/components/DH_Components/displaySupervisor.js",
+                                lineNumber: 70,
+                                columnNumber: 33
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "src/components/DH_Components/displaySupervisor.js",
+                            lineNumber: 70,
+                            columnNumber: 25
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "src/components/DH_Components/displaySupervisor.js",
+                        lineNumber: 69,
+                        columnNumber: 22
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                        children: fname
+                    }, void 0, false, {
+                        fileName: "src/components/DH_Components/displaySupervisor.js",
+                        lineNumber: 76,
+                        columnNumber: 25
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                        children: email
+                    }, void 0, false, {
+                        fileName: "src/components/DH_Components/displaySupervisor.js",
+                        lineNumber: 77,
+                        columnNumber: 25
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                        children: phone
+                    }, void 0, false, {
+                        fileName: "src/components/DH_Components/displaySupervisor.js",
+                        lineNumber: 78,
+                        columnNumber: 25
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                        children: field
+                    }, void 0, false, {
+                        fileName: "src/components/DH_Components/displaySupervisor.js",
+                        lineNumber: 79,
+                        columnNumber: 25
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
+                        type: "submit",
+                        onClick: ()=>this.request()
+                        ,
+                        children: "Request"
+                    }, void 0, false, {
+                        fileName: "src/components/DH_Components/displaySupervisor.js",
+                        lineNumber: 81,
+                        columnNumber: 25
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/DH_Components/displaySupervisor.js",
+                lineNumber: 68,
+                columnNumber: 21
+            }, this)
+        }, void 0, false, {
+            fileName: "src/components/DH_Components/displaySupervisor.js",
+            lineNumber: 67,
+            columnNumber: 17
+        }, this);
+    }
+}
+exports.default = DisplaySupervisors;
+
+  $parcel$ReactRefreshHelpers$bc4c.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
