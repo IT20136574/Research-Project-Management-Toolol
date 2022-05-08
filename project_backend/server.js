@@ -41,6 +41,8 @@ const viewRoleRouter = require("./routes/NT_routes/viewRoles");
 const asignPanalMemberRouter = require("./routes/NT_routes/asignPanalMember")
 
 
+const staffRouter = require("./routes/RS_routes/staff");
+
 
 // rotues
 app.use("/student",studentRouter);
@@ -48,6 +50,8 @@ app.use("/admin",adminRouter);
 app.use("/viewRole",viewRoleRouter);
 app.use("/panalmember",asignPanalMemberRouter);
 
+
+app.use("/staff", staffRouter);
 
 
 app.listen(PORT, () => {

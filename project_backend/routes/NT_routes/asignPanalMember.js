@@ -1,7 +1,7 @@
 const express = require("express");
 const router = require("express").Router();
 let group = require("../../models/DH_models/student_group");
-const staff = require("../../models/RS_models/satff")
+const staff = require("../../models/RS_models/staff")
 
 //Display Staff roles , panalmemberstatus:"pending"
 router.get("/fletchgroups/:status",(req,res)=>{

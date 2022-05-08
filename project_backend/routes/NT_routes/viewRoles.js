@@ -1,7 +1,7 @@
 const { setInternalBufferSize } = require("bson");
 const express = require("express");
 const student = require("../../models/DH_models/student");
-const staff = require("../../models/RS_models/satff")
+const staff = require("../../models/RS_models/staff")
 const router = require("express").Router();
 
 //Display Staff roles

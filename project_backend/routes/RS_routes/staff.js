@@ -1,12 +1,13 @@
 const express = require("express");
 const router = require("express").Router();
-let staff= require("../../models/RS_models/staff");
+const staff = require("../../models/RS_models/staff");
 let student_group = require("../../models/DH_models/student_group");
 const validator= require("validator");
 const jwt = require('jsonwebtoken');
 // const auth = require('../../middleware/staff_middleware/auth')
 const bcrypt = require('bcryptjs')
 const auth = require("../../middleware/staff/staffauth");
+
  
 
 //create
