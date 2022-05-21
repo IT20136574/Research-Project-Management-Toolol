@@ -9,7 +9,7 @@ let admin= require("../../models/NT_models/admin");
 //Admin Register to Web application
 router.post('/add', async (req, res) => {
     try {
-      const {fname, mname, lname, username, pno, nic, sliitid, email, password, imageUrl} = req.body
+      const {fname,lname, username, pno, nic, sliitid, email, password, imageUrl} = req.body
 
       //Check application has already created account using given email or SLIIT staff id  
       let admin1 = await admin.findOne({email})
@@ -23,7 +23,6 @@ router.post('/add', async (req, res) => {
       }
         admin1 = {
         fname : fname,
-        mname : mname,
         lname : lname,
         username :username,
         pno : pno,
@@ -94,11 +93,10 @@ router.delete("/delete", auth, async (req, res) => {
 //admin update
 router.put('/update', auth, async (req, res) => {
  
-  const {fname, mname, lname, username, pno, nic, sliitid, email, imageUrl} = req.body
+  const {fname, lname, username, pno, nic, sliitid, email, imageUrl} = req.body
   try {
     const updateValus={
       fname : fname,
-      mname : mname,
       lname : lname,
       username :username,
       pno : pno,
