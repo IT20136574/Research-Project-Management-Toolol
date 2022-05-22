@@ -25,7 +25,13 @@ const documentSchema = new mongoose.Schema({
         trim:true
     },
 
-    filename: {
+    type: {
+        type : String,
+        require:true,
+        trim:true
+    },
+
+    fileUrl: {
         type : String,
         require:true,
         trim:true

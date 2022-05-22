@@ -71,14 +71,34 @@ const staffSchema = new mongoose.Schema({
           required: true,
         }
       }],
-      researchTopic_Info: [
-        {
-          _id: {
-              type: String,
-              ref: "studentgroups"
+ 
+ 
+      researchTopic_Info: [{
+        _id: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: "student_groups"
+        },
+        group_name:{
+          type :String,
+          require:true
+        },
+ 
+          research_Topic: {
+            type: String,
+           //require: true
+          },
+          field: {
+            type: String,
+            //required: true
+          },
+          tags: {
+            type: String,
+            //required: true
           }
-        }
-    ],
+   
+      }],
+     
       groups: [{
         _id: {
           type: String,
@@ -121,3 +141,7 @@ staffSchema.methods.generateAuthToken = async function () {
  
 const staff = mongoose.model("staff",staffSchema);
 module.exports = staff;
+ 
+ 
+ 
+

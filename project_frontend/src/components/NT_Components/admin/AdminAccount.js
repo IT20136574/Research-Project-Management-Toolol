@@ -108,7 +108,6 @@ export default class AdminAccount extends Component {
   render() {
     return (
       <div>
-          
           <p>imageUrl : {this.state.imageUrl}</p>
           <p>Fname : {this.state.fname}</p>
           <p>Lname : {this.state.lname}</p>

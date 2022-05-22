@@ -13,6 +13,7 @@ export default class UpdateAdmin extends Component {
         sliitid: "",
         email: "",
         imageUrl: "",
+        lastUpdated:""
         }
     }
     componentDidMount(){
@@ -45,7 +46,8 @@ export default class UpdateAdmin extends Component {
                     nic: res.data.admin1.nic,
                     sliitid: res.data.admin1.sliitid,
                     email: res.data.admin1.email,
-                    imageUrl: res.data.admin1.imageUrl
+                    imageUrl: res.data.admin1.imageUrl,
+                    lastUpdated:res.data.admin1.lastUpdated
                 })
                 console.log(this.state)
             }
@@ -69,7 +71,8 @@ export default class UpdateAdmin extends Component {
             email : email,
             password : password,
             cpassword : cpassword,
-            imageUrl : imageUrl
+            imageUrl : imageUrl,
+            lastUpdated: new Date().toString(),
         }
         console.log(updateadmin)
         const config = {

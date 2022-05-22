@@ -38,15 +38,15 @@ console.log("Mongodb connection success!!!");
 const studentRouter = require("./routes/DH_routes/student");
 const adminRouter = require("./routes/NT_routes/admin");
 const viewRoleRouter = require("./routes/NT_routes/viewRoles");
-const asignPanalMemberRouter = require("./routes/NT_routes/asignPanalMember")
-
-
+const asignPanalMemberRouter = require("./routes/NT_routes/asignPanalMember");
+const documentRouter = require("./routes/NT_routes/document")
 
 // rotues
 app.use("/student",studentRouter);
 app.use("/admin",adminRouter);
 app.use("/viewRole",viewRoleRouter);
 app.use("/panalmember",asignPanalMemberRouter);
+app.use("/document", documentRouter)
 
 
 

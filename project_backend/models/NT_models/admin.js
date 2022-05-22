@@ -56,6 +56,16 @@ const adminSchema = new mongoose.Schema({
     imageUrl: {
         type: String,
     },
+    
+    dateCreated:{
+        type:Date,
+        required: true
+    },
+
+    lastUpdated:{
+        type:Date,
+        required: true
+    },
 
     tokens: [{
         token: {

@@ -38,6 +38,8 @@ export default class RegisterAdmin extends Component {
             nic : nic,
             email : email,
             password : password,
+            dateCreated: new Date().toString(),
+            lastUpdated: new Date().toString(),
             cpassword : cpassword,
             imageUrl : imageUrl
         }
