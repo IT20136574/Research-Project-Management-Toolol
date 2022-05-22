@@ -415,11 +415,18 @@ router.post("/requestSupervisor/:id", auth, async (req, res) => {
       throw new Error('Your group already requested a supervisor...!')
     }
 
+    var arr = [];
+    arr = Group.researchTopic_Info;
+
+    var info = arr[0];
+
 
     let researchTopic_Info = {
       _id: gid,
       group_name: Group.group_name,
-      researchTopic_Info: Group.researchTopic_Info
+      research_Topic: info.research_Topic,
+      field: info.field,
+      tags: info.tags
     };
 
     await staff.findOneAndUpdate(

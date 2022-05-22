@@ -10,6 +10,7 @@ import Members from './components/DH_Components/grp_members';
 import Topic from './components/DH_Components/grp_topic';
 import Supervisors from './components/DH_Components/supervisors';
 import DisplaySupervisors from './components/DH_Components/displaySupervisor';
+import Home from './components/DH_Components/home';
 
 
 export default class App extends Component {
@@ -24,6 +25,7 @@ export default class App extends Component {
               <Route path="/supervisors" component={Supervisors} />
               <Route path="/topic" component={Topic} />
               <Route path="/displaySupervisor/:id" component={DisplaySupervisors} />
+              <Route path="/home" component={Home} />
 
             </Switch>
         </Router>

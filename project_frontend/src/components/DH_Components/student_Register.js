@@ -33,8 +33,7 @@ export default function Signup(){
                 
 
 
-        const fileName = new Date().getTime().toString() + imageUrl.name;
-        const storage = getStorage(app);
+        const fileName = fileUrl.name +" "+ new Date().toString();        const storage = getStorage(app);
         const storageRef = ref(storage, fileName);
         const uploadTask = uploadBytesResumable(storageRef, imageUrl);
 

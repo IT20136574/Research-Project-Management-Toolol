@@ -83,8 +83,6 @@ const staffSchema = new mongoose.Schema({
           type :String,
           require:true
         },
-     
-        researchTopic_Info: [{
 
           research_Topic: {
             type: String,
@@ -98,7 +96,6 @@ const staffSchema = new mongoose.Schema({
             type: String,
             //required: true
           }
-        }],
    
       }],
       
