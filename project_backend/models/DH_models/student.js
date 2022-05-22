@@ -84,8 +84,9 @@ const studentSchema = new mongoose.Schema({
   },
 
   grp_id: {
-    type: String,
-    trim: true,
+    type: mongoose.Schema.Types.ObjectId,
+    //required: true,
+    ref: "student_groups"
   },
 
   imageUrl: {

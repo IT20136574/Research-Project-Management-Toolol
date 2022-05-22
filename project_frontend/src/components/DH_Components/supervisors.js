@@ -24,7 +24,6 @@ export default class Supervisors extends Component {
         },
       };
 
-      console.log(config);
 
     axios.get(`http://localhost:8070/student/displaySuper`,config).then(res =>{
     if(res.data.status){

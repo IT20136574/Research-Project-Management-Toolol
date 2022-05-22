@@ -1,64 +1,96 @@
-import React,{useState} from "react";
+import React from "react";
+import { Component } from 'react';
 import axios from "axios";
 
 
 
-export default function GrpReg(){
+export default class Member extends Component {
 
-    const [group_name, setgroup_name] = useState("");
-
-
-    const sendData = async (e) => {
-        e.preventDefault();
-        
-        let newGrp = {
-            group_name: group_name,
+    constructor(props){
+      super(props);
+      this.state={
+        research_Topic:"",
+        field:"",
+        tags:"",
  
-        }
+      }
+  }
+  
+  handleInputChange = (e) => {
+      const {name,value} = e.target;
+      this.setState({
+          ...this.state,
+          [name]:value
+      }) 
+  } 
 
 
-        
-        axios.post("http://localhost:8070/student/grpReg",newGrp)
+  
+componentDidMount(){
+
+}
+
+  
+  onSubmit = (e) =>{
+
+    const config = {
+        headers: {
+          Authorization: localStorage.getItem("Authorization"),
+        },
+      };
+      console.log(config)
+    
+  
+    e.preventDefault();
+        const {research_Topic,field,tags} = this.state;
+        const data = {research_Topic,field,tags};
+        console.log(data)
+
+        axios.post(`http://localhost:8070/student/regResearchTopic`,config, data)
         .then(res=>{
-                alert("Group Name Registered")
-                let data = res.data.id;
-                  console.log(data);
-            //toast.success('Registration Success',{position:toast.POSITION.TOP_CENTER});
-            window.location = `/grpmem/${data}`
+                alert("Reasearch Topic Registered")
+                window.location.reload();
         }).catch((err)=>{
             alert(err)
         })
 
-
-        setgroup_name("");
-
-    }
+  }
 
 
-    return(
 
-      <div>
-                            <form action="" method="post" name="form" onSubmit={sendData}> 
+    render() {
+        return (
+         
+            <div>
+                
+                <form name="form" onSubmit={this.onSubmit}> 
                                
-                                <h1>Group Name</h1>
-                                    <input type="text"   placeholder="Phone Number"
-                                    onChange={(e) => setgroup_name(e.target.value)} required/>
-              
-        
-                 
-                                <br/>                   
-                                <center><button type="submit">
-                                        Next
-                                    </button></center>
-                                
-                            </form>    
-                            
+                               <h1>Reasearch Topic</h1>
+                                   <input type="text" name="research_Topic"  placeholder="topic"
+                                    onChange={this.handleInputChange} value={this.setState.research_Topic} required/>
+             
+                                <h1>Field</h1>
+                                   <input type="text" name="field"  placeholder="field"
+                                    onChange={this.handleInputChange} value={this.setState.field} required/>
+             
+                                <h1>Tags</h1>
+                                   <input type="text" name="tags"  placeholder="tags"
+                                    onChange={this.handleInputChange} value={this.setState.tags} required/>
+             
+                               <br/>                   
+                               <center><button type="submit">
+                                       Submit
+                                   </button></center>
+                               
+                           </form>     
                          
-                            </div>             
-
-
-
-
-    )
-
-}
+                        
+                            
+            </div>     
+          
+    
+        )
+    
+    }
+    
+    }

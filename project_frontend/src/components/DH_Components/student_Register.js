@@ -1,6 +1,12 @@
 import React,{useState} from "react";
 import axios from "axios";
-
+import {
+    getDownloadURL,
+    getStorage,
+    ref,
+    uploadBytesResumable,
+  } from "firebase/storage";
+import app from "../../firebase";
 
 export default function Signup(){
 
@@ -13,49 +19,99 @@ export default function Signup(){
     const [phone, setphone] = useState("");
     const [DOB, setDOB] = useState("");
     const [email, setEmail] = useState("");
+    const [imageUrl, setimageUrl] = useState("");
     const [pwd1, setPassowrd1] = useState("");
     const [pwd2, setPassowrd2] = useState("");
 
 
     const sendData = async (e) => {
+
         e.preventDefault();
-        
-        let newStudent = {
-            name: name,
-            nic: nic,
-            faculty: faculty,
-            student_id: student_id,
-            batch: batch,
-            specialization: specialization,
-            phone: phone,
-            DOB: DOB,
-            email: email,
-            pwd: pwd1
-        }
 
-        if (pwd1 === pwd2) { 
-        axios.post("http://localhost:8070/student/signup",newStudent)
-        .then(()=>{
-            alert("Registration Success")
-            //window.location = "/login"
-        }).catch((err)=>{
-            alert(err)
-        })
-        }else{
-            alert("Password dismatch")
-        }
 
-        setname("");
-        setnic("");
-        setfaculty("");
-        setstudent_id("");
-        setbatch("");
-        setspecialization("");
-        setphone("");
-        setDOB("");
-        setEmail("");
-        setPassowrd1("");
-        setPassowrd2("");  
+
+                
+
+
+        const fileName = new Date().getTime().toString() + imageUrl.name;
+        const storage = getStorage(app);
+        const storageRef = ref(storage, fileName);
+        const uploadTask = uploadBytesResumable(storageRef, imageUrl);
+
+        // Register three observers:
+        // 1. 'state_changed' observer, called any time the state changes
+        // 2. Error observer, called on failure
+        // 3. Completion observer, called on successful completion
+        uploadTask.on('state_changed', 
+        (snapshot) => {
+
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+            case 'paused':
+                console.log('Upload is paused');
+                break;
+            case 'running':
+                console.log('Upload is running');
+                break;
+            }
+        }, 
+        (error) => {
+            // Handle unsuccessful uploads
+        }, 
+        () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            getDownloadURL(uploadTask.snapshot.ref).then((imageUrl) => {
+            console.log('File available at', imageUrl);
+
+            let newStudent = {
+                name: name,
+                nic: nic,
+                faculty: faculty,
+                student_id: student_id,
+                batch: batch,
+                specialization: specialization,
+                phone: phone,
+                DOB: DOB,
+                email: email,
+                imageUrl:imageUrl,
+                pwd: pwd1
+            }
+    
+            if (pwd1 === pwd2) { 
+                console.log(newStudent)
+                axios.post("http://localhost:8070/student/signup",newStudent)
+                .then(()=>{
+                    alert("Registration Success")
+
+                        setname("");
+                        setnic("");
+                        setfaculty("");
+                        setstudent_id("");
+                        setbatch("");
+                        setspecialization("");
+                        setphone("");
+                        setDOB("");
+                        setEmail("");
+                        setimageUrl("");
+                        setPassowrd1("");
+                        setPassowrd2("");  
+                    //window.location = "/login"
+                }).catch((err)=>{
+                    alert(err)
+                })
+                }else{
+                    alert("Password dismatch")
+                }
+
+            });
+        }
+        );
+
+
       
     }
 
@@ -109,7 +165,10 @@ export default function Signup(){
                                     <input type="text"   placeholder="Country"
                                     onChange={(e) => setspecialization(e.target.value)} required/>
 
- 
+                                <h1 >Image</h1>
+                                    
+                                    <input type="file"   placeholder="Country"
+                                    onChange={(e) => setimageUrl(e.target.files[0])} required/>
 
 
 
@@ -134,9 +193,6 @@ export default function Signup(){
                                     </button></center>
                                 
                             </form>                 
-
-
-
 
     )
 

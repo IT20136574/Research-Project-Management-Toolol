@@ -3,6 +3,7 @@ const router = require("express").Router();
 let student = require("../../models/DH_models/student");
 let group = require("../../models/DH_models/student_group");
 let staff = require("../../models/RS_models/satff");
+let uploads = require("../../models/DH_models/uploads");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -223,19 +224,23 @@ router.post("/signup", async (req, res) => {
         const Student = await student.findById(req.Std._id)
         const gid = await Student.grp_id;
         const Group = await group.findById(gid);
-        const arrLength = Group.researchTopic_Info.length;
+  
+
 
         if (!Student) {
           throw new Error('There is no Student')
         }
     
-        if (!Group) {
+        if (!Student.grp_id) {
           throw new Error('You are not registered in a group...!')
         }
+
+        const arrLength = Group.researchTopic_Info.length;
 
         if(arrLength >= 1){
           throw new Error('You can only register 1 topic..!!!')
         }
+
 
 
         const {
@@ -413,6 +418,8 @@ router.post("/requestSupervisor/:id", auth, async (req, res) => {
 
     let researchTopic_Info = {
       _id: gid,
+      group_name: Group.group_name,
+      researchTopic_Info: Group.researchTopic_Info
     };
 
     await staff.findOneAndUpdate(
@@ -475,7 +482,6 @@ router.get("/displayCoSuper",auth, async (req, res) => {
      res.status(500).send({ status: "Error with retrieve", error: error.message });
    }
 });
-
 
 
 module.exports = router;
