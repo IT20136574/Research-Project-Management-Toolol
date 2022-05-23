@@ -28,12 +28,8 @@ export default function Signup(){
 
         e.preventDefault();
 
-
-
-                
-
-
-        const fileName = fileUrl.name +" "+ new Date().toString();        const storage = getStorage(app);
+        const fileName = imageUrl.name +" "+ new Date().toString();
+        const storage = getStorage(app);
         const storageRef = ref(storage, fileName);
         const uploadTask = uploadBytesResumable(storageRef, imageUrl);
 

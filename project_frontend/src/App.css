@@ -6,42 +6,72 @@
 
 
 
-body {
-    background-color: #fbfbfb;
-  }
-  @media (min-width: 991.98px) {
-    main {
-      padding-left: 240px;
-    }
-  }
-  
-  /* Sidebar */
-  .sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    padding: 58px 0 0; /* Height of navbar */
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
-    width: 240px;
-    z-index: 600;
-  }
-  
-  @media (max-width: 991.98px) {
-    .sidebar {
-      width: 100%;
-    }
-  }
-  .sidebar .active {
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-  }
-  
-  .sidebar-sticky {
-    position: relative;
-    top: 0;
-    height: calc(100vh - 48px);
-    padding-top: 0.5rem;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-  }
+#introCarousel,
+        .carousel-inner,
+        .carousel-item,
+        .carousel-item.active {
+          height: 100vh;
+        }
+
+        .carousel-item:nth-child(1) {
+          background-image: url('https://firebasestorage.googleapis.com/v0/b/researchprojectmanagemen-d4b3b.appspot.com/o/Home-Slider-1.jpg%20Mon%20May%2023%202022%2005%3A42%3A29%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=38f63995-7415-418e-8f99-71617b10c7c9');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center center;
+        }
+        .carousel-item:nth-child(2) {
+          background-image: url('https://firebasestorage.googleapis.com/v0/b/researchprojectmanagemen-d4b3b.appspot.com/o/research-word-concept-people-letters-icons-colored-flat-vector-illustration-white-background-research-word-concept-130743336%20(1).jpg%20Mon%20May%2023%202022%2005%3A52%3A47%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=8ec0bbd1-e275-49f4-b8ba-bc74d5d78d96');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center center;
+        }
+        .carousel-item:nth-child(3) {
+          background-image: url('https://firebasestorage.googleapis.com/v0/b/researchprojectmanagemen-d4b3b.appspot.com/o/Home-Slider-1.jpg%20Mon%20May%2023%202022%2005%3A42%3A29%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=38f63995-7415-418e-8f99-71617b10c7c9');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center center;
+        }
+
+        /* Height for devices larger than 576px */
+        @media (min-width: 992px) {
+ 
+          #introCarousel,
+          .carousel-inner,
+          .carousel-item,
+          .carousel-item.active {
+            height: 50vh;
+          }
+        }
+        .navbar-scroll .nav-link,
+        .navbar-scroll .navbar-toggler-icon,
+        .navbar-scroll .navbar-brand {
+          color: #fff;
+        }
+        
+        /* Color of the links AFTER scroll */
+        .navbar-scrolled .nav-link,
+        .navbar-scrolled .navbar-toggler-icon,
+        .navbar-scrolled .navbar-brand {
+          color: #fff;
+        }
+        
+        /* Color of the navbar AFTER scroll */
+        .navbar-scroll,
+        .navbar-scrolled {
+          background-color: #cbbcb1;
+        }
+        
+        .mask-custom {
+          backdrop-filter: blur(5px);
+          background-color: rgba(255, 255, 255, .15);
+        }
+        
+        .navbar-brand {
+          font-size: 1.75rem;
+          letter-spacing: 3px;
+        }
+        .cardd {
+            margin-right: 10px;
+            margin-left: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          }
