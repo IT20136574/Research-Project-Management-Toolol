@@ -12,6 +12,7 @@ import Supervisors from './components/DH_Components/supervisors';
 import DisplaySupervisors from './components/DH_Components/displaySupervisor';
 import Home from './components/DH_Components/home';
 import Header from './components/DH_Components/header';
+import DocumentUpload from './components/DH_Components/documentUpload';
 
 
 export default class App extends Component {
@@ -28,6 +29,7 @@ export default class App extends Component {
               <Route path="/topic" component={Topic} />
               <Route path="/displaySupervisor/:id" component={DisplaySupervisors} />
               <Route path="/home" component={Home} />
+              <Route path="/document" component={DocumentUpload} />
             </Switch>
         </Router>
     )

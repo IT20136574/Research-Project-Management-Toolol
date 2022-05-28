@@ -113,7 +113,7 @@ export default function Signup(){
 
     return(
 
-
+                        <div style={{marginTop:"5rem"}}>
                             <form action="" method="post" name="form" onSubmit={sendData}> 
                                 <h1>name</h1>
                                     <input type="text"   placeholder="Phone Number"
@@ -188,7 +188,7 @@ export default function Signup(){
                                     </button></center>
                                 
                             </form>                 
-
+                            </div>
     )
 
 }

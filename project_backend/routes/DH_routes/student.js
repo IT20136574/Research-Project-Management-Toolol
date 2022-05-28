@@ -92,9 +92,6 @@ router.post("/signup", async (req, res) => {
 
 
 
-
-
-
     // group register
 
     router.post("/grpReg", async (req, res) => {

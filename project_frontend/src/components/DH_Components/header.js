@@ -32,19 +32,22 @@ export default class Header extends Component {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#!">Student Group</a>
+                        <a class="nav-link" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#!">Research Topic</a>
+                        <a class="nav-link" href="/grpreg">Student Group</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#!">Supervisor</a>
+                        <a class="nav-link" href="/topic">Research Topic</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/supervisors">Supervisor</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#!">Reference</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#!">Submissions</a>
+                        <a class="nav-link" href="/document">Submissions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#!">Downloads</a>

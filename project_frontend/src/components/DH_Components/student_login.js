@@ -32,8 +32,8 @@ export default class Login extends Component {
           token: res.data.token
         })
         localStorage.setItem("Authorization", res.data.token)
-        //window.location = "/displayCoSuper"
-        alert('loging successfull');
+        window.location = "/home"
+        alert('login successfull');
       })
       .catch((err) => {
         console.log(err)
@@ -55,7 +55,7 @@ export default class Login extends Component {
       return (
         
              
-             <div>
+             <div style={{marginTop:"5rem"}}>
 
                     <form onSubmit={this.userLoginSubmit} name="form"> 
 
