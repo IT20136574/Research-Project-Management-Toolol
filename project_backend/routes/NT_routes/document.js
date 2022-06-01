@@ -72,4 +72,22 @@ router.get("/getDocument/:id",(req,res)=>{
     });
 });
 
+router.route('/update/:id').put((req,res)=>{
+    document.findByIdAndUpdate(
+        req.params.id,{
+            $set:req.body
+        },
+        (err,document)=>{
+           
+            if(err){
+                return res.status(400).json({error:err});
+            }
+           
+            return res.status(200).json({
+                success: "Update Successfully",
+                documents : document 
+            });
+        });
+    });
+
 module.exports = router;

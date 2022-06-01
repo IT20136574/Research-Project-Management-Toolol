@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { Component } from 'react'
-export default class UpdateStaffMember extends Component {
+import axios from 'axios';
+export default class UpdatePanelMember extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -101,25 +101,23 @@ export default class UpdateStaffMember extends Component {
            console.log(error)
         })
      }
- 
   render() {
     return (
         <div>
-            fname : <input type="text" name='fname' value={this.state.fname} onChange={this.handleInputChange}/> <br/><br/>
-            lname : <input type="text" name='lname' value={this.state.lname} onChange={this.handleInputChange}/> <br/><br/>
-            staffid : <input type="text" name='staffid' value={this.state.staffid} onChange={this.handleInputChange}/> <br/><br/>
-            email : <input type="text" name='email' value={this.state.email} onChange={this.handleInputChange}/> <br/><br/>
-            username : <input type="text" name='username' value={this.state.username} onChange={this.handleInputChange}/> <br/><br/>
-            nic : <input type="text" name='nic' value={this.state.nic} onChange={this.handleInputChange}/> <br/><br/>
-            field : <input type="text" name='field' value={this.state.field} onChange={this.handleInputChange}/> <br/><br/>
-            phone : <input type="text" name='phone' value={this.state.phone} onChange={this.handleInputChange}/> <br/><br/>
-            description : <input type="text" name='description' value={this.state.description} onChange={this.handleInputChange}/> <br/><br/>
-            profileImage : <input type="text" name='profileImage' value={this.state.profileImage} onChange={this.handleInputChange}/> <br/><br/>
-            Role : <input type="text" name='Role' value={this.state.Role} onChange={this.handleInputChange}/> <br/><br/>
+        fname : <input type="text" name='fname' value={this.state.fname} onChange={this.handleInputChange}/> <br/><br/>
+        lname : <input type="text" name='lname' value={this.state.lname} onChange={this.handleInputChange}/> <br/><br/>
+        staffid : <input type="text" name='staffid' value={this.state.staffid} onChange={this.handleInputChange}/> <br/><br/>
+        email : <input type="text" name='email' value={this.state.email} onChange={this.handleInputChange}/> <br/><br/>
+        username : <input type="text" name='username' value={this.state.username} onChange={this.handleInputChange}/> <br/><br/>
+        nic : <input type="text" name='nic' value={this.state.nic} onChange={this.handleInputChange}/> <br/><br/>
+        field : <input type="text" name='field' value={this.state.field} onChange={this.handleInputChange}/> <br/><br/>
+        phone : <input type="text" name='phone' value={this.state.phone} onChange={this.handleInputChange}/> <br/><br/>
+        description : <input type="text" name='description' value={this.state.description} onChange={this.handleInputChange}/> <br/><br/>
+        profileImage : <input type="text" name='profileImage' value={this.state.profileImage} onChange={this.handleInputChange}/> <br/><br/>
+        Role : <input type="text" name='Role' value={this.state.Role} onChange={this.handleInputChange}/> <br/><br/>
 
-            <a href={`/staff/${this.state.Role}`}><button>Back</button></a> &nbsp; <button onClick={this.onSubmit}>Save</button>
-      </div>
+        <a href={`/staff/${this.state.Role}`}><button>Back</button></a> &nbsp; <button onClick={this.onSubmit}>Save</button>
+  </div>
     )
   }
 }
-

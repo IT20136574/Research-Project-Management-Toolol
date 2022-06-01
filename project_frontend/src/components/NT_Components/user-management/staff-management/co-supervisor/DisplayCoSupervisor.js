@@ -1,7 +1,6 @@
-import axios from 'axios';
 import React, { Component } from 'react'
-
-export default class DisplayStaffMember extends Component {
+import axios from 'axios';
+export default class DisplayCoSupervisor extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -44,24 +43,23 @@ export default class DisplayStaffMember extends Component {
             console.log(e)
         })
     }
-
   render() {
     return (
-      <div>
-          <p>Fname : {this.state.fname}</p>
-          <p>Lname : {this.state.lname}</p>
-          <p>staffid : {this.state.staffid}</p>
-          <p>username : {this.state.username}</p>
-          <p>Email : {this.state.email}</p>
-          <p>nic : {this.state.nic}</p>
-          <p>field : {this.state.field}</p>
-          <p>phone : {this.state.phone}</p>
-          <p>description : {this.state.description}</p>
-          <p>profileImage : {this.state.profileImage}</p>
-          <p>profileImage : {this.state.Role}</p>
+        <div>
+        <p>Fname : {this.state.fname}</p>
+        <p>Lname : {this.state.lname}</p>
+        <p>staffid : {this.state.staffid}</p>
+        <p>username : {this.state.username}</p>
+        <p>Email : {this.state.email}</p>
+        <p>nic : {this.state.nic}</p>
+        <p>field : {this.state.field}</p>
+        <p>phone : {this.state.phone}</p>
+        <p>description : {this.state.description}</p>
+        <p>profileImage : {this.state.profileImage}</p>
+        <p>profileImage : {this.state.Role}</p>
 
-         <a href={`/staff/${this.state.Role}`}><button>Back</button></a>
-      </div>
+       <a href={`/staff/${this.state.Role}`}><button>Back</button></a>
+    </div>
     )
   }
 }

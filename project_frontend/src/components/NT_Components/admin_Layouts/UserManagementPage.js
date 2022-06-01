@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class UserManagementPage extends Component {
   render() {
     return (
-      <div>
+      <div className='alignMargin'>
           <ul><li>
                    <a href="/adminpage"> Dashboard</a>
                 </li>

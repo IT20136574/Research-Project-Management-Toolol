@@ -33,7 +33,7 @@ export default class ShowGroup extends Component {
     }
     render() {
     return (
-      <div>
+      <div className='alignMargin'>
           <h2>Panal Member Asign</h2>
       <table border="1">
         <thead>
