@@ -25,11 +25,28 @@ const documentSchema = new mongoose.Schema({
         trim:true
     },
 
-    filename: {
+    type: {
         type : String,
         require:true,
         trim:true
-    }
+    },
+
+    file_Info: [{
+
+        _id: {
+            type: mongoose.Schema.Types.ObjectId,
+            //required: true,
+            ref: "student_groups"
+        },
+        group_name: {
+          type: String,
+          //required: true
+        },
+        fileUrl: {
+          type: String,
+          //required: true
+        }
+      }],
 })
 
 const document = mongoose.model("document",documentSchema);
