@@ -449,7 +449,6 @@ router.post("/requestSupervisor/:id", auth, async (req, res) => {
 
 
 
-
 //fetch co-supervisors in same field
 router.get("/displayCoSuper",auth, async (req, res) => {
 
@@ -475,7 +474,7 @@ router.get("/displayCoSuper",auth, async (req, res) => {
 
     const arr = topic[0];
 
-    const field1 = arr.field
+    const field1 = arr.field;
 
 
     const co_supervisors = await staff.find({ field: field1, role:"co-supervisor"});
@@ -486,6 +485,10 @@ router.get("/displayCoSuper",auth, async (req, res) => {
      res.status(500).send({ status: "Error with retrieve", error: error.message });
    }
 });
+
+
+
+
 
 
 module.exports = router;
