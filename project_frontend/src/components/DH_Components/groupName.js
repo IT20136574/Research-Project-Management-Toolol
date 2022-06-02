@@ -35,7 +35,7 @@ export default class groupName extends Component {
                     });
                    
                 }
-                    alert("Group Member Registered")
+                    alert("Group Name Registered")
                     window.location.href= `/grpmem/${this.state.id}`
             }).catch((err)=>{
                 alert("Register error",err)
@@ -47,19 +47,35 @@ export default class groupName extends Component {
   render() {
     return (
         <div style={{marginTop:"5rem"}}>
-                
-        <form name="form" onSubmit={this.onSubmit}> 
-                       
-                       <h1>Group Name</h1>
-                           <input type="text" name="group_name"  placeholder="student id"
-                            onChange={this.handleInputChange} value={this.setState.group_name} required/>
-        
-                       <br/>                   
-                       <center><a ><button type="submit">
-                               Next
-                           </button></a></center>
-                       
-                   </form>     
+
+                <div class="container py-5">
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-md-12 col-xl-10">
+
+                            <form name="form" onSubmit={this.onSubmit}>
+
+                                <div className="d-flex align-items-center mb-3 pb-1">
+                                    <i className="fa fa-users fa-2x me-1" style={{color: "#ff6219"}}></i>
+                                    <span className="h2 fw-bold mb-0">Group Registration</span>
+                                </div>
+                                <br/><br/>
+                                <h5 className="fw-normal mb-3 pb-3" style={{letterSpacing:"1px"}}>Group Name</h5>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="group_name" id="floatingInput" placeholder="name@example.com" onChange={this.handleInputChange} value={this.setState.group_name}  required/>
+                                    <label for="floatingInput">Group name</label>
+                                </div>
+                                <br/>
+                                <div className="pt-1 mb-4">
+                                    <button className="btn btn-dark btn-lg btn-block ml-4 mr-4" type="submit">Next</button>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+            
+        </div>
                  
         </div>
     )

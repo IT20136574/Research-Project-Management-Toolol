@@ -93,7 +93,7 @@ componentDidMount(){
          
             <div style={{marginTop:"5rem"}}>
                 
-                <form name="form" onSubmit={this.onSubmit}> 
+                {/* <form name="form" onSubmit={this.onSubmit}> 
                                
                                <h1>Student ID</h1>
                                    <input type="text" name="member1_student_id"  placeholder="student id"
@@ -106,18 +106,49 @@ componentDidMount(){
                                        Next
                                    </button></center>
                                
-                           </form>     
+                           </form>      */}
+
+                <div class="container py-5">
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-md-12 col-xl-10">
+
+                            <form name="form" onSubmit={this.onSubmit}>
+
+                                <div className="d-flex align-items-center mb-3 pb-1">
+                                <center><i className="fa fa-users fa-2x me-3" style={{color: "#ff6219"}}></i>
+                                    <span className="h2 mb-0">Group Member Registration</span></center>
+                                </div>
+
+                                <h5 className="fw-normal mb-3 pb-3" style={{letterSpacing:"1px"}}>Student ID</h5>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="member1_student_id" id="floatingInput" placeholder="name@example.com" onChange={this.handleInputChange} value={this.setState.member1_student_id}  required/>
+                                    <label for="floatingInput">Student ID</label>
+                                </div>
+
+                                <div className="pt-1 mb-4">
+                                    <button className="btn btn-dark btn-lg btn-block ml-4 mr-4" type="submit">Next</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>    
+                </div>
+
+
+
+
+
                          
                             <div>
-                    <div>
+                    <div class="container py-5">
                     <div>
                         <center><h4>
                         Registerd Group Members
-                        </h4></center>
+                        </h4></center><br/>
                             
                            
                         </div>
-                        <table className="table table-hover" style={{marginTop:'40px', background: "#F0FFFF" }} >
+                        {/* <table className="table table-hover" style={{marginTop:'40px', background: "#F0FFFF" }} >
                             <thead>
                                 <tr bgcolor="#D5D6EA">
                                 <th scope="col">No</th>
@@ -145,7 +176,53 @@ componentDidMount(){
                                    
                                 ))}
                             </tbody>
+                        </table> */}
+
+<table class="table align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                            <tr>
+                            <th>Name</th>
+                            <th>Student ID</th>
+                            <th>Contact</th>
+                            <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {this.state.groupMembers.map((groupMembers)=>(
+                            <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                <img
+                                    src={groupMembers.imageUrl}
+                                    alt=""
+                                    style={{width: "45px", height: "45px"}}
+                                    class="rounded-circle"
+                                    />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">{groupMembers.name}</p>
+                                    <p class="text-muted mb-0">{groupMembers.email}</p>
+                                </div>
+                                </div>
+                            </td>
+                            <td>
+                            <span class="badge badge-primary rounded-pill d-inline">{groupMembers.student_id}</span>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">{groupMembers.phone}</p>
+                            </td>
+
+                            <td>
+                                <button onClick={()=>this.onDelete(groupMembers._id)} type="button" class="bg-dark text-light btn-link btn-sm btn-rounded">
+                                Remove
+                                </button>
+                            </td>
+                            </tr>
+                            ))}
+                        </tbody>
                         </table>
+
+
+
                     </div>
             </div>
                             
