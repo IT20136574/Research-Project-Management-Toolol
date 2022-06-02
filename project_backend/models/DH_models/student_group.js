@@ -2,18 +2,18 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-
-
+ 
+ 
 const studentGroupSchema = new mongoose.Schema({
-
+ 
   group_name: {
     type: String,
     required: true,
     trim: true,
   },
-
+ 
   researchTopic_Info: [{
-
+ 
     research_Topic: {
       type: String,
      //require: true
@@ -27,19 +27,19 @@ const studentGroupSchema = new mongoose.Schema({
       //required: true
     }
   }],
-
+ 
   researchTopic_Status:{
     type: String,
     trim: true
   },
-
+ 
   groupMembers: [{
     _id: {
       type: String,
       required: true,
       ref: "students"
     },
-
+ 
     student_id: {
       type: String,
      //require: true
@@ -57,13 +57,36 @@ const studentGroupSchema = new mongoose.Schema({
       required: false
     }
   }],
-
-
-
+  panalmembers: [{
+    _id: {
+      type: String,
+      required: true,
+      ref: "staff"
+    },
+ 
+    fname: {
+      type: String,
+    //  require: true
+    },
+    lname: {
+      type: String,
+      // required: true
+    },
+    staffid: {
+      type: String,
+      //required: true
+    }
+  }],
+  panalmemberstatus: {
+    type:String,
+    //required: true
+  }
+ 
 });
-
-
-
+ 
+ 
+ 
 const studentGroup = mongoose.model("studentGroups", studentGroupSchema);
-
+ 
 module.exports = studentGroup;
+

@@ -1,7 +1,8 @@
 const express = require("express");
 const router = require("express").Router();
 const staff = require("../../models/RS_models/staff");
-let student_group = require("../../models/DH_models/student_group");
+let group = require("../..//models/DH_models/student_group");
+const marking = require("../../models/NT_models/marking")
 const validator= require("validator");
 const jwt = require('jsonwebtoken');
 // const auth = require('../../middleware/staff_middleware/auth')
@@ -46,11 +47,6 @@ router.post('/add', async (req, res) => {
   })
 
 
-
-
-
-
-
   //login Staff Member
  router.post('/login', async (req, res) => {
   try {
@@ -74,6 +70,74 @@ router.post('/add', async (req, res) => {
 
 
 
+// delete Staff Member
+router.delete("/sdelete", auth, async (req, res) => {
+  try {
+    const staff1 = await staff.findById(req.staff1.id);
+    if (!staff1) {
+      throw new Error("There is no staff to delete");
+    }
+    const deleteProfile = await staff.findByIdAndDelete(req.staff1.id);
+    res.status(200).send({ status: "user deleted", staff1 : deleteProfile });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ status: "error with id", error: error.message });
+  }
+
+});
+
+
+
+
+
+//update staff member case ekak thiyeee
+router.put('/supdate', auth, async (req, res) => {
+ 
+  const {fname, lname, username, phone, nic, staffid, field, email, description, profileImage} = req.body
+  try {
+    const updateValus={
+      fname : fname,
+      lname : lname,
+      username :username,
+      phone : phone,
+      nic : nic,
+      staffid : staffid,
+      field : field,
+      email : email,
+      description: description,
+      profileImage : profileImage
+    };
+
+    let staff1 = await staff.findOne({username})
+ 
+    if (!staff1) {
+      throw new Error('There is no staff account')
+    }
+
+    const staffUpdate = await staff.findByIdAndUpdate(req.staff1.id,updateValus)
+ 
+    res.status(200).send({status: 'staff Profile Updated', staff1: staffUpdate})
+  } catch (error) {
+    res.status(500).send({error: error.message})
+    console.log(error)
+  }
+});
+
+
+//staff profile
+router.get("/sprofile", auth, async (req, res) => {
+  try {
+    res.status(201)
+    res.send({ success: "User fetched", staff1: req.staff1});
+  } catch (error) {
+    res.status(500)
+    res.send({ status: "Error with /profile", error: error.message });
+  }
+});
+
+
+
 //-------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------
 
@@ -82,11 +146,14 @@ router.post('/add', async (req, res) => {
 
 
 router.get("/desplaysupertopics",auth, async (req, res) => {
-
   try {
+    
     const sup = await staff.findById(req.staff1.id);
+    var arr =[];
+    arr = sup.researchTopic_Info;
+    
 
-    res.status(200).send({ status: "Supervisor data retrieved", researchTopic_Info: sup.researchTopic_Info });
+    res.status(200).send({ status: "Supervisor data retrieved", researchTopic_Info: arr });
   } catch (error) {
      res.status(500).send({ status: "Error with retrieve", error: error.message });
    }
@@ -95,39 +162,143 @@ router.get("/desplaysupertopics",auth, async (req, res) => {
 
 
 
+//topic acception
+router.post("/addstatusAccept/:id",auth,async (req,res)=>{
 
-//get topics 
-
-// router.get("/viewtopic",(req,res)=>{
-//   student_group.find().exec((err,student_group)=>{
-//       if(err){
-//           return res.status(400).json({
-//               error:err
-//           });
-//       }
-//       return res.status(200).json({
-//           success:true,
-//           showstudent_groups :student_group,
-//       });
-//   });
-// });
-//----------------------------------------------------------------
+  const sup = await staff.findById(req.staff1._id);
+  const groupId = req.params.id
+  const Group = await group.findById(groupId);
+  const topics = sup.researchTopic_Info;
 
 
-// //get topics specific staff id
+  try{
+    //send accepted topics to specific model
+    for(var i = 0; i< topics.length; i++){
+      var arr1 = topics[i];
+      var id = arr1._id.toString();
+//accepted new array creating
+      if(id == groupId){
+        await staff.findOneAndUpdate(
+          {_id:req.staff1._id },
+          {$push: {accepted_researchTopic_Info: arr1}},
+          { new: true , upsert: true }
+          
+        )
+//delete from research topics array
+        staff.findOneAndUpdate(
+          { _id: req.staff1._id },
+          { $pull: { researchTopic_Info: arr1 } },
+          { new: true }
+        )
+          .then(arr1 => console.log(arr1))
+          .catch(err => console.log(err));
+  
+      }
+     }
+      
 
-// router.route("/viewtopic/:id").get((req,res)=>{
-//   let id= req.params.id;
-//   staff.findById(id,(err,staff)=>{
-//     if(err){
-//         return res.status(400).json({success:false,err});
-//     }
-//     return res.status(200).json({
-//       success:true,
-//       staff
-//     });
-//   });
-// });
+  if(!Group){
+    throw new Error("Group not found")
+  }
+
+  if(Group.researchTopic_Status === "Requested"){
+
+              await group.findOneAndUpdate(
+                  {_id:groupId},
+                  {researchTopic_Status : "Accepted"},
+                  {new : true, upsert : true}
+              );
+              await group.findOneAndUpdate(
+                {_id:groupId},
+                {panalmemberstatus : "Requested"},
+                {new : true, upsert : true}
+            );
+     
+      };
+
+
+    
+
+      res.status(200).send({status : "Topic status updated"})
+      
+      }catch(error){
+          res.status(500).send({error : error.message})
+      }
+ 
+});
+
+
+
+//topic Rejection
+
+router.post("/addstatusReject/:id", auth, async (req,res)=>{
+
+  const sup = await staff.findById(req.staff1._id);
+  const groupId = req.params.id
+  const Group = await group.findById(groupId)
+  const topics = sup.researchTopic_Info;
+
+  try{
+
+    for(var i = 0; i< topics.length; i++){
+      var arr1 = topics[i];
+      var id = arr1._id.toString();
+
+   //delete from research topics array
+      if(id == groupId){
+        staff.findOneAndUpdate(
+          { _id: req.staff1._id },
+          { $pull: { researchTopic_Info: arr1 } },
+          { new: true }
+        )
+          .then(arr1 => console.log(arr1))
+          .catch(err => console.log(err));
+  
+      }
+     }
+
+  
+  if(!Group){
+    throw new Error("Group not found")
+  }
+
+  if(Group.researchTopic_Status === "Requested"){
+
+              await group.findOneAndUpdate(
+                  {_id:groupId},
+                  {researchTopic_Status : "Rejected"},
+                  {new : true, upsert : true}
+              );
+              
+              
+      }
+
+      res.status(200).send({status : "Topic status updated"})
+      
+      }catch(error){
+          res.status(500).send({error : error.message})
+      }
+ 
+});
+
+
+//get marking schemes to supervisours
+
+router.get("/getmarkings",(req,res)=>{
+
+  marking.find({}).exec((err,marking)=>{
+      if(err){
+          return res.status(400).json({
+              error:err
+          });
+      }
+      return res.status(200).json({
+          success:true,
+          markings : marking,
+      });
+  });
+});
+
 
 
 

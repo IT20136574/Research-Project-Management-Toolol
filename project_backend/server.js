@@ -7,7 +7,12 @@ const app = express();
 require("dotenv").config();
 app.use(express.json());
 
-const PORT = process.env.PORT || 8070;
+
+
+
+const {notFound, errorHandler} = require('./middleware/errorMiddleware');
+
+const PORT = process.env.PORT || 8070; 
 
 app.use(bodyParser.json({limit: '50mb'}) );
 app.use(bodyParser.urlencoded({
@@ -42,6 +47,12 @@ const asignPanalMemberRouter = require("./routes/NT_routes/asignPanalMember")
 
 
 const staffRouter = require("./routes/RS_routes/staff");
+const userRoutes = require("./routes/RS_routes/userRoutes");
+const chatRoutes = require("./routes/RS_routes/chatRoutes");
+const messageRoutes = require("./routes/RS_routes/messageRoutes");
+
+
+
 
 
 // rotues
@@ -53,7 +64,67 @@ app.use("/panalmember",asignPanalMemberRouter);
 
 app.use("/staff", staffRouter);
 
+app.use('/api/user',userRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/api/message', messageRoutes);
 
-app.listen(PORT, () => {
+
+// app.use(notFound);
+// app.use(errorHandler);
+
+// app.listen(PORT, () => {
+//     console.log(`Server is up and running on port number: ${PORT}`)
+// })
+
+const server = app.listen(PORT, () => {
     console.log(`Server is up and running on port number: ${PORT}`)
-})
+});
+
+
+
+const io = require('socket.io')(server, { 
+  pingTimeout: 60000,
+  cors:{
+    origin:"http://localhost:1234"
+  },
+   
+});
+
+
+io.on("connection", (socket) => {
+console.log('connected to socket.io');
+   
+socket.on ('setup', (userData)=> {
+  socket.join(userData._id);
+  socket.emit("connected");
+});
+
+socket.on('join chat', (room) => {
+  socket.join(room);
+  console.log("User Joined Room: " + room);
+});
+
+socket.on("typing", (room) => socket.in(room).emit("typing"));
+  socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
+
+socket.on("new message", (newMessageRecieved) => {
+  var chat = newMessageRecieved.chat;
+
+  if (!chat.users) return console.log("chat.users not defined");
+
+  chat.users.forEach((user) => {
+    if (user._id == newMessageRecieved.sender._id) return;
+
+    socket.in(user._id).emit("message recieved", newMessageRecieved);
+  });
+
+  });
+
+  socket.off("setup", () => {
+    console.log("USER DISCONNECTED");
+    socket.leave(userData._id);
+  });
+});
+
+
+
