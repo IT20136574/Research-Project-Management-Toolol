@@ -34,12 +34,12 @@ export default class Member extends Component {
         const id = this.props.match.params.data;
 
         console.log(id)
-        axios.post(`http://localhost:8070/student/grpReg/${id}`,data)
+        axios.post(`http://localhost:8070/studentGroup/grpReg/${id}`,data)
         .then(res=>{
                 alert("Group Member Registered")
                 window.location.reload();
         }).catch((err)=>{
-            alert(JSON.stringify(err))
+            alert("This student already registered in a group...!")
         })
 
   }
@@ -49,7 +49,7 @@ export default class Member extends Component {
   displaygroupMembers(){
     const id = this.props.match.params.data;
   
-    axios.get(`http://localhost:8070/student/display/${id}`).then(res =>{
+    axios.get(`http://localhost:8070/studentGroup/display/${id}`).then(res =>{
     if(res.data.status){
             this.setState({
                 groupMembers:res.data.groupMembers
@@ -70,7 +70,7 @@ export default class Member extends Component {
 onDelete = (id) =>{
 
     if (window.confirm('Are you sure you wish to remove this member?')) {
-        axios.delete(`http://localhost:8070/student/deleteMem/${id}`).then((res)=>{
+        axios.delete(`http://localhost:8070/studentGroup/deleteMem/${id}`).then((res)=>{
                 //alert("Delete successful");
                 alert('Removed successfully');
                 window.location.reload();

@@ -46,12 +46,12 @@ componentDidMount(){
         const data = {research_Topic,field,tags};
         console.log(data)
 
-        axios.post(`http://localhost:8070/student/regResearchTopic`,config, data)
+        axios.post(`http://localhost:8070/studentGroup/regResearchTopic`,config, data)
         .then(res=>{
                 alert("Reasearch Topic Registered")
                 window.location.reload();
         }).catch((err)=>{
-            alert(err)
+            alert("Group Topic Already Exists!")
         })
 
   }

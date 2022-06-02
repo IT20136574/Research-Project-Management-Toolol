@@ -5,14 +5,16 @@ import './App.css'
 
 import Signup from './components/DH_Components/student_Register';
 import Login from './components/DH_Components/student_login';
-import Group from './components/DH_Components/grp_topic';
+import GroupTopic from './components/DH_Components/grp_topic';
 import Members from './components/DH_Components/grp_members';
-import Topic from './components/DH_Components/grp_topic';
+import grpReg from './components/DH_Components/groupName';
 import Supervisors from './components/DH_Components/supervisors';
 import DisplaySupervisors from './components/DH_Components/displaySupervisor';
 import Home from './components/DH_Components/home';
 import Header from './components/DH_Components/header';
 import DocumentUpload from './components/DH_Components/documentUpload';
+import Submissions from './components/DH_Components/submissions';
+
 
 
 export default class App extends Component {
@@ -23,13 +25,14 @@ export default class App extends Component {
             <Switch>
               <Route path ='/aa' component={Signup} />
               <Route path="/login" component={Login} />
-              <Route path="/grpreg" component={Group} />
+              <Route path="/grpTopic" component={GroupTopic} />
               <Route path="/grpmem/:data" component={Members} />
               <Route path="/supervisors" component={Supervisors} />
-              <Route path="/topic" component={Topic} />
+              <Route path="/grpReg" component={grpReg} />
               <Route path="/displaySupervisor/:id" component={DisplaySupervisors} />
               <Route path="/home" component={Home} />
-              <Route path="/document" component={DocumentUpload} />
+              <Route path="/document/:id" component={DocumentUpload} />
+              <Route path="/submissions" component={Submissions} />
             </Switch>
         </Router>
     )

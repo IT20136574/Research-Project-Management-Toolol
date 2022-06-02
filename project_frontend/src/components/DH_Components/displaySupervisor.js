@@ -17,7 +17,7 @@ export default class DisplaySupervisors extends Component {
 
   displaysupervisor(){
     const id = this.props.match.params.id;
-    axios.get(`http://localhost:8070/student/supervisor/${id}`).then(res =>{
+    axios.get(`http://localhost:8070/sSupervisorGroup/supervisor/${id}`).then(res =>{
     if(res.data.success){
             this.setState({
                 staff:res.data.staff
@@ -41,7 +41,7 @@ request(){
     const id = this.props.match.params.id;
       
     if (window.confirm('Are you sure you want to request this supervisor?')) {
-        axios.post(`http://localhost:8070/student/requestSupervisor/${id}`,config).then(res=>{
+        axios.post(`http://localhost:8070/sSupervisorGroup/requestSupervisor/${id}`,config).then(res=>{
             console.log(config)
                 alert("requested successfully");
                 window.location.reload();

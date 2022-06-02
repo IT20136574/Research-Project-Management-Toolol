@@ -36,9 +36,12 @@ console.log("Mongodb connection success!!!");
 
 // @import routes
 const studentRouter = require("./routes/DH_routes/student");
+const studentGroupRouter = require("./routes/DH_routes/studentGroup");
+const sSupervisorRouter = require("./routes/DH_routes/supervisors");
+const submissionsRouter = require("./routes/DH_routes/submissions");
 const adminRouter = require("./routes/NT_routes/admin");
 const viewRoleRouter = require("./routes/NT_routes/viewRoles");
-const asignPanalMemberRouter = require("./routes/NT_routes/asignPanalMember")
+const asignPanalMemberRouter = require("./routes/NT_routes/asignPanalMember");
 
 
 
@@ -47,6 +50,9 @@ app.use("/student",studentRouter);
 app.use("/admin",adminRouter);
 app.use("/viewRole",viewRoleRouter);
 app.use("/panalmember",asignPanalMemberRouter);
+app.use("/studentGroup",studentGroupRouter);
+app.use("/sSupervisorGroup",sSupervisorRouter);
+app.use("/submitDocs",submissionsRouter);
 
 
 
