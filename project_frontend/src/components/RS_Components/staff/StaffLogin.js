@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
+import image from '../../../asserts/RS_Assests/oo.jpg'
 
 
 export default class StaffLogin extends Component {
@@ -41,12 +42,12 @@ await axios.post("http://localhost:8070/staff/login",userData)
           }else if (res.data.staff1.role === "co-supervisor"){
             localStorage.setItem("Authorization", res.data.token)
             alert("loging complete");
-            window.location.href = "/cosupHome";
+            window.location.href = "/shome";
 
           }else if(res.data.staff1.role === "panal_member"){
             localStorage.setItem("Authorization", res.data.token)
             alert("loging complete");
-            window.location.href = "/panelHome";
+            window.location.href = "/phome";
 
           }else {
               console.log("login Error");
@@ -71,16 +72,61 @@ await axios.post("http://localhost:8070/staff/login",userData)
     return (
       
       <div>
-          <h1>staff login</h1>
-          <form onSubmit={this.userLoginSubmit}>
-
-            username : <input type="text" name='username' onChange={e => this.setState({ username: e.target.value })}/> <br/><br/>
-
-            password : <input type="text" name='password' onChange={e => this.setState({ password: e.target.value })}/> <br/><br/>
-
-            <input type="submit" value="Login"/>
-
-          </form>
+             
+      <section className="vh-200" style={{backgroundColor: "#D8BFD8"}}>
+        <div className="container py-5 h-100">
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col col-xl-10">
+              <div className="card" style={{borderRadius: "1rem", marginBottom:"1rem"}}>
+                <div className="row g-0">
+                  <div className="col-md-6 col-lg-5 d-none d-md-block">
+                    <img src={image}
+                      alt="login form" className="img-fluid" style={{borderRadius: "1rem 0 0 1rem" }}/>
+                  </div>
+                  
+                  <div className="col-md-6 col-lg-7 d-flex align-items-center">
+                    <div className="card-body p-4 p-lg-5 text-black">
+                   
+      
+                      <form onSubmit={this.userLoginSubmit} name="form">
+      
+                        <div className="d-flex align-items-center mb-3 pb-1">
+                          <i className="fas fa-door-open fa-2x me-3" style={{color: "#ff6219"}}></i>
+                          <span className="h1 fw-bold mb-0">Staff Login</span>
+                        </div>
+      
+      
+                        <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="username" id="floatingInput" placeholder="username" onChange={e => this.setState({ username: e.target.value })} required/>
+                      <label for="floatingInput">Username</label>
+                    </div>
+      
+                    <div class="form-floating mb-3">
+                      <input type="password" class="form-control" name="password" id="floatingInput" placeholder="Password" onChange={e => this.setState({ password: e.target.value })} required/>
+                      <label for="floatingInput">Password</label>
+                    </div>
+      
+                        <div className="pt-1 mb-4">
+                          <button className="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                        </div>
+      
+         
+                        <p className="mb-5 pb-lg-2" style={{color: "#393f81"}}>Don't have an account? <a href="/reg"
+                            style={{color: "#393f81"}}>Register here</a></p>
+                        
+      
+                      </form>
+      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+                 
       </div>
     )
   }

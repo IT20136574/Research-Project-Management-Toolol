@@ -33,7 +33,7 @@ async getResearchDetailes(){
             researchs : res.data.researchTopic_Info
                                
           });
-          console.log(this.state.researchs);
+          // console.log(this.state.researchs);
          
       }
   });
@@ -64,22 +64,22 @@ async getResearchDetailes(){
 
 
 onAccept = (id) =>{
+  
   const config = {
-      headers: {
-        "Authorization": localStorage.getItem("Authorization"),
-      },
-    };
+    headers: {
+        Authorization: localStorage.getItem("Authorization")
+     }
+}   
 
   if (window.confirm('Are you sure you wish to accept this Research Topic?')) {
-    
-      axios.post(`http://localhost:8070/staff/addstatusAccept/${id}`,config).then((res)=>{
-        
+   
+    axios.get(`http://localhost:8070/staff/addstatusAccept/${id}`, config).then((res)=>{
+      
               alert('Topic Accepted Successfully');
-              window.location.reload();
-               
+              window.location.reload();     
+                 
       });
   };
- 
 };
 
 

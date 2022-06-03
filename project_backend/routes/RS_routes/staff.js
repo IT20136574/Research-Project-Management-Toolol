@@ -2,7 +2,8 @@ const express = require("express");
 const router = require("express").Router();
 const staff = require("../../models/RS_models/staff");
 let group = require("../..//models/DH_models/student_group");
-const marking = require("../../models/NT_models/marking")
+const marking = require("../../models/NT_models/marking");
+const submitions = require("../../models/NT_models/submition");
 const validator= require("validator");
 const jwt = require('jsonwebtoken');
 // const auth = require('../../middleware/staff_middleware/auth')
@@ -163,7 +164,7 @@ router.get("/desplaysupertopics",auth, async (req, res) => {
 
 
 //topic acception
-router.post("/addstatusAccept/:id",auth,async (req,res)=>{
+router.post("/addstatusAccept/:id", auth, async (req,res)=>{
 
   const sup = await staff.findById(req.staff1._id);
   const groupId = req.params.id
@@ -215,9 +216,6 @@ router.post("/addstatusAccept/:id",auth,async (req,res)=>{
             );
      
       };
-
-
-    
 
       res.status(200).send({status : "Topic status updated"})
       
@@ -302,6 +300,38 @@ router.get("/getmarkings",(req,res)=>{
 
 
 
+//get project submitions to supervisours
+
+router.get("/getsubmitions",(req,res)=>{
+
+  submitions.find({}).exec((err,submitions)=>{
+      if(err){
+          return res.status(400).json({
+              error:err
+          });
+      }
+      return res.status(200).json({
+          success:true,
+          exitingsubmitions : submitions,
+      });
+  });
+});
+
+
+//get stutent groups for panel member
+router.get("/desplaypanalgroups",auth, async (req, res) => {
+  try {
+    
+    const panel = await staff.findById(req.staff1.id);
+    var arr =[];
+    arr = panel.groups;
+    
+
+    res.status(200).send({ status: "student group data retrieved", groups: arr });
+  } catch (error) {
+     res.status(500).send({ status: "Error with retrieve", error: error.message });
+   }
+});
 
 
 

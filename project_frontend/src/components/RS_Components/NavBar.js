@@ -14,15 +14,15 @@ export default class NavBar extends Component{
 
 
       <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-      <div class="container-sm">
+      <div class="container-fluid">
           <img
                   src="https://static.sliit.lk/wp-content/uploads/2021/10/24070027/SLIIT.png"
                   height="43"
                   alt="slitt"
                   loading="lazy"
               /><p>  &nbsp;&nbsp; </p>
-                     <p style={{color: "#5e9693", fontSize:"22px"}}>STAFF</p><p style={{color: "#fff", fontSize:"20px"}}>Staff</p>
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <p style={{color: "#5e9693", fontSize:"22px"}}>Supervisor/Co-Supervisor</p>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
                     data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -34,7 +34,7 @@ export default class NavBar extends Component{
                     <a class="nav-link" style={{ fontSize:"18px"}} href="/shome">Home</a>
                 </li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <li class="nav-item">
-                    <a class="nav-link" style={{ fontSize:"18px"}} href="/topics">Topics</a>
+                    <a class="nav-link" style={{ fontSize:"18px"}} href="/topics">Accept/Reject Topics</a>
                 </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <li class="nav-item">
                     <a class="nav-link" style={{ fontSize:"18px"}} href="/eveluate">Evaluate Documents</a>

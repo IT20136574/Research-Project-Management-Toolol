@@ -3,6 +3,8 @@
 }
 
 
+
+
 /* ravi */
 
 ::-webkit-scrollbar {
@@ -39,3 +41,10 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
  
+  .cardN2{
+    background-color: #C2DCF5;
+    padding: 20px 20px 20px 20px;
+    margin-left: 10px;
+    border-radius: 15px;
+  }
+  
