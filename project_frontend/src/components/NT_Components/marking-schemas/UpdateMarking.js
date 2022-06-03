@@ -93,25 +93,61 @@ const params = useParams();
     }
     
   return (
-    <div className='alignMargin'>
-        <h2>Update Marking Schema</h2> <br/>
-        <form method='POST' onSubmit={sendData}>
-                <label>Marking Schema Title : </label> &nbsp;
-                <input type="text" name="mTittle" value={mTittle} onChange={(e)=>{setmTittle(e.target.value)}}  required/><br/><br/>
+        <div className='alignMarginN'>
+        <div class="container">
+            <div class="main-body">
+            <div class="col-md-12">
+            <div class="card mb-2 mt-5" style={{width:94+"%",boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
+                <div class="card-body">
+                <h4 className="fw-bold mb-1">Update Marking Schema</h4><br/>
+                <form method='POST' onSubmit={sendData}>
+                <div className="row">
+                        <div className="col-md-12 mb-2">
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" name="mTittle" id="mTittle" placeholder="Marking Schema Title" value={mTittle} onChange={(e)=>{setmTittle(e.target.value)}} required="true"/>
+                            <label for="floatingInput">Marking Schema Title</label>
+                        </div>
+                        </div>
+                </div>
 
-                <label>Display Title : </label> &nbsp;
-                <input type="text" name="DTittle" value={DTittle} onChange={(e)=>{setDTittle(e.target.value)}} required/><br/><br/>
+                <div className="row">
+                        <div className="col-md-12 mb-2">
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" name="mTittle" id="mTittle" placeholder="Marking Schema Display Title" value={DTittle} onChange={(e)=>{setDTittle(e.target.value)}} required="true"/>
+                            <label for="floatingInput">Marking Schema Display Title</label>
+                        </div>
+                        </div>
+                </div>
+    
 
-                <label>Discription : </label> &nbsp;
-                <input type="text" name="discription" value={discription} onChange={(e)=>{setdiscription(e.target.value)}} required/><br/><br/>
+                <div class="form-floating mb-3">
+                        <textarea id="floatingInput" name="discription" style={{height: "100px"}} type="text"  class="form-control" placeholder="Description" value={discription} onChange={(e)=>{setdiscription(e.target.value)}} required/>
+                        <label for="floatingInput">Description</label>
+                </div>
 
-                <label>File : </label> &nbsp;
-                <input type="file" name="fileUrl"  onChange={(e) => setfileUrl(e.target.files[0])}/><br/><br/>
+                <div className="row">
+                <div class="file-upload-wrapper">
+                    <input type="file" id="input-file-now" class="file-upload" onChange={(e) => setfileUrl(e.target.files[0])}/>
+                    </div>
+                </div>
                 
-                <input type="submit" value="submit"/>
-       
-        </form>
+                <center>
+                    <div className='mt-4'>
+                        <input class='btn btn-warning' type="reset" value="Reset" style={{width: 20+"%"}}/> &nbsp;&nbsp;&nbsp;
+                        <input class='btn btn-primary' type="submit" value="Update Marking Scheme" style={{width: 20+"%"}}/> 
+                    </div>
+                </center>
+                
+                </form>
+                
 
+            </div>
+            </div>
+        </div>
+
+
+            </div>
+        </div>
     </div>
   )
 }

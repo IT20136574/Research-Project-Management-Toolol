@@ -4,11 +4,27 @@ import {BrowserRouter, Route, Switch } from 'react-router-dom'
 import React from 'react'
 import UserManagementPage from './components/NT_Components/admin_Layouts/UserManagementPage';
 import Studentmanagement from './components/NT_Components/user-management/student-management/Studentmanagement';
-import DisplayStudentDetails from './components/NT_Components/user-management/student-management/DisplayStudentDetails';
+import UpdateStudent from './components/NT_Components/user-management/student-management/UpdateStudent';
+import StudentView from './components/NT_Components/user-management/student-management/StudentView';
+
+import SupervisorMgtPage from './components/NT_Components/user-management/staff-management/supervisor/SupervisorMgtPage';
+import UpdateSupervisor from './components/NT_Components/user-management/staff-management/supervisor/UpdateSupervisor';
+import ViewSupervisor from './components/NT_Components/user-management/staff-management/supervisor/ViewSupervisor'
+
+import UpdateCoSupervisor from './components/NT_Components/user-management/staff-management/co-supervisor/UpdateCoSupervisor';
+import CoSupervisorMgtPage from './components/NT_Components/user-management/staff-management/co-supervisor/CoSupervisorMgtPage';
+import ViewCoSupervisor from './components/NT_Components/user-management/staff-management/co-supervisor/ViewCoSupervisor';
+
 import AdminLogin from './components/NT_Components/admin/AdminLogin';
 import AdminAccount from './components/NT_Components/admin/AdminAccount';
 import RegisterAdmin from './components/NT_Components/admin/RegisterAdmin';
 import UpdateAdmin from './components/NT_Components/admin/UpdateAdmin';
+
+import PanalMemberMgtPage from './components/NT_Components/user-management/staff-management/panal-member/PanalMemberMgtPage';
+import UpdatePanelMem from './components/NT_Components/user-management/staff-management/panal-member/UpdatePanelMem';
+import ViewPanelMem from './components/NT_Components/user-management/staff-management/panal-member/ViewPanelMem';
+
+
 import ShowGroup from './components/NT_Components/asign-panel-member/ShowGroup';
 import AddPanelMember from './components/NT_Components/asign-panel-member/AddPanalMember'
 import DocumentUpload from './components/NT_Components/document-presentation/DocumentUpload';
@@ -16,22 +32,14 @@ import DocumentPage from './components/NT_Components/document-presentation/Docum
 import UpdateDocument from './components/NT_Components/document-presentation/UpdateDocument';
 import Sidebar from './components/NT_Components/admin_Layouts/nav-bar/Sidebar';
 import Dashboard from './components/NT_Components/admin_Layouts/Dashboard';
-import CoSupervisorMgtPage from './components/NT_Components/user-management/staff-management/co-supervisor/CoSupervisorMgtPage';
-import UpdateCoSupervisor from './components/NT_Components/user-management/staff-management/co-supervisor/UpdateCoSupervisor';
-import DisplayCoSupervisor from './components/NT_Components/user-management/staff-management/co-supervisor/DisplayCoSupervisor';
-import UpdateStudentDetails from './components/NT_Components/user-management/student-management/DisplayStudentDetails'
-import PanalMemberMgtPage from './components/NT_Components/user-management/staff-management/panal-member/PanalMemberMgtPage';
-import UpdatePanelMember from './components/NT_Components/user-management/staff-management/panal-member/UpdatePanelMember';
-import DisplayPanalMember from './components/NT_Components/user-management/staff-management/panal-member/DisplayPanalMember';
-import DisplaySupervisor from './components/NT_Components/user-management/staff-management/supervisor/DisplaySupervisor';
-import SupervisorMgtPage from './components/NT_Components/user-management/staff-management/supervisor/SupervisorMgtPage';
-import UpdateSupervisor from './components/NT_Components/user-management/staff-management/supervisor/UpdateSupervisor';
 import SubmitionPage from './components/NT_Components/submition-type/SubmitionPage';
 import AddSubmition from './components/NT_Components/submition-type/AddSubmition';
 import UpdataSubmition from './components/NT_Components/submition-type/UpdataSubmition';
 import MarkingSchemaPage from './components/NT_Components/marking-schemas/MarkingSchemaPage';
 import AddMarkingSchema from './components/NT_Components/marking-schemas/AddMarkingSchema';
 import UpdateMarking from './components/NT_Components/marking-schemas/UpdateMarking';
+
+
 
 function App() {
   return (
@@ -42,13 +50,13 @@ function App() {
       </Switch> */}
         <Sidebar/>
         <Switch>
-                <Route path="/" component={AdminLogin} exact/>
+                <Route path="/login" component={AdminLogin} exact/>
                 <Route path="/dashboard" component={Dashboard}/>
 
                 {/* Student */}
                 <Route path="/student" component={Studentmanagement}/>
-                <Route path="/showstudent/:id" component={DisplayStudentDetails}/>
-                <Route path="/updatestudent/:id" component={UpdateStudentDetails}/>
+                <Route path="/upstudent/:id" component={UpdateStudent}/>
+                <Route path="/showstudent/:id" component={StudentView}/>
 
                 {/* Admin */}
                 <Route path="/adminpage" component={UserManagementPage}/>
@@ -65,20 +73,20 @@ function App() {
                 <Route path="/documentPage" component={DocumentPage}/>
                 <Route path="/updateDoc/:id" component={UpdateDocument}/>
 
-                {/* Co-Supervisor */}
+                {/* Co-Supervisor */} 
                 <Route path="/CoSupervisor/:role" component={CoSupervisorMgtPage}/>
-                <Route path="/showcoSup/:id" component={DisplayCoSupervisor}/>
                 <Route path="/updatecoSup/:id" component={UpdateCoSupervisor}/>
+                <Route path="/viewcoSup/:id" component={ViewCoSupervisor}/>
 
                 {/* Supervisor */}
                 <Route path="/supervisor/:role" component={SupervisorMgtPage}/>
-                <Route path="/showSup/:id" component={DisplaySupervisor}/>
-                <Route path="/updateSup/:id" component={UpdateSupervisor}/>
+                <Route path="/upsupervisor/:id" component={UpdateSupervisor}/>
+                <Route path="/viewsupervisor/:id" component={ViewSupervisor}/>
 
                 {/* Panal-Member */}
                 <Route path="/panalMember/:role" component={PanalMemberMgtPage}/>
-                <Route path="/showpanalMem/:id" component={DisplayPanalMember}/>
-                <Route path="/updatepanalMem/:id" component={UpdatePanelMember}/>
+                <Route path="/showpanalMem/:id" component={ViewPanelMem}/>
+                <Route path="/updatepanalMem/:id" component={UpdatePanelMem}/>
 
                 {/* Submition Type */}
                 <Route path="/submition" component={SubmitionPage}/>

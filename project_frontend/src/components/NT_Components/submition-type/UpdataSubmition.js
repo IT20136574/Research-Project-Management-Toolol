@@ -118,7 +118,7 @@ export default class UpdataSubmition extends Component {
     <div class="container">
         <div class="main-body">
         <div class="col-md-12">
-          <div class="card mb-2 mt-5" style={{width:94+"%"}}>
+          <div class="card mb-2 mt-5" style={{width:94+"%",boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
             <div class="card-body">
             <h4 className="fw-bold mb-1">Update Submission Type</h4><br/>
             <form method='POST' onSubmit={this.onSubmit}>
@@ -166,7 +166,7 @@ export default class UpdataSubmition extends Component {
             <center>
                 <div className='mt-4'>
                     <a href='/submition'><input class='btn btn-info' type="button" value="Cancel" style={{width: 15+"%"}}/></a> &nbsp;&nbsp;&nbsp;
-                    <input class='btn btn-info' type="reset" value="Reset" style={{width: 15+"%"}}/> &nbsp;&nbsp;&nbsp;
+                    <input class='btn btn-warning' type="reset" value="Reset" style={{width: 15+"%"}}/> &nbsp;&nbsp;&nbsp;
                     <input class='btn btn-primary' type="submit" value="Update Submission" style={{width: 15+"%"}}/> 
                 </div>
             </center>

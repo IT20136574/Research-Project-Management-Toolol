@@ -101,7 +101,7 @@ export default class AdminAccount extends Component {
           <button onClick={this.adminLogout}>Admin Logout</button>  */}
           <div class="container">
             <div class="main-body">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4" style={{width:93.5+"%"}}>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4" style={{width:93.5+"%",boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
@@ -117,9 +117,9 @@ export default class AdminAccount extends Component {
   
 
 
-          <div class="row gutters-sm ">
-            <div class="col-md-4 mb-3">
-              <div class="card mt-3" style={{width:90+"%"}}>
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3 mt-3">
+              <div class="card mt-3" style={{width:90+"%", boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center mt-3">
                     <img src={this.state.imageUrl} alt="Profile_Picture" class="rounded-circle" width="150"/>
@@ -133,8 +133,8 @@ export default class AdminAccount extends Component {
                 </div>
               </div>
             </div>
-            <div class="col-md-8">
-              <div class="card mb-2 mt-3" style={{width:90+"%"}}>
+            <div class="col-md-8 mt-3">
+              <div class="card mb-2 mt-3" style={{width:90+"%", boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
@@ -193,7 +193,7 @@ export default class AdminAccount extends Component {
               </div>
             </div>
           </div>
-          <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4" style={{width:93.5+"%"}}>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3" style={{width:93.5+"%", boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)",height:80+"px"}}>
             
           <div class="container-fluid">
               <div>

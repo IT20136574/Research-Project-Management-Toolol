@@ -1,14 +1,159 @@
 import React, { Component } from 'react'
-import DisplayDocuments from './DisplayDocuments'
+import {HiRefresh} from "react-icons/hi"
+import {RiAddCircleFill} from "react-icons/ri"
+import axios from 'axios'
 
 export default class DocumentPage extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+        Documents : []
+    }
+}
+componentDidMount(){
+    axios.get("http://localhost:8070/document/getDocument").then((res)=>{
+        if(res.data.success){
+            this.setState({
+                Documents : res.data.documents
+            })
+            console.log(this.state.Documents)
+        }
+    })
+}
 
+filterData(Documents,searchKey){
+  const result = Documents.filter((Documents) =>
+      Documents.docname.toLowerCase().includes(searchKey)
+  )
+  this.setState({Documents : result})
+}
+
+handleSearchArea = (e)=> {
+const searchKey = e.currentTarget.value;
+axios.get("http://localhost:8070/document/getDocument").then(res =>{
+     if(res.data.success){
+            this.filterData(res.data.documents,searchKey)
+         };
+     }
+ )
+}
+
+onDelete(id){
+    if(window.confirm("Are you sure to delete this?")){
+      axios.delete(`http://localhost:8070/document/deleteDocument/${id}`).then((res)=>{
+        if(res.data){
+          console.log("delete success!")
+          window.location.reload();
+        }
+      }).catch((e)=>{
+        console.log(e)
+      })
+
+    }
+  }
+
+onUpdate(id){
+    window.location.href=`/updateDoc/${id}`
+}
   render() {
     return (
-      <div className='alignMargin'> 
-          <h3>Document Page</h3>
-          <a href='/DocumentUpload'><button>Add Document</button></a><br/>
-          <DisplayDocuments/><br/>
+      // <div className='alignMargin'> 
+      //     <h3>Document Page</h3>
+      //     <a href='/DocumentUpload'><button>Add Document</button></a><br/>
+      //     <DisplayDocuments/><br/>
+      // </div>
+
+      <div className='alignMarginN'>
+      <div class="container">
+          <div class="main-body">
+  
+          <div class="col-md-12">
+            <div class="card mb-2 mt-4" style={{width:94+"%",boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
+              <div class="card-body">
+                <center><h3 className="fw-bold mb-0">Document Management</h3></center>
+                <div className='row mt-3'>
+                  <div className="col-md-6 mt-0">
+                    <div class="input-group rounded">
+                    <a href='/DocumentUpload'><button class="btn btn-primary"> <span><RiAddCircleFill color="white" fontSize="1.5em"/>&nbsp; Add Document</span></button></a>     
+                    <button class="btn btn-info" style={{marginLeft:"0.5rem"}} onClick={()=>{window.location.reload()}} > <span><HiRefresh color="white" fontSize="1.5em"/> &nbsp; Refresh Table</span></button>
+                    </div>
+                  </div>
+                  <div className="col-md-3 ms-auto mt-0">
+                    <div class="input-group rounded">
+                      <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"
+                      name="searchQuery" onChange={this.handleSearchArea}></input>
+                      <span class="input-group-text border-0" id="search-addon">
+                        <i class="fas fa-search"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+  
+                <hr className='mt-4' style={{height:3+"px"}}/>
+                <div class="table-wrapper-scroll-y my-custom-scrollbar mt-4">
+        <table class="table table-bordered table-striped mb-0">
+          <thead style={{color:"white", backgroundColor:"#28282B"}}>
+            <tr style={{textAlign:"center"}}>
+                <th>No</th>
+                <th>Document Name</th>
+                <th>Display Title</th>
+                <th>File Type</th>
+                <th>File</th>
+                <th>Actions</th>
+            </tr>
+          </thead>
+                <tbody>
+                    {this.state.Documents.map((Documents,index)=>(
+                    <tr>
+                        <th>{index +1}</th>
+                        <td>{Documents.docname}</td>
+                        <td>{Documents.displaytitle}</td>
+                        <td>{Documents.type}</td>
+                        {
+                            Documents.type === "Presentation" &&
+                                <div>
+                                    <td><a href={Documents.fileUrl}>Pesentation</a></td>
+                                </div> 
+                        }
+
+                        {
+                            Documents.type === "PDF" &&
+                                <div>
+                                    <td><a href={Documents.fileUrl}>pdf</a></td>
+                                </div> 
+                        }
+
+                        {
+                            Documents.type === "word" &&
+                                <div>
+                                    <td><a href={Documents.fileUrl}>word</a></td>
+                                </div> 
+                        }
+
+                        <td style={{textAlign:"center"}}>
+                        {/* <button onClick={()=>{this.onUpdate(Documents._id)}}>Update</button> &nbsp;
+                        <button onClick={()=>{this.onDelete(Documents._id)}}>Delete</button>  */}
+                        {/* <button type="button" onClick={()=>{this.onUpdate(Documents._id)}} class="btn btn-primary btn-rounded"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;
+                        <button type="button" onClick={()=>{this.onDelete(Documents._id)}} class="btn btn-danger btn-rounded"><i class="fa fa-trash"></i></button> */}
+                            
+                            <button type="button" onClick={()=>{this.onUpdate(Documents._id)}} class="btn btn-outline-dark btn-floating"><i class="fa fa-pencil" style={{color:"blue"}}></i></button>&nbsp;&nbsp;
+                            <button type="button" onClick={()=>{this.onDelete(Documents._id)}} class="btn btn-outline-dark btn-floating"><i class="fa fa-trash" style={{color:"red"}}></i></button>
+                        
+                        </td>
+                    </tr>                                  
+                    ))}
+                                            
+                </tbody>
+      </table>
+      </div>
+
+
+  
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
       </div>
     )
   }

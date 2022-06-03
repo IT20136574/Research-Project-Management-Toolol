@@ -122,7 +122,7 @@ export default class UpdateAdmin extends Component {
     <div className='alignMarginN'>
     <div class="container">
         <div class="main-body">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4" style={{width:93.5+"%"}}>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4" style={{width:93.5+"%", boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
@@ -136,7 +136,7 @@ export default class UpdateAdmin extends Component {
             </div>
         </nav>
         <div class="col-md-12">
-          <div class="card mb-2 mt-3" style={{width:94+"%"}}>
+          <div class="card mb-2 mt-3" style={{width:94+"%", boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
             <div class="card-body">
             <h4 className="fw-bold mb-1">Admin Profile Update</h4><br/>
             <form onSubmit={this.onSubmit}>
@@ -198,8 +198,8 @@ export default class UpdateAdmin extends Component {
 
                 <center>
                     <div className='mt-5'>
-                        <input class='btn btn-light' type="reset" value="Reset" style={{width: 15+"%"}}/> &nbsp;&nbsp;&nbsp;
-                        <input class='btn btn-primary' type="submit" value="Register" style={{width: 15+"%"}}/> 
+                        <input class='btn btn-warning' type="reset" value="Reset" style={{width: 15+"%"}}/> &nbsp;&nbsp;&nbsp;
+                        <input class='btn btn-primary' type="submit" value="Update" style={{width: 15+"%"}}/> 
                     </div>
                 </center>
                 

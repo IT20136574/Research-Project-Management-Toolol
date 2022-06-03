@@ -23,6 +23,24 @@ componentDidMount(){
     })
 }
 
+filterData(submitionTypes,searchKey){
+  const result = submitionTypes.filter((submitionTypes) =>
+      submitionTypes.submitionTitle.toLowerCase().includes(searchKey)||
+      submitionTypes.submitionType.toLowerCase().includes(searchKey)
+  )
+  this.setState({submitionTypes:result})
+}
+
+handleSearchArea = (e)=> {
+const searchKey = e.currentTarget.value;
+axios.get(`http://localhost:8070/submition/getSubmition`).then(res =>{
+     if(res.data.success){
+            this.filterData(res.data.submitions,searchKey)
+         };
+     }
+ )
+}
+
 onDelete(id){
     if(window.confirm("Are you sure to delete this?")){
         axios.delete(`http://localhost:8070/submition/deleteSubmition/${id}`).then((res)=>{
@@ -34,7 +52,7 @@ onDelete(id){
           console.log(e)
         })
     }
-}
+  }
 
 onUpdate(id){
     window.location.href=`/updatesubmition/${id}`
@@ -53,14 +71,15 @@ onUpdate(id){
             <div class="main-body">
     
             <div class="col-md-12">
-              <div class="card mb-2 mt-4" style={{width:94+"%"}}>
+              <div class="card mb-2 mt-4" style={{width:94+"%",boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
                 <div class="card-body">
-                  <center><h3 className="fw-bold mb-0">Submition Types</h3></center>
+                  <center><h3 className="fw-bold mb-0">Submission Types</h3></center>
                   <div className='row mt-3'>
-                    <div className="col-md-4 mt-0">
+                    <div className="col-md-6 mt-0">
                       <div class="input-group rounded">
-                      <a href='/addsubmition'><button class="rounded-5"> <span><RiAddCircleFill color="green" fontSize="1.5em"/> Create Submition Type</span></button></a> &nbsp;&nbsp;&nbsp;
-                        <button class="rounded-5"> <span><HiRefresh color="green" fontSize="1.5em"/> Reshresh</span></button>
+                      <a href='/addsubmition'><button class="btn btn-primary"> <span><RiAddCircleFill color="white" fontSize="1.5em"/> &nbsp; Create Submissions Type</span></button></a>
+                      <button class="btn btn-info" style={{marginLeft:"0.5rem"}} onClick={()=>{window.location.reload()}} > <span><HiRefresh color="white" fontSize="1.5em"/> &nbsp; Refresh Table</span></button>
+
                       </div>
                     </div>
                     <div className="col-md-3 ms-auto mt-0">
@@ -79,12 +98,12 @@ onUpdate(id){
                   <div class="table-wrapper-scroll-y my-custom-scrollbar mt-4">
                     <table class="table table-bordered table-striped mb-0">
                       <thead style={{color:"white", backgroundColor:"#28282B"}}>
-                        <tr>
+                        <tr style={{textAlign:"center"}}>
                             <th>No</th>
-                            <th>Submition Title</th>
+                            <th>submissions Title</th>
                             <th>Started Date</th>
                             <th>Deadline</th>
-                            <th>Submition Type</th>
+                            <th>submissions Type</th>
                             <th>Action</th>
                         </tr>
                       </thead>
@@ -96,9 +115,13 @@ onUpdate(id){
                                                 <td>{submitionTypes.submitionStartedDate}</td>
                                                 <td>{submitionTypes.deadline}</td>
                                                 <td>{submitionTypes.submitionType}</td>
-                                                <td>
-                                            <button onClick={()=>{this.onUpdate(submitionTypes._id)}}>Edit</button> &nbsp;
-                                            <button onClick={()=>{this.onDelete(submitionTypes._id)}}>Delete</button> &nbsp;
+                                                <td style={{textAlign:"center"}}>
+                                                {/* <button type="button" onClick={()=>{this.onUpdate(submitionTypes._id)}} class="btn btn-primary btn-rounded"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;
+                                                <button type="button" onClick={()=>{this.onDelete(submitionTypes._id)}} class="btn btn-danger btn-rounded"><i class="fa fa-trash"></i></button> */}
+                                                
+                                                <button type="button" onClick={()=>{this.onUpdate(submitionTypes._id)}} class="btn btn-outline-dark btn-floating"><i class="fa fa-pencil" style={{color:"blue"}}></i></button>&nbsp;&nbsp;
+                                                <button type="button" onClick={()=>{this.onDelete(submitionTypes._id)}} class="btn btn-outline-dark btn-floating"><i class="fa fa-trash" style={{color:"red"}}></i></button>
+                                            
                                             </td>
                                           </tr>
                                     ))}

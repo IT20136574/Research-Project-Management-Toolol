@@ -117,7 +117,10 @@ router.post("/addPanelMembers/:id",async (req,res)=>{
 
                 
                 let groups = {
-                    _id : groupId
+                    _id : groupId,
+                    researchTopic_Info : Group.researchTopic_Info,
+                    groupMembers : Group.groupMembers,
+                    group_name : Group.group_name
                 }
                 
                 await staff.findOneAndUpdate(

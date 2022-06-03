@@ -83,38 +83,105 @@ function DocumentUpload() {
     }
 
   return (
-    <div className='alignMargin'>
-        <br/>
-        <h3>Document Management</h3>
-        <form method='POST' onSubmit={sendData}>
-            <label>Document Name : </label> &nbsp;
-            <input type="text" name="docname" onChange={(e) => setdocName(e.target.value)} required/><br/>
+    // <div className='alignMargin'>
+    //     <br/>
+    //     <h3>Document Management</h3>
+    //     <form method='POST' onSubmit={sendData}>
+    //         <label>Document Name : </label> &nbsp;
+    //         <input type="text" name="docname" onChange={(e) => setdocName(e.target.value)} required/><br/>
 
-            <br/>
-            <label>Display Title : </label> &nbsp;
-            <input type="text" name="displayTitle" onChange={(e) => setdisplayTitle(e.target.value)}/><br/>
+    //         <br/>
+    //         <label>Display Title : </label> &nbsp;
+    //         <input type="text" name="displayTitle" onChange={(e) => setdisplayTitle(e.target.value)}/><br/>
 
-            <br/>
-            <label>discription : </label> &nbsp;
-            <input type="text" name="discription" onChange={(e) => setdiscription(e.target.value)}/><br/>
+    //         <br/>
+    //         <label>discription : </label> &nbsp;
+    //         <input type="text" name="discription" onChange={(e) => setdiscription(e.target.value)}/><br/>
 
-            <br/>
-            <label>Document Type : </label> &nbsp;
-            <select name="documentType" onChange={(e) => settype(e.target.value)}>
-                <option>choose file type</option>
-                <option valure="pdf">PDF</option>
-                <option valure="ptr">Presentaion</option>
-                <option valure="word">word</option>
-            </select>
+    //         <br/>
+    //         <label>Document Type : </label> &nbsp;
+    //         <select name="documentType" onChange={(e) => settype(e.target.value)}>
+    //             <option>choose file type</option>
+    //             <option valure="pdf">PDF</option>
+    //             <option valure="ptr">Presentaion</option>
+    //             <option valure="word">word</option>
+    //         </select>
             
-            <br/>
+    //         <br/>
 
-            <br/>
-            <label>File : </label> &nbsp;
-            <input type="file" name="fileUrl" onChange={(e) => setfileUrl(e.target.files[0])}/><br/><br/>
+    //         <br/>
+    //         <label>File : </label> &nbsp;
+    //         <input type="file" name="fileUrl" onChange={(e) => setfileUrl(e.target.files[0])}/><br/><br/>
 
-            <input type="submit" value="submit"/>
-        </form>
+    //         <input type="submit" value="submit"/>
+    //     </form>
+    // </div>
+    <div className='alignMarginN'>
+        <div class="container">
+            <div class="main-body">
+            <div class="col-md-12">
+              <div class="card mb-2 mt-5" style={{width:94+"%",boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
+                <div class="card-body">
+                <h4 className="fw-bold mb-1">Upload Document</h4><br/>
+                <form method='POST' onSubmit={sendData}>
+                <div className="row">
+                    <div className="col-md-12 mb-2">
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" name="docname" id="docname" placeholder="Document Name" onChange={(e) => setdocName(e.target.value)} required="true"/>
+                            <label for="floatingInput">Document Name</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='row'>
+                <div className="col-md-6 mb-2">
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" name="displaytitle" id="displaytitle" placeholder="Display Title" onChange={(e) => setdisplayTitle(e.target.value)} required="true"/>
+                            <label for="floatingInput">Display Title</label>
+                        </div>
+                    </div>
+
+                    <div className="col-md-6 mb-2">
+                        <div class="form-floating mb-2">
+                        <select className="form-control" required="required" id="submitionType" placeholder="Submission Type"  name="submitionType" onChange={(e) => settype(e.target.value)}>
+                            <option selected>Submission Type</option>
+                            <option value="PDF">PDF</option>
+                            <option value="Presentation">Presentaion</option>
+                            <option value="Word">Word</option>
+                        </select>
+                        </div>
+                    </div>
+
+                </div>
+       
+
+                <div class="form-floating mb-3">
+                          <textarea id="floatingInput" name="discription" style={{height: "100px"}} type="text"  class="form-control" placeholder="Description" onChange={(e) => setdiscription(e.target.value)} required/>
+                          <label for="floatingInput">Description</label>
+                 </div>
+                 <div className="row">
+                <div class="file-upload-wrapper">
+                    <input type="file" id="input-file-now" class="file-upload" onChange={(e) => setfileUrl(e.target.files[0])}/>
+                    </div>
+                </div>
+              
+                <center>
+                    <div className='mt-4'>
+                        <input class='btn btn-warning' type="reset" value="Reset" style={{width: 15+"%"}}/> &nbsp;&nbsp;&nbsp;
+                        <input class='btn btn-primary' type="submit" value="Upload" style={{width: 15+"%"}}/> 
+                    </div>
+                </center>
+                
+                </form>
+                  
+    
+              </div>
+            </div>
+          </div>
+
+
+            </div>
+        </div>
     </div>
   )
 }

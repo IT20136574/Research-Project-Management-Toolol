@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 
-export default class UpdateSupervisor extends Component {
+export default class UpdatePanelMem extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -95,7 +95,7 @@ export default class UpdateSupervisor extends Component {
                 profileImage:"",
                 Role:""
              })
-             window.location.href = '/supervisor/supervisor';  
+             window.location.href = '/panalMember/panal_member';  
              alert("update Successful")
           }
         }).catch((error)=>{

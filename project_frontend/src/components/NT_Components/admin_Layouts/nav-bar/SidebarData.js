@@ -22,7 +22,7 @@ export const SidebarData = [
         icon: <FaIcons.FaUserPlus/>
     },
     {
-        title: 'Submition Types',
+        title: 'Submission Types',
         path: '/submition',
         icon: <HiIcons.HiDocumentDownload/>
     },

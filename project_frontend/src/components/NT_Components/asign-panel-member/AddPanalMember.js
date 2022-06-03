@@ -109,35 +109,12 @@ export default class AddPanalMember extends Component {
 
   render() {
     return (
-    //   <div className='alignMargin'>
-    //       <h1>Add Panal Member</h1>
-        //   Panal Member 01 : <select onChange={this.onChangepanelMember1}>
-        //       <option selected> select panel member 01 </option>
-            //   {this.state.specificPmembers1.map((specificPmembers1) => (
-            //                    <option key={specificPmembers1._id} value={specificPmembers1._id}>
-            //                     {specificPmembers1.fname+" "+specificPmembers1.lname}
-            //                 </option>
-            //       ))}
-        //   </select><br/><br/>
-
-        //   Panal Member 02 : <select onChange={this.onChangepanelMember2}>
-        //       <option selected> select panel member 02 </option>
-            //   {this.state.specificPmembers1.map((specificPmembers1) => (
-            //     <option key={specificPmembers1._id} value={specificPmembers1._id}>
-            //         {specificPmembers1.fname+" "+specificPmembers1.lname}
-            //     </option>
-
-            //     ))}
-        //   </select><br/><br/>
-        //   <button onClick={this.onsubmit}> Submit </button>
-    //   </div>
-
     <div className='alignMarginN'>
     <div class="container">
         <div class="main-body">
 
         <div class="col-md-12">
-          <div class="card mb-2 mt-4" style={{width:94+"%"}}>
+          <div class="card mb-2 mt-4" style={{width:94+"%",boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
             <div class="card-body">
               <center><h3 className="fw-bold mb-0">Allocate Panel Members</h3></center>
               <hr className='mt-4 mb-5' style={{height:3+"px"}}/>
@@ -181,7 +158,7 @@ export default class AddPanalMember extends Component {
                             
                         </div><br/>
                         <div className='mt-4'>
-                            <center><input type="reset" class="btn btn-secondary" value="Reset" style={{width:150+"px"}}/> &nbsp;&nbsp; <input type="submit" class="btn btn-primary" value="Submit" style={{width:150+"px"}}/></center>
+                            <center><input type="reset" class="btn btn-warning" value="Reset" style={{width:150+"px"}}/> &nbsp;&nbsp; <input type="submit" class="btn btn-primary" value="Submit" style={{width:150+"px"}}/></center>
                         </div>
                         </form>
       

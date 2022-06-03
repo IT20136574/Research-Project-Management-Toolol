@@ -104,7 +104,56 @@ const staffSchema = new mongoose.Schema({
           type: String,
           required: true,
           ref: "staff"
-        }
+        },
+        
+        research_Topic: {
+          type: String,
+         //require: true
+        },
+        group_name:{
+          type :String,
+          require:true
+        },
+        groupMembers: [{
+          _id: {
+            type: String,
+            required: true,
+            ref: "students"
+          },
+      
+          student_id: {
+            type: String,
+           //require: true
+          },
+          name: {
+            type: String,
+            //required: true
+          },
+          email: {
+            type: String,
+            //required: true
+          },
+          phone: {
+            type: String,
+            required: false
+          }
+        }],
+        researchTopic_Info: [{
+
+          research_Topic: {
+            type: String,
+           //require: true
+          },
+          field: {
+            type: String,
+            //required: true
+          },
+          tags: {
+            type: String,
+            //required: true
+          }
+        }],
+
     }]
 }
 );
