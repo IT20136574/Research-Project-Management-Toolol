@@ -40,11 +40,15 @@ export default class MarkingSchemes extends Component {
       
       <div><NavBar/>
       <br/><br/><br/><br/>
-
+      <div class="container-sm">
+      <div className="wrapperR">
+      
       <div class="d-flex justify-content-center">
+      <div className="row" style={{ paddingTop: "22px" , paddingBottom: "22px",  }} >
+      
       {this.state.mark.map((item) => (
         <div className='cardR'>
-                  <Card  style={{ width: '30rem' }}>
+                  <Card  style={{ width: '30rem'  }}>
               <Card.Img className="img2" variant="top" src="https://media.istockphoto.com/vectors/todo-list-banner-design-man-holds-a-pencil-and-notes-completed-tasks-vector-id1269034924?k=20&m=1269034924&s=612x612&w=0&h=4K1zjhyxWXB7rFKKvu46SVB896Gljo_JQsuPe7AhS8U=" />
               <Card.Body>
                 <Card.Title style={{ textAlign: 'center' }}>Marking Scheme</Card.Title>
@@ -65,10 +69,15 @@ export default class MarkingSchemes extends Component {
                 </div>
               </Card.Body>
             </Card>
+            
             </div>
               ))}
+            
             </div>
             
+            </div>
+            </div>
+            </div>
       </div>
     )
   }

@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import FileBase64 from 'react-file-base64';
+import FileBase64 from 'react-filebase64';
 import image from '../../../asserts/RS_Assests/yy.jpg'
 import {toast} from 'react-toastify';
 
 function StaffRegister(){
 
     const [fname, setfname] = useState("")
+    const [lname, setlname] = useState("")
     const [staffid, setstaffid] = useState("")
     const [email, setemail] = useState("")
     const [nic, setnic] = useState("")
@@ -25,6 +26,7 @@ function StaffRegister(){
 
         const newstaff = {
             fname,
+            lname,
             staffid,
             email,
             nic,
@@ -77,8 +79,8 @@ function StaffRegister(){
                         </div>
                         <div className="col-md-6 mb-4">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="staffid" id="staffid" placeholder="Last Name" onChange={(e)=>{setstaffid(e.target.value);}}  required/>
-                            <label for="floatingInput">Staffid</label>
+                            <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" onChange={(e)=>{setlname(e.target.value);}}  required/>
+                            <label for="floatingInput">Last Name</label>
                         </div>
                         </div>
                         </div>
@@ -164,6 +166,12 @@ function StaffRegister(){
                 
                         </select>
                         </div>
+                        </div>
+                        </div>
+                        <div className="col-md-6 mb-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="staffid" id="staffid" placeholder="Last Name" onChange={(e)=>{setstaffid(e.target.value);}}  required/>
+                            <label for="floatingInput">Staffid</label>
                         </div>
                         </div>
 

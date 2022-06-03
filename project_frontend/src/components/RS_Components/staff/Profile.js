@@ -7,6 +7,7 @@ export default class Profile extends Component {
     this.state ={
     fname: "",
     email: "",
+    lname: "",
     username: "",
     nic: "",
     role: "",
@@ -34,6 +35,7 @@ async getStaffDetails(){
       if(res.data.success){
           this.setState({
               fname: res.data.staff1.fname,
+              lname: res.data.staff1.lname,
               email: res.data.staff1.email,
               username: res.data.staff1.username,
               nic: res.data.staff1.nic,
@@ -107,7 +109,7 @@ staffLogout(){
                 <h6 class="mb-0">Full Name</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-              {this.state.fname}
+              {this.state.fname} {this.state.lname}
               </div>
             </div>
             <hr/>

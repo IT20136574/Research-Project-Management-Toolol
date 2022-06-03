@@ -40,7 +40,7 @@ export default class NavBarPanal extends Component{
                     <a class="nav-link" style={{ fontSize:"18px"}} href="/eveluate">Evaluate Precentations</a>
                 </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <li class="nav-item">
-                    <a class="nav-link" style={{ fontSize:"18px"}} href="/topics">Evaluate Topics</a>
+                    <a class="nav-link" style={{ fontSize:"18px"}} href="/pMtopics">Evaluate Topics</a>
                 </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 
                 <li class="nav-item">

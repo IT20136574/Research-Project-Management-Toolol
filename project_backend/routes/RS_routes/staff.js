@@ -9,8 +9,9 @@ const jwt = require('jsonwebtoken');
 // const auth = require('../../middleware/staff_middleware/auth')
 const bcrypt = require('bcryptjs')
 const auth = require("../../middleware/staff/staffauth");
+const { request } = require("express");
 
- 
+
 
 //create
 router.post('/add', async (req, res) => {
@@ -333,6 +334,43 @@ router.get("/desplaypanalgroups",auth, async (req, res) => {
    }
 });
 
+
+
+//get specific group details to panal
+router.route('/group/:id').get((req,res)=>{
+ 
+  let Id = req.params.id;
+  group.findById(Id,(err,group)=>{
+      if(err){
+          return res.status(400).json({success:false,err})
+      }
+      return res.status(200).json({
+          success:true,
+          group
+      });
+  });
+});
+
+
+//send topic feedback
+router.route('/group/:id').post(async(req,res)=>{
+  try {
+    let Id = req.params.id;
+    var grp = await group.findById(Id);
+    var feed = req.body
+    grp.topicFeedback = req.body.feedback;
+  
+    await grp.save();
+    res.status(200).send({
+      status:"feedback send successfully",Feedback:feed
+    })
+  } catch (error) {
+    res.status(500).send({
+      status:"error with feedback",Error:error.message
+    })
+  }
+  
+});
 
 
 

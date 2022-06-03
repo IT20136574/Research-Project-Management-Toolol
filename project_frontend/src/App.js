@@ -17,6 +17,8 @@ import EvaluateMarks from './components/RS_Components/EvaluateMarks';
 import PanelHome from './components/RS_Components/staffHomes/PanelHome';
 import MarkingSchemeForPanel from './components/RS_Components/staffHomes/MarkingSchemeForPanel';
 import StaffRegister from './components/RS_Components/staff/StaffRegister';
+import PanelMemberTopics from './components/RS_Components/PanelMemberTopics';
+import ShowSpecificGroupToPanael from './components/RS_Components/ShowSpecificGroupToPanael';
 
 
 
@@ -43,6 +45,8 @@ export default class App extends Component {
             <Route path="/eveluate"  component={EvaluateMarks}/>
             <Route path="/phome"  component={PanelHome}/>
             <Route path="/pmark"  component={MarkingSchemeForPanel}/>
+            <Route path="/pMtopics"  component={PanelMemberTopics}/>
+            <Route path="/group/:id"  component={ShowSpecificGroupToPanael}/>
 
             <Route path="/chathome"  component={ChatHome}/>
             <Route path="/chats"  component={ChatPage}/>

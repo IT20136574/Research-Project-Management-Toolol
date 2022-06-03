@@ -80,6 +80,11 @@ const studentGroupSchema = new mongoose.Schema({
   panalmemberstatus: {
     type:String,
     //required: true
+  },
+
+  topicFeedback: {
+    type:String,
+    //required: true
   }
  
 });
