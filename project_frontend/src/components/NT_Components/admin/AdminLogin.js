@@ -30,7 +30,7 @@ export default class AdminLogin extends Component {
           })
           localStorage.setItem("Authorization", res.data.token)
           alert("loging complete");
-          window.location = "/adminpage";
+          window.location = "/dashboard";
           
         })
         .catch((err) => {
@@ -41,7 +41,7 @@ export default class AdminLogin extends Component {
       }
   render() {
     return (
-      <div>
+      <div className='alignMargin'>
           <h3>Admin Login</h3>
           <form onSubmit={this.userLoginSubmit}>
             username : <input type="text" name='username' onChange={e => this.setState({ username: e.target.value })}/> <br/><br/>

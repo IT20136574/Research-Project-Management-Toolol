@@ -81,9 +81,8 @@ export default class DisplayDocuments extends Component {
                         }
 
                         <td>
-                        <button onClick={()=>{this.onDelete(Documents._id)}}>Delete</button> 
                         <button onClick={()=>{this.onUpdate(Documents._id)}}>Update</button> &nbsp;
-
+                        <button onClick={()=>{this.onDelete(Documents._id)}}>Delete</button> 
                         </td>
                     </tr>                                  
                     ))}

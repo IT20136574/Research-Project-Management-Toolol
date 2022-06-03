@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import axios from 'axios';
 import {
     getDownloadURL,
     getStorage,
@@ -57,7 +56,6 @@ function DocumentUpload() {
             let newDocument = {
                 docname: docName,
                 displaytitle: displayTitle,
-                Uploaddate: new Date().toString(),
                 type:type,
                 discription: discription,
                 fileUrl:fileUrl
@@ -67,13 +65,14 @@ function DocumentUpload() {
                 console.log(newDocument)
                 axios.post("http://localhost:8070/document/uploadDoc",newDocument)
                 .then(()=>{
-                    alert("Registration Success")
+                    alert("Document Upload Success")
                         setdocName("");
                         setdisplayTitle("");
                         setdiscription("");
                         setfileUrl("");
                         settype("");
                     window.location.reload();
+                    window.location.href="/documentPage"
                 }).catch((err)=>{
                     alert(err)
                 })
@@ -84,7 +83,7 @@ function DocumentUpload() {
     }
 
   return (
-    <div>
+    <div className='alignMargin'>
         <br/>
         <h3>Document Management</h3>
         <form method='POST' onSubmit={sendData}>

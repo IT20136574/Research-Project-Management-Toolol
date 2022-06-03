@@ -23,12 +23,12 @@ export const SidebarData = [
     },
     {
         title: 'Submition Types',
-        path: '/products',
+        path: '/submition',
         icon: <HiIcons.HiDocumentDownload/>
     },
     {
         title: 'Marking Schemes',
-        path: '/products',
+        path: '/marking',
         icon: <HiIcons.HiDocumentAdd />
     },
     {

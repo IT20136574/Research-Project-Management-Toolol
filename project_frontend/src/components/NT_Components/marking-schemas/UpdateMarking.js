@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React,{useEffect, useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom';
 import {
     getDownloadURL,
@@ -8,27 +8,28 @@ import {
     uploadBytesResumable,
   } from "firebase/storage";
 import app from "../../../firebase";
-export default function UpdateDocument() {
-    const [docname, setdocname] = useState("")
-    const [displaytitle, setdisplaytitle] = useState("")
-    const [discription, setdiscription] = useState("")
-    const [type, settype] = useState("")
-    const [fileUrl, setfileUrl] = useState("")
 
-    const params = useParams();
-    const id = params.id;
+export default function UpdateMarking() {
+const [mTittle, setmTittle] = useState("");
+const [DTittle, setDTittle] = useState("");
+const [discription, setdiscription] = useState("");
+const [fileUrl, setfileUrl] = useState("")
+
+const params = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:8070/document/getDocument/${id}`).then((res)=>{
-            if(res.data){
-                setdocname(res.data.documents.docname);
-                setdisplaytitle(res.data.documents.displaytitle);
-                setdiscription(res.data.documents.discription);
-                settype(res.data.documents.type);
-                setfileUrl(res.data.documents.fileUrl)
+        const id = params.id;
+        axios.get(`http://localhost:8070/marking/getMarking/${id}`).then((res)=>{
+            if(res.data.success){
+                setmTittle(res.data.markings.mTittle);
+                setDTittle(res.data.markings.DTittle);
+                setdiscription(res.data.markings.discription);
+                setfileUrl(res.data.markings.fileUrl);
             }
+        }).catch((e)=>{
+            console.log(e)
         })
-  
+
     }, [])
 
     const sendData = async (e) => {
@@ -69,17 +70,19 @@ export default function UpdateDocument() {
             getDownloadURL(uploadTask.snapshot.ref).then((fileUrl) => {
             console.log('File available at', fileUrl);
 
-            let updateDocument = {
-                docname : docname,
-                displaytitle : displaytitle ,
+            let updateMarking = {
+                mTittle : mTittle,
+                DTittle : DTittle ,
                 discription : discription,
-                type : type,
                 fileUrl : fileUrl
             }
-                axios.put(`http://localhost:8070/document/update/${id}`,updateDocument)
+    
+                const id = params.id;
+
+                axios.put(`http://localhost:8070/marking/update/${id}`,updateMarking)
                 .then(()=>{
-                    alert("Document Updated successful")
-                    window.location.href="/documentPage"
+                    alert("Marking update successful")
+                    window.location.href="/marking"
                 }).catch((err)=>{
                     alert(err)
                 })
@@ -91,37 +94,24 @@ export default function UpdateDocument() {
     
   return (
     <div className='alignMargin'>
-            <h3>Update Document</h3>
-            <form method='POST' onSubmit={sendData}>
-                <label>Document Name : </label> &nbsp;
-                <input type="text" name="docname" value={docname} onChange={(e)=>{setdocname(e.target.value)}}  required/><br/>
+        <h2>Update Marking Schema</h2> <br/>
+        <form method='POST' onSubmit={sendData}>
+                <label>Marking Schema Title : </label> &nbsp;
+                <input type="text" name="mTittle" value={mTittle} onChange={(e)=>{setmTittle(e.target.value)}}  required/><br/><br/>
 
-                <br/>
                 <label>Display Title : </label> &nbsp;
-                <input type="text" name="displayTitle" value={displaytitle} onChange={(e)=>{setdisplaytitle(e.target.value)}} /><br/>
+                <input type="text" name="DTittle" value={DTittle} onChange={(e)=>{setDTittle(e.target.value)}} required/><br/><br/>
 
-                <br/>
-                <label>discription : </label> &nbsp;
-                <input type="text" name="discription" value={discription} onChange={(e)=>{setdiscription(e.target.value)}}/><br/>
+                <label>Discription : </label> &nbsp;
+                <input type="text" name="discription" value={discription} onChange={(e)=>{setdiscription(e.target.value)}} required/><br/><br/>
 
-                <br/>
-                <label>Document Type : </label> &nbsp;
-                <select name="documentType" value={type} onChange={(e)=>{settype(e.target.value)}}>
-                    <option>choose file type</option>
-                    <option valure="pdf">PDF</option>
-                    <option valure="ptr">Presentaion</option>
-                    <option valure="word">word</option>
-                </select>
-                
-                <br/>
-
-                <br/>
                 <label>File : </label> &nbsp;
                 <input type="file" name="fileUrl"  onChange={(e) => setfileUrl(e.target.files[0])}/><br/><br/>
-
+                
                 <input type="submit" value="submit"/>
-            </form>
-        </div>
+       
+        </form>
 
+    </div>
   )
 }

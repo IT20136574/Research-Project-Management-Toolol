@@ -13,12 +13,6 @@ const documentSchema = new mongoose.Schema({
         trim:true
     },
 
-    Uploaddate: {
-        type : String,
-        require:true,
-        trim:true
-    },
-
     discription: {
         type : String,
         require:true,

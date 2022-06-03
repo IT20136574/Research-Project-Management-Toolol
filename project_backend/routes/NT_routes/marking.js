@@ -53,6 +53,22 @@ router.delete("/deleteMarking/:id", async (req, res)=>{
 
 })
 
+router.get("/getMarking/:id",(req,res)=>{
+    let id = req.params.id;
+
+    marking.findById(id).exec((err,marking)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            markings : marking,
+        });
+    });
+});
+
 
 router.route('/update/:id').put((req,res)=>{
     marking.findByIdAndUpdate(

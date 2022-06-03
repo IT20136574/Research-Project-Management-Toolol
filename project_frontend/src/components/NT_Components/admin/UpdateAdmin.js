@@ -15,6 +15,7 @@ export default class UpdateAdmin extends Component {
         imageUrl: "",
         lastUpdated:""
         }
+        this.onFileChange = this.onFileChange.bind(this);
     }
     componentDidMount(){
         this.getAdminDetails()
@@ -57,6 +58,17 @@ export default class UpdateAdmin extends Component {
                 console.log(error.message)
         }
     }
+    
+    onFileChange(e) {
+        let files = e.target.files;
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(files[0]);
+        fileReader.onload = (event) => {
+            this.setState({
+                imageUrl: event.target.result,
+            })
+        }
+    }
 
     onSubmit =(e)=>{
         e.preventDefault();
@@ -69,8 +81,6 @@ export default class UpdateAdmin extends Component {
             pno : pno,
             nic : nic,
             email : email,
-            password : password,
-            cpassword : cpassword,
             imageUrl : imageUrl,
             lastUpdated: new Date().toString(),
         }
@@ -91,8 +101,6 @@ export default class UpdateAdmin extends Component {
                     pno :"",
                     nic :"",
                     email :"",
-                    password :"",
-                    cpassword :"",
                     imageUrl : "" 
                 })
                 // console.log("update success")
@@ -111,22 +119,101 @@ export default class UpdateAdmin extends Component {
 
   render() {
     return (
-      <div>
-        <form>
-            fname : <input type="text" name="fname" onChange={this.handleInputChange} value={this.state.fname}/><br/><br/>
-            lname : <input type="text" name="lname" onChange={this.handleInputChange} value={this.state.lname}/><br/><br/>
-            username : <input type="text" name="username" onChange={this.handleInputChange} value={this.state.username}/><br/><br/>
-            SLIIT tid : <input type="text" name="sliitid" onChange={this.handleInputChange} value={this.state.sliitid}/><br/><br/>
-            phone no : <input type="text" name="pno" onChange={this.handleInputChange} value={this.state.pno}/><br/><br/>
-            nic : <input type="text" name="nic" onChange={this.handleInputChange} value={this.state.nic}/><br/><br/>
-            email : <input type="text" name="email" onChange={this.handleInputChange} value={this.state.email}/><br/><br/>
-            imageUrl : <input type="text" name="imageUrl" onChange={this.handleInputChange} value={this.state.imageUrl}/><br/><br/>
+    <div className='alignMarginN'>
+    <div class="container">
+        <div class="main-body">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4" style={{width:93.5+"%"}}>
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link " aria-current="page" href="/adminaccount">Profile</a>
+                    <a class="nav-link disabled" >Update Admin</a>
+                </div>
+                </div>
+                <form class="d-flex input-group w-auto">
+                    <button class="btn btn-primary" onClick={this.adminLogout}>Log Out</button>
+                </form>
+            </div>
+        </nav>
+        <div class="col-md-12">
+          <div class="card mb-2 mt-3" style={{width:94+"%"}}>
+            <div class="card-body">
+            <h4 className="fw-bold mb-1">Admin Profile Update</h4><br/>
+            <form onSubmit={this.onSubmit}>
+            <div className="row">
+                    <div className="col-md-6 mb-2">
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" onChange={this.handleInputChange} value={this.state.fname}  required="true"/>
+                        <label for="floatingInput">First Name</label>
+                    </div>
+                    </div>
+                    <div className="col-md-6 mb-2">
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" onChange={this.handleInputChange} value={this.state.lname} required/>
+                        <label for="floatingInput">Last Name</label>
+                    </div>
+                </div>
+            </div>
 
-           
-        </form>
-            <button onClick={this.onBack}>Cancle</button> &nbsp;
-            <button onClick={this.onSubmit}>Save</button>
-      </div>
+            <div className="row">
+                    <div className="col-md-6 mb-2">
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="User Name" onChange={this.handleInputChange} value={this.state.username} required/>
+                        <label for="floatingInput">User Name</label>
+                    </div>
+                    </div>
+                    <div className="col-md-6 mb-2">
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" name="email" id="email" placeholder="Email" onChange={this.handleInputChange} value={this.state.email} required/>
+                        <label for="floatingInput">Email</label>
+                    </div>
+                </div>
+            </div>
+
+            <div className="row">
+                    <div className="col-md-4 mb-2">
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" name="nic" id="nic" placeholder="NIC"  onChange={this.handleInputChange} value={this.state.nic} required/>
+                        <label for="floatingInput">NIC</label>
+                    </div>
+                    </div>
+                    <div className="col-md-4 mb-2">
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" name="sliitid" id="sliitid" placeholder="Staff ID" onChange={this.handleInputChange} value={this.state.sliitid} required/>
+                        <label for="floatingInput">Staff ID</label>
+                    </div>
+                </div>
+
+                <div className="col-md-4 mb-2">
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" name="pno" id="pno" placeholder="Phone No" onChange={this.handleInputChange} value={this.state.pno} required/>
+                        <label for="floatingInput">Phone No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div className='mt-3'>
+            <center> <label style={{fontSize : 18+"px"}}>Image :</label> <input type="file"  name="imageUrl"  onChange={this.onFileChange} style={{width:20+"%"}}/></center>
+            </div>
+
+                <center>
+                    <div className='mt-5'>
+                        <input class='btn btn-light' type="reset" value="Reset" style={{width: 15+"%"}}/> &nbsp;&nbsp;&nbsp;
+                        <input class='btn btn-primary' type="submit" value="Register" style={{width: 15+"%"}}/> 
+                    </div>
+                </center>
+                
+                </form>
+                
+
+            </div>
+            </div>
+        </div>
+
+
+            </div>
+        </div>
+    </div>
     )
   }
 }
