@@ -84,7 +84,7 @@
 .mt-100{
   margin-top:100px;
 }
-.card {
+.cardd {
   border-radius: 5px;
   -webkit-box-shadow: 0 0 5px 0 rgba(43,43,43,.1), 0 11px 6px -7px rgba(43,43,43,.1);
   box-shadow: 0 0 5px 0 rgba(43,43,43,.1), 0 11px 6px -7px rgba(43,43,43,.1);
@@ -94,14 +94,14 @@
   transition: all .3s ease-in-out;
 }
 
-.card .card-header {
+.cardd .cardd-header {
   background-color: transparent;
   border-bottom: none;
   padding: 20px;
   position: relative;
 }
 
-.card .card-header h5:after {
+.cardd .cardd-header h5:after {
   content: "";
   background-color: #d2d2d2;
   width: 101px;
@@ -111,7 +111,7 @@
   left: 20px;
 }
 
-.card .card-block {
+.cardd .cardd-block {
   padding: 1.25rem;
 }
 
@@ -221,11 +221,6 @@
     margin-left: 280px;
 }
 
-.navbar-brand {
-    font-size: 1.75rem;
-    letter-spacing: 3px;
-    position:fixed;
-}
 
 .my-custom-scrollbar {
     position: relative;

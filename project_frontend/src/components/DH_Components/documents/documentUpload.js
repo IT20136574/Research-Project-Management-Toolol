@@ -12,7 +12,7 @@ import app from "../../../firebase";
 
 
 
-export default function DocumentUpload(){
+export default function DocumentUploadD(){
 
     const [fileUrl, setfileUrl] = useState("");
     const params = useParams();

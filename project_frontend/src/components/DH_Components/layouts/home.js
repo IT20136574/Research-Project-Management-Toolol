@@ -153,8 +153,8 @@ displayx(){
       <div class="row">
         <div class="col-xl-6 col-md-12 mb-4">
             <div class="cardd">
-          <div class="card mr-1">
-            <div class="card-body">
+          <div class="cardd mr-1">
+            <div class="cardd-body">
               <div class="d-flex justify-content-between p-md-1">
                 <div class="d-flex flex-row">
                   <div class="align-self-center">
@@ -176,8 +176,8 @@ displayx(){
         </div>
         <div class="col-xl-6 col-md-12 mb-4">
         <div class="cardd">
-          <div class="card">
-            <div class="card-body">
+          <div class="cardd">
+            <div class="cardd-body">
               <div class="d-flex justify-content-between p-md-1">
                 <div class="d-flex flex-row">
                   <div class="align-self-center">
@@ -202,8 +202,8 @@ displayx(){
       <div class="row">
         <div class="col-xl-6 col-md-12 mb-4">
         <div class="cardd">
-          <div class="card">
-            <div class="card-body">
+          <div class="cardd">
+            <div class="cardd-body">
               <div class="d-flex justify-content-between p-md-1">
                 <div class="d-flex flex-row">
                   <div class="align-self-center">
@@ -224,8 +224,8 @@ displayx(){
         </div>
         <div class="col-xl-6 col-md-12 mb-4">
         <div class="cardd">
-          <div class="card">
-            <div class="card-body">
+          <div class="cardd">
+            <div class="cardd-body">
               <div class="d-flex justify-content-between p-md-1">
                 <div class="d-flex flex-row">
                   <div class="align-self-center">
@@ -263,15 +263,15 @@ displayx(){
           {this.state.groupMembers.map((groupMembers)=>(
 
             <div class="col-lg-3 col-md-6 mb-4">
-              <div class="card">
+              <div class="cardd">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                 <img class="rounded-circle z-depth-1 shadow p-3 mb-3 bg-white rounded" alt="100x100" src={groupMembers.imageUrl} data-holder-rendered="true"/>
                   <a href="#!">
                     <div class="mask" style={{backgroundColor: "rgba(251, 251, 251, 0.15)"}}></div>
                   </a>
                 </div>
-                <div class="card-body">
-                  <h5 class="card-title">{groupMembers.name}</h5>
+                <div class="cardd-body">
+                  <h5 class="cardd-title">{groupMembers.name}</h5>
                   <p class="card-text">
                      <span class="font-weight-bold">Student ID</span> : {groupMembers.student_id}<br/>
                      <span class="font-weight-bold">Email</span> : {groupMembers.email}<br/>

@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import {BrowserRouter, Route, Switch } from 'react-router-dom'
-import React from 'react'
+import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -54,7 +54,7 @@ import Supervisors from './components/DH_Components/supervisors/supervisors';
 import DisplaySupervisors from './components/DH_Components/supervisors/displaySupervisor';
 import Home from './components/DH_Components/layouts/home';
 import Header from './components/DH_Components/layouts/header';
-import DocumentUpload from './components/DH_Components/documents/documentUpload';
+import DocumentUploadD from './components/DH_Components/documents/documentUpload';
 import Submissions from './components/DH_Components/documents/submissions';
 import DocumentDownload from './components/DH_Components/documents/documentDownload';
 import Pannel from './components/DH_Components/supervisors/pannel';
@@ -62,12 +62,12 @@ import Pannel from './components/DH_Components/supervisors/pannel';
 toast.configure();
 
 function App() {
+
     return (
+
       <BrowserRouter>
-      <div>
-          <Header/>
             <Switch>
-              <Route path ='/aa' component={Signup} />
+              <Route path ='/aa' component={Signup} exact/>
               <Route path="/login" component={Login} />
               <Route path="/grpTopic" component={GroupTopic} />
               <Route path="/grpmem/:data" component={Members} />
@@ -75,63 +75,64 @@ function App() {
               <Route path="/grpReg" component={grpReg} />
               <Route path="/displaySupervisor/:id" component={DisplaySupervisors} />
               <Route path="/home" component={Home} />
-              <Route path="/document/:id" component={DocumentUpload} />
+              <Route path="/document/:id" component={DocumentUploadD} />
               <Route path="/submissions" component={Submissions} />
               <Route path="/documents" component={DocumentDownload} />
               <Route path="/pannelDetails" component={Pannel} />
             </Switch>
-            </div>
-            <Sidebar/>
-            <Switch>
-                <Route path="/login" component={AdminLogin} exact/>
-                <Route path="/dashboard" component={Dashboard}/>
 
+            <Switch>
+            <Route path="/loginN" component={AdminLogin} exact/>
+                <Route path="/dashboard" component={Dashboard}/>
+ 
                 {/* Student */}
                 <Route path="/student" component={Studentmanagement}/>
                 <Route path="/upstudent/:id" component={UpdateStudent}/>
                 <Route path="/showstudent/:id" component={StudentView}/>
-
+ 
                 {/* Admin */}
                 <Route path="/adminpage" component={UserManagementPage}/>
                 <Route path="/adminaccount" component={AdminAccount}/>
                 <Route path="/regadmin" component={RegisterAdmin}/>
                 <Route path="/updateadmin" component={UpdateAdmin}/>
-
+ 
                 {/* Ad Panel Members */}
                 <Route path="/showgroups/:status" component={ShowGroup}/>
                 <Route path="/addpanel/:id" component={AddPanelMember}/>
-
+ 
                 {/* Document Upload */}
                 <Route path="/DocumentUpload" component={DocumentUpload}/>
                 <Route path="/documentPage" component={DocumentPage}/>
                 <Route path="/updateDoc/:id" component={UpdateDocument}/>
-
-                {/* Co-Supervisor */} 
+ 
+                {/* Co-Supervisor */}
                 <Route path="/CoSupervisor/:role" component={CoSupervisorMgtPage}/>
                 <Route path="/updatecoSup/:id" component={UpdateCoSupervisor}/>
                 <Route path="/viewcoSup/:id" component={ViewCoSupervisor}/>
-
+ 
                 {/* Supervisor */}
                 <Route path="/supervisor/:role" component={SupervisorMgtPage}/>
                 <Route path="/upsupervisor/:id" component={UpdateSupervisor}/>
                 <Route path="/viewsupervisor/:id" component={ViewSupervisor}/>
-
+ 
                 {/* Panal-Member */}
                 <Route path="/panalMember/:role" component={PanalMemberMgtPage}/>
                 <Route path="/showpanalMem/:id" component={ViewPanelMem}/>
                 <Route path="/updatepanalMem/:id" component={UpdatePanelMem}/>
-
+ 
                 {/* Submition Type */}
                 <Route path="/submition" component={SubmitionPage}/>
                 <Route path="/addsubmition" component={AddSubmition}/>
                 <Route path="/updatesubmition/:id" component={UpdataSubmition}/>
-
+ 
                 {/* Marking Schema */}
                 <Route path="/marking" component={MarkingSchemaPage}/>
                 <Route path="/Addmarking" component={AddMarkingSchema}/>
                 <Route path="/updateMarking/:id" component={UpdateMarking}/>
 
             </Switch>
+
+
           </BrowserRouter>
     )
 }
