@@ -59,82 +59,130 @@ import Submissions from './components/DH_Components/documents/submissions';
 import DocumentDownload from './components/DH_Components/documents/documentDownload';
 import Pannel from './components/DH_Components/supervisors/pannel';
 
+//Ravi Components
+import StaffLogin from './components/RS_Components/staff/StaffLogin';
+import SupervisorHome from './components/RS_Components/staffHomes/SupervisorHome';
+import ChatHome from './components/RS_Components/chatApp/ChatHome';
+import ChatProvider from './Context/ChatProvider';
+import ChatPage from './components/RS_Components/chatApp/ChatPage';
+import Profile from './components/RS_Components/staff/Profile';
+import SupHome from './components/RS_Components/SupHome';
+import MarkingSchemes from './components/RS_Components/staffHomes/MarkingSchemes';
+import EvaluateSubmissions from './components/RS_Components/EvaluateSubmissions';
+import PanelHome from './components/RS_Components/staffHomes/PanelHome';
+import MarkingSchemeForPanel from './components/RS_Components/staffHomes/MarkingSchemeForPanel';
+import StaffRegister from './components/RS_Components/staff/StaffRegister';
+import PanelMemberTopics from './components/RS_Components/PanelMemberTopics';
+import ShowSpecificGroupToPanael from './components/RS_Components/ShowSpecificGroupToPanael';
+import StaffUpdate from './components/RS_Components/staff/StaffUpdate';
+
+
 toast.configure();
 
 function App() {
 
-    return (
+  <BrowserRouter>
+  <Switch>
+    <Route path ='/aa' component={Signup} exact/>
+    <Route path="/login" component={Login} />
+    <Route path="/grpTopic" component={GroupTopic} />
+    <Route path="/grpmem/:data" component={Members} />
+    <Route path="/supervisors" component={Supervisors} />
+    <Route path="/grpReg" component={grpReg} />
+    <Route path="/displaySupervisor/:id" component={DisplaySupervisors} />
+    <Route path="/home" component={Home} />
+    <Route path="/document/:id" component={DocumentUploadD} />
+    <Route path="/submissions" component={Submissions} />
+    <Route path="/documents" component={DocumentDownload} />
+    <Route path="/pannelDetails" component={Pannel} />
+  </Switch>
 
-      <BrowserRouter>
-            <Switch>
-              <Route path ='/aa' component={Signup} exact/>
-              <Route path="/login" component={Login} />
-              <Route path="/grpTopic" component={GroupTopic} />
-              <Route path="/grpmem/:data" component={Members} />
-              <Route path="/supervisors" component={Supervisors} />
-              <Route path="/grpReg" component={grpReg} />
-              <Route path="/displaySupervisor/:id" component={DisplaySupervisors} />
-              <Route path="/home" component={Home} />
-              <Route path="/document/:id" component={DocumentUploadD} />
-              <Route path="/submissions" component={Submissions} />
-              <Route path="/documents" component={DocumentDownload} />
-              <Route path="/pannelDetails" component={Pannel} />
-            </Switch>
+  <Switch>
+  <Route path="/loginN" component={AdminLogin} exact/>
+      <Route path="/dashboard" component={Dashboard}/>
 
-            <Switch>
-            <Route path="/loginN" component={AdminLogin} exact/>
-                <Route path="/dashboard" component={Dashboard}/>
- 
-                {/* Student */}
-                <Route path="/student" component={Studentmanagement}/>
-                <Route path="/upstudent/:id" component={UpdateStudent}/>
-                <Route path="/showstudent/:id" component={StudentView}/>
- 
-                {/* Admin */}
-                <Route path="/adminpage" component={UserManagementPage}/>
-                <Route path="/adminaccount" component={AdminAccount}/>
-                <Route path="/regadmin" component={RegisterAdmin}/>
-                <Route path="/updateadmin" component={UpdateAdmin}/>
- 
-                {/* Ad Panel Members */}
-                <Route path="/showgroups/:status" component={ShowGroup}/>
-                <Route path="/addpanel/:id" component={AddPanelMember}/>
- 
-                {/* Document Upload */}
-                <Route path="/DocumentUpload" component={DocumentUpload}/>
-                <Route path="/documentPage" component={DocumentPage}/>
-                <Route path="/updateDoc/:id" component={UpdateDocument}/>
- 
-                {/* Co-Supervisor */}
-                <Route path="/CoSupervisor/:role" component={CoSupervisorMgtPage}/>
-                <Route path="/updatecoSup/:id" component={UpdateCoSupervisor}/>
-                <Route path="/viewcoSup/:id" component={ViewCoSupervisor}/>
- 
-                {/* Supervisor */}
-                <Route path="/supervisor/:role" component={SupervisorMgtPage}/>
-                <Route path="/upsupervisor/:id" component={UpdateSupervisor}/>
-                <Route path="/viewsupervisor/:id" component={ViewSupervisor}/>
- 
-                {/* Panal-Member */}
-                <Route path="/panalMember/:role" component={PanalMemberMgtPage}/>
-                <Route path="/showpanalMem/:id" component={ViewPanelMem}/>
-                <Route path="/updatepanalMem/:id" component={UpdatePanelMem}/>
- 
-                {/* Submition Type */}
-                <Route path="/submition" component={SubmitionPage}/>
-                <Route path="/addsubmition" component={AddSubmition}/>
-                <Route path="/updatesubmition/:id" component={UpdataSubmition}/>
- 
-                {/* Marking Schema */}
-                <Route path="/marking" component={MarkingSchemaPage}/>
-                <Route path="/Addmarking" component={AddMarkingSchema}/>
-                <Route path="/updateMarking/:id" component={UpdateMarking}/>
+      {/* Student */}
+      <Route path="/student" component={Studentmanagement}/>
+      <Route path="/upstudent/:id" component={UpdateStudent}/>
+      <Route path="/showstudent/:id" component={StudentView}/>
 
-            </Switch>
+      {/* Admin */}
+      <Route path="/adminpage" component={UserManagementPage}/>
+      <Route path="/adminaccount" component={AdminAccount}/>
+      <Route path="/regadmin" component={RegisterAdmin}/>
+      <Route path="/updateadmin" component={UpdateAdmin}/>
+
+      {/* Ad Panel Members */}
+      <Route path="/showgroups/:status" component={ShowGroup}/>
+      <Route path="/addpanel/:id" component={AddPanelMember}/>
+
+      {/* Document Upload */}
+      <Route path="/DocumentUpload" component={DocumentUpload}/>
+      <Route path="/documentPage" component={DocumentPage}/>
+      <Route path="/updateDoc/:id" component={UpdateDocument}/>
+
+      {/* Co-Supervisor */}
+      <Route path="/CoSupervisor/:role" component={CoSupervisorMgtPage}/>
+      <Route path="/updatecoSup/:id" component={UpdateCoSupervisor}/>
+      <Route path="/viewcoSup/:id" component={ViewCoSupervisor}/>
+
+      {/* Supervisor */}
+      <Route path="/supervisor/:role" component={SupervisorMgtPage}/>
+      <Route path="/upsupervisor/:id" component={UpdateSupervisor}/>
+      <Route path="/viewsupervisor/:id" component={ViewSupervisor}/>
+
+      {/* Panal-Member */}
+      <Route path="/panalMember/:role" component={PanalMemberMgtPage}/>
+      <Route path="/showpanalMem/:id" component={ViewPanelMem}/>
+      <Route path="/updatepanalMem/:id" component={UpdatePanelMem}/>
+
+      {/* Submition Type */}
+      <Route path="/submition" component={SubmitionPage}/>
+      <Route path="/addsubmition" component={AddSubmition}/>
+      <Route path="/updatesubmition/:id" component={UpdataSubmition}/>
+
+      {/* Marking Schema */}
+      <Route path="/marking" component={MarkingSchemaPage}/>
+      <Route path="/Addmarking" component={AddMarkingSchema}/>
+      <Route path="/updateMarking/:id" component={UpdateMarking}/>
+
+  </Switch>
+
+  <Switch>
+            
+
+  <Route path="/reg"  component={StaffRegister}/>
+            <Route path="/home"  component={StaffLogin}/>
+            <Route path="/topics"  component={SupervisorHome}/>
+            
+            <Route path="/profile"  component={Profile}/>
+            <Route path="/shome"  component={SupHome}/>
+            <Route path="/mark"  component={MarkingSchemes}/>
+            <Route path="/eveluate"  component={EvaluateSubmissions}/>
+            <Route path="/phome"  component={PanelHome}/>
+            <Route path="/pmark"  component={MarkingSchemeForPanel}/>
+            <Route path="/pMtopics"  component={PanelMemberTopics}/>
+            <Route path="/group/:id"  component={ShowSpecificGroupToPanael}/>
+            <Route path="/update"  component={StaffUpdate}/>
 
 
-          </BrowserRouter>
-    )
+  <ChatProvider>
+
+          <ChakraProvider>
+
+            <Route path="/chathome"  component={ChatHome}/>
+            <Route path="/chats"  component={ChatPage}/>
+           
+          </ChakraProvider>
+            
+   </ChatProvider>         
+      
+  </Switch>
+
+
+
+</BrowserRouter>
+       
 }
 
 export default App;
