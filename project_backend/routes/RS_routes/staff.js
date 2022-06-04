@@ -13,11 +13,23 @@ const { request } = require("express");
 
 
 
-//create
+//register staff members
 router.post('/add', async (req, res) => {
     try {
       const {fname, lname, email, username, password, nic, staffid,  field, phone, description, profileImage, role} = req.body
- 
+      
+      if(!fname || !lname || !email || !username || !password || !nic || !staffid || !field || !phone || !description || !profileImage)
+       return res.status(400).json({error: "required"})
+     
+      if(staffid.length != 7)
+      return res.status(400).json({error: "Invalid Staff ID. Staff ID must be 7 charaactors"})
+      
+      if(nic.length < 9)
+      return res.status(400).json({error: "Invalid NIC. Student ID must be grated than 9 charaactors"})
+
+      if(phone.length != 10 )
+      return res.status(400).json({error: "Invalid Phone number. Phone number must be 10 charaactors"})
+
       let staff1 = await staff.findOne({email})
       let staff2 = await staff.findOne({username})
       if (staff1 || staff2) {

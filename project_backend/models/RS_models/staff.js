@@ -8,60 +8,60 @@ const staffSchema = new mongoose.Schema({
  
     fname:{
         type : String,
-        require:true
+        required:true
     },
 
     lname:{
       type : String,
-      require:true
+      required:true
   },
 
  
  
     email:{
         type :String,
-        require:true,
+        required:true,
         lowercase: true
     },
  
     username:{
         type :String,
-        require:true
+        required:true
     },
  
     password:{
         type :String,
-        require:true
+        required:true
     },
  
     nic:{
         type :String,
-        require:true,
+        required:true,
     },
  
     staffid:{
         type :String,
-        require:true,
+        required:true,
     },
    
     field:{
         type :String,
-        require:true
+        required:true
     },
  
     phone:{
         type :String,
-        require:true
+        required:true
     },
    
     description:{
         type :String,
-        require:true
+        required:true
     },
  
     profileImage:{
         type:String,
-        require :true,
+        required :true,
     },
     role: {
         type:String,
