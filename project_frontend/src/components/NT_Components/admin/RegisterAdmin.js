@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-
+import {toast} from 'react-toastify';
 export default class RegisterAdmin extends Component {
     constructor(props){
         super(props);
@@ -60,14 +60,19 @@ export default class RegisterAdmin extends Component {
                         cpassword :"",
                         imageUrl : "" 
                     })
-            
-                    alert("admin register successful")
-                    window.location.href = '/adminaccount';
+                    toast.success('admin register successful..!',{position:toast.POSITION.TOP_Right});
+                    window.setTimeout(function() {
+                        window.location.href="/adminaccount"
+                    }, 3000)
+                            
+                    // alert("admin register successful")
+                    // window.location.href = '/adminaccount';
                 }
         }).catch((err)=>{
             console.log('Admin Account Already Exsist Check Email or Username again');
         })
         }else{
+            toast.warn('Password not match',{position:toast.POSITION.TOP_Right});
             console.log("Password not match")
           }
 
@@ -128,13 +133,17 @@ export default class RegisterAdmin extends Component {
                 <div className="row">
                         <div className="col-md-6 mb-2">
                         <div class="form-floating mb-2">
-                            <input type="text" class="form-control" name="username" id="username" placeholder="User Name" onChange={this.handleInputChange} value={this.setState.username} required/>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="User Name"
+                            minLength="6" data-toggle="tooltip" data-placement="center" title="Username must be more than 6 characters"
+                            onChange={this.handleInputChange} value={this.setState.username} required/>
                             <label for="floatingInput">User Name</label>
                         </div>
                         </div>
                         <div className="col-md-6 mb-2">
                         <div class="form-floating mb-2">
-                            <input type="text" class="form-control" name="email" id="email" placeholder="Email" onChange={this.handleInputChange} value={this.setState.email} required/>
+                            <input type="text" class="form-control" name="email" id="email" placeholder="Email" data-toggle="tooltip" data-placement="center" title="Sample Email - sample@gmail.com"
+                            pattern="(?![.-])((?![.-][.-])[a-zA-Z\d.-]){0,63}[a-zA-Z\d]@((?!-)((?!--)[a-zA-Z\d-]){0,63}[a-zA-Z\d]\.){1,2}([a-zA-Z]{2,14}\.)?[a-zA-Z]{2,14}"
+                            onChange={this.handleInputChange} value={this.setState.email} required/>
                             <label for="floatingInput">Email</label>
                         </div>
                     </div>
@@ -143,20 +152,24 @@ export default class RegisterAdmin extends Component {
                 <div className="row">
                         <div className="col-md-4 mb-2">
                         <div class="form-floating mb-2">
-                            <input type="text" class="form-control" name="nic" id="nic" placeholder="NIC"  onChange={this.handleInputChange} value={this.setState.nic} required/>
+                            <input type="text" class="form-control" name="nic" id="nic" placeholder="NIC"
+                            pattern ="[0-9]{12}||[0-9]{9}[v||V]" data-toggle="tooltip" data-placement="center" title="Sample NIC - xxxxxxxxxV or xxxxxxxxxv or xxxxxxxxxxxx"
+                            onChange={this.handleInputChange} value={this.setState.nic} required/>
                             <label for="floatingInput">NIC</label>
                         </div>
                         </div>
                         <div className="col-md-4 mb-2">
                         <div class="form-floating mb-2">
-                            <input type="text" class="form-control" name="sliitid" id="sliitid" placeholder="Staff ID" onChange={this.handleInputChange} value={this.setState.sliitid} required/>
+                            <input type="phone" class="form-control" name="sliitid" id="sliitid" placeholder="Staff ID" onChange={this.handleInputChange} value={this.setState.sliitid} required/>
                             <label for="floatingInput">Staff ID</label>
                         </div>
                     </div>
 
                     <div className="col-md-4 mb-2">
                         <div class="form-floating mb-2">
-                            <input type="text" class="form-control" name="pno" id="pno" placeholder="Phone No" onChange={this.handleInputChange} value={this.setState.pno} required/>
+                            <input type="text" class="form-control" name="pno" id="pno" placeholder="Phone No" 
+                            maxLength={10} minLength={10}
+                            onChange={this.handleInputChange} value={this.setState.pno} required/>
                             <label for="floatingInput">Phone No</label>
                         </div>
                     </div>
@@ -165,13 +178,17 @@ export default class RegisterAdmin extends Component {
                 <div className="row">
                         <div className="col-md-6 mb-2">
                         <div class="form-floating mb-2">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password"  onChange={this.handleInputChange} value={this.setState.password} required/>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password"  data-toggle="tooltip" data-placement="center" title="Password must contain at least 6 characters, including UPPER/lowercase and numbers Sample = 'Sample@523'"
+                            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$"
+                            onChange={this.handleInputChange} value={this.setState.password} required/>
                             <label for="floatingInput">Password</label>
                         </div>
                         </div>
                         <div className="col-md-6 mb-4">
                         <div class="form-floating mb-2">
-                            <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm Password" onChange={this.handleInputChange} value={this.setState.cpassword} required/>
+                            <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm Password" data-toggle="tooltip" data-placement="center" title="Password must contain at least 6 characters, including UPPER/lowercase and numbers Sample = 'Sample@523'"
+                            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" 
+                            onChange={this.handleInputChange} value={this.setState.cpassword} required/>
                             <label for="floatingInput">Confirm Password</label>
                         </div>
                     </div>

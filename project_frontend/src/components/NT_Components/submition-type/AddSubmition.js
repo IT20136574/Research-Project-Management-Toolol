@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-
+import {toast} from 'react-toastify';
 export default class AddSubmition extends Component {
     constructor(props){
         super(props)
@@ -36,8 +36,11 @@ export default class AddSubmition extends Component {
 
          axios.post("http://localhost:8070/submition/create",NewSubmition).then((res)=>{
              if(res.data){
-                 alert("Submition type creation successfull")
-                 window.location.href="/submition"
+                toast.success('Submission Type Created',{position:toast.POSITION.TOP_Right});
+                window.setTimeout(function() {
+                    window.location.href="/submition";
+                }, 3000)   
+                 
              }
          }).catch((e)=>{
              console.log(e)
@@ -45,33 +48,6 @@ export default class AddSubmition extends Component {
      }
   render() {
     return (
-        // <div className='alignMargin'>
-        //     <h2>Create Submition Type</h2>
-        //    <form onSubmit={this.onSubmit}>
-        //         <label>Submition Title : </label> &nbsp;
-        //         <input type="text" name="submitionTitle" onChange={this.handleInputChange} value={this.setState.submitionTitle}   required/><br/><br/>
-
-        //         <label>Submition Started Date : </label> &nbsp;
-        //         <input type="text" name="submitionStartedDate" onChange={this.handleInputChange} value={this.setState.submitionStartedDate}  required/><br/><br/>
-
-        //         <label>Deadline : </label> &nbsp;
-        //         <input type="text" name="deadline" onChange={this.handleInputChange} value={this.setState.deadline}  required/><br/><br/>
-
-        //         <label>Discription : </label> &nbsp;
-        //         <input type="text" name="discription" onChange={this.handleInputChange} value={this.setState.discription} required/><br/><br/>
-
-        //         <label>Submition Type : </label> &nbsp;
-        //         <select name="submitionType" onChange={this.handleInputChange} value={this.setState.submitionType}>
-        //             <option>choose file type</option>
-        //             <option valure="pdf">PDF</option>
-        //             <option valure="ptr">Presentaion</option>
-        //             <option valure="word">word</option>
-        //         </select><br/><br/>
-
-        //         <input type="submit" value="submit"/>
-        //     </form>
-
-        // </div>
         <div className='alignMarginN'>
         <div class="container">
             <div class="main-body">

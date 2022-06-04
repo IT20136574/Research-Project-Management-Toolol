@@ -1,5 +1,9 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import {Modal} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+import {FiAlertCircle} from 'react-icons/fi'
+import { FiAlertTriangle } from 'react-icons/fi';
 export default class AdminAccount extends Component {
     constructor(props){
         super(props)
@@ -12,8 +16,30 @@ export default class AdminAccount extends Component {
         sliitid: "",
         email: "",
         imageUrl: "",
-        }
+        show: false,
+        show1: false
+        };
+        this.showModal = this.showModal.bind(this);
+        this.hideModal = this.hideModal.bind(this);
+        this.showModal1 = this.showModal1.bind(this);
+        this.hideModal1 = this.hideModal1.bind(this);
     }
+    showModal = () => {
+      this.setState({ show: true });
+    };
+  
+    hideModal = () => {
+      this.setState({ show: false });
+    };
+
+    showModal1 = () => {
+      this.setState({ show1: true });
+    };
+  
+    hideModal1 = () => {
+      this.setState({ show1: false });
+    };
+
     componentDidMount(){
         this.getAdminDetails()
     }
@@ -55,26 +81,20 @@ export default class AdminAccount extends Component {
                 Authorization: localStorage.getItem("Authorization")
              }
         }
-
-        if (window.confirm('Are you sure you wish to delete this Account?')) {
             await axios.delete('http://localhost:8070/admin/delete', config)
             .then((res) => {
               localStorage.removeItem('Authorization')
-              alert("Admin Account delete successfull")
               window.location="/"
             })
             .catch((err) => {
               console.log(err.message)
             })
-          }
+        
     }
 
     adminLogout(){
-        if (window.confirm('Are you sure you wish to logout from this Account?')) {
             localStorage.removeItem('Authorization')
-            alert("log out complete")
-            window.location = "/"
-        }
+            window.location = "/login"
     }
 
     adminRegister(){
@@ -110,12 +130,55 @@ export default class AdminAccount extends Component {
                 </div>
                 </div>
                 <form class="d-flex input-group w-auto">
-                    <button class="btn btn-primary" onClick={this.adminLogout}>Log Out</button>
+                    <Button class="btn btn-primary" onClick={this.showModal}>Log Out</Button>
                 </form>
             </div>
             </nav>
-  
+            <Modal show={this.state.show} onHide={this.hideModal} >
+              {/* <Modal.Header closeButton>
+                <Modal.Title>Confirm Logout</Modal.Title>
+              </Modal.Header> */}
+              <Modal.Body>
+                  <center>
+                      <FiAlertCircle color="red" fontSize="3em"/><br/>
+                      <b>Are you sure?</b><br/>
+                      Your will be returned to the login screen.
+                  </center>
+              </Modal.Body>
+              <Modal.Footer >
+                  <div className="mx-auto">
+                  <Button variant="danger" onClick={this.adminLogout} style={{width: 170+"px"}}>
+                          Logout
+                      </Button> &nbsp; &nbsp;
+                      <Button variant="primary" onClick={this.hideModal} style={{width: 170+"px"}}>
+                          Cancel
+                      </Button>
 
+                  </div>
+              </Modal.Footer>
+            </Modal> 
+
+            <Modal show={this.state.show1} onHide={this.hideModal1} >
+             <Modal.Body>
+               <center>
+               <FiAlertTriangle color="red" fontSize="3em" /><br/>
+                <b>Are you sure?</b><br/>
+                 Do you really want to delete this file.<br/>
+                 This file cannot be restore
+
+                 </center>
+                </Modal.Body>
+                <Modal.Footer >
+                 <div className="mx-auto">
+                 <Button variant="danger" onClick={this.deleteAdmin}  style={{width: 170+"px"}}>
+                  Delete
+                 </Button> &nbsp; &nbsp;
+                  <Button variant="success" onClick={this.hideModal1} style={{width: 170+"px"}}>
+                  Cancel
+                  </Button>
+                  </div>
+                  </Modal.Footer>
+                  </Modal>
 
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3 mt-3">
@@ -199,7 +262,7 @@ export default class AdminAccount extends Component {
               <div>
                 <div style={{ marginLeft: 19+"rem"}}>
                     <button type="button" class="btn btn-primary" onClick={this.updateAdmin} style={{width:190+"px"}}>Edit Profile</button> &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-                    <button type="button" class="btn btn-danger" onClick={this.deleteAdmin} style={{width:190+"px"}}>Delete Account</button> &nbsp;
+                    <Button type="button" variant="danger" onClick={this.showModal1} style={{width:190+"px"}}>Delete Account</Button> &nbsp;
                 </div>
               </div>
             </div>

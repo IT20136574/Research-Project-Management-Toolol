@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-
+import {toast} from 'react-toastify';
 export default class UpdateSupervisor extends Component {
     constructor(props){
         super(props);
@@ -95,8 +95,10 @@ export default class UpdateSupervisor extends Component {
                 profileImage:"",
                 Role:""
              })
-             window.location.href = '/supervisor/supervisor';  
-             alert("update Successful")
+             toast.success('update Successful',{position:toast.POSITION.TOP_Right});
+             window.setTimeout(function() {
+                window.location.href = '/supervisor/supervisor';  
+             }, 3000) 
           }
         }).catch((error)=>{
            console.log(error)
@@ -181,6 +183,7 @@ export default class UpdateSupervisor extends Component {
                 
                 <center>
                     <div className='mt-3'>
+                    <a href='/supervisor/supervisor'><input class='btn btn-info' type="button" value="Cancel" style={{width: 15+"%"}}/></a> &nbsp;&nbsp;&nbsp;
                         <input class='btn btn-warning' type="reset" value="Reset" style={{width: 15+"%"}}/> &nbsp;&nbsp;&nbsp;
                         <input class='btn btn-primary' type="submit" value="Update" style={{width: 15+"%"}}/> 
                     </div>

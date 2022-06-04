@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-
+import {toast} from 'react-toastify';
 export default class UpdateAdmin extends Component {
     constructor(props){
         super(props)
@@ -104,8 +104,11 @@ export default class UpdateAdmin extends Component {
                     imageUrl : "" 
                 })
                 // console.log("update success")
-                alert("update success")
-                window.location.href="/adminaccount"
+                toast.success('Update Successful.!',{position:toast.POSITION.TOP_Right});
+                window.setTimeout(function() {
+                    window.location.href="/adminaccount";
+                }, 3000)  
+                
            }
         }).catch((e)=>{
             console.log(e)
@@ -158,7 +161,7 @@ export default class UpdateAdmin extends Component {
             <div className="row">
                     <div className="col-md-6 mb-2">
                     <div class="form-floating mb-2">
-                        <input type="text" class="form-control" name="username" id="username" placeholder="User Name" onChange={this.handleInputChange} value={this.state.username} required/>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="User Name" onChange={this.handleInputChange} value={this.state.username} readOnly/>
                         <label for="floatingInput">User Name</label>
                     </div>
                     </div>

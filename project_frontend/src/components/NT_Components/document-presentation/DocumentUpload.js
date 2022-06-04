@@ -7,7 +7,7 @@ import {
   } from "firebase/storage";
 import app from "../../../firebase";
 import axios from 'axios';
-
+import {toast} from 'react-toastify';
 function DocumentUpload() {
     const [docName, setdocName] = useState("");
     const [displayTitle, setdisplayTitle] = useState("");
@@ -64,15 +64,18 @@ function DocumentUpload() {
 
                 console.log(newDocument)
                 axios.post("http://localhost:8070/document/uploadDoc",newDocument)
-                .then(()=>{
-                    alert("Document Upload Success")
+                .then((res)=>{
+                    if(res.data){
+                        toast.success('Document Uploaded Successfull',{position:toast.POSITION.TOP_Right});
+                        window.setTimeout(function() {
+                            window.location.href="/documentPage"
+                        }, 3000)   
+                    }
                         setdocName("");
                         setdisplayTitle("");
                         setdiscription("");
                         setfileUrl("");
                         settype("");
-                    window.location.reload();
-                    window.location.href="/documentPage"
                 }).catch((err)=>{
                     alert(err)
                 })
@@ -83,39 +86,6 @@ function DocumentUpload() {
     }
 
   return (
-    // <div className='alignMargin'>
-    //     <br/>
-    //     <h3>Document Management</h3>
-    //     <form method='POST' onSubmit={sendData}>
-    //         <label>Document Name : </label> &nbsp;
-    //         <input type="text" name="docname" onChange={(e) => setdocName(e.target.value)} required/><br/>
-
-    //         <br/>
-    //         <label>Display Title : </label> &nbsp;
-    //         <input type="text" name="displayTitle" onChange={(e) => setdisplayTitle(e.target.value)}/><br/>
-
-    //         <br/>
-    //         <label>discription : </label> &nbsp;
-    //         <input type="text" name="discription" onChange={(e) => setdiscription(e.target.value)}/><br/>
-
-    //         <br/>
-    //         <label>Document Type : </label> &nbsp;
-    //         <select name="documentType" onChange={(e) => settype(e.target.value)}>
-    //             <option>choose file type</option>
-    //             <option valure="pdf">PDF</option>
-    //             <option valure="ptr">Presentaion</option>
-    //             <option valure="word">word</option>
-    //         </select>
-            
-    //         <br/>
-
-    //         <br/>
-    //         <label>File : </label> &nbsp;
-    //         <input type="file" name="fileUrl" onChange={(e) => setfileUrl(e.target.files[0])}/><br/><br/>
-
-    //         <input type="submit" value="submit"/>
-    //     </form>
-    // </div>
     <div className='alignMarginN'>
         <div class="container">
             <div class="main-body">

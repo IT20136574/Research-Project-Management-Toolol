@@ -6,7 +6,6 @@ import * as AiIcons from 'react-icons/ai';
 import { SidebarData } from './SidebarData';
 import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
-import sliitLog from '../../../../asserts/sliit.png'
 const Nav = styled.div`
   background: #28282B;
   height: 80px;

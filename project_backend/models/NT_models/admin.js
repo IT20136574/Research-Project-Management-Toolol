@@ -66,6 +66,11 @@ const adminSchema = new mongoose.Schema({
         type:Date,
         required: true
     },
+    role:{
+        type:String,
+        default : "admin"
+    },
+
 
     tokens: [{
         token: {

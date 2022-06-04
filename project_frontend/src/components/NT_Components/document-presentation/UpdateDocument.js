@@ -8,6 +8,7 @@ import {
     uploadBytesResumable,
   } from "firebase/storage";
 import app from "../../../firebase";
+import {toast} from 'react-toastify';
 export default function UpdateDocument() {
     const [docname, setdocname] = useState("")
     const [displaytitle, setdisplaytitle] = useState("")
@@ -78,8 +79,10 @@ export default function UpdateDocument() {
             }
                 axios.put(`http://localhost:8070/document/update/${id}`,updateDocument)
                 .then(()=>{
-                    alert("Document Updated successful")
-                    window.location.href="/documentPage"
+                    toast.success('Document Updated successful',{position:toast.POSITION.TOP_Right});
+                    window.setTimeout(function() {
+                        window.location.href="/documentPage"
+                    }, 3000)       
                 }).catch((err)=>{
                     alert(err)
                 })

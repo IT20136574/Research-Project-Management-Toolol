@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import {BrowserRouter, Route, Switch } from 'react-router-dom'
 import React from 'react'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import UserManagementPage from './components/NT_Components/admin_Layouts/UserManagementPage';
 import Studentmanagement from './components/NT_Components/user-management/student-management/Studentmanagement';
 import UpdateStudent from './components/NT_Components/user-management/student-management/UpdateStudent';
@@ -40,7 +42,7 @@ import AddMarkingSchema from './components/NT_Components/marking-schemas/AddMark
 import UpdateMarking from './components/NT_Components/marking-schemas/UpdateMarking';
 
 
-
+toast.configure();
 function App() {
   return (
     <BrowserRouter>

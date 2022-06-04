@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import {toast} from 'react-toastify';
 
 export default class UpdatePanelMem extends Component {
     constructor(props){
@@ -95,8 +96,11 @@ export default class UpdatePanelMem extends Component {
                 profileImage:"",
                 Role:""
              })
-             window.location.href = '/panalMember/panal_member';  
-             alert("update Successful")
+               
+             toast.success('Update Successful',{position:toast.POSITION.TOP_Right});
+             window.setTimeout(function() {
+                window.location.href = '/panalMember/panal_member';
+             }, 3000) 
           }
         }).catch((error)=>{
            console.log(error)
@@ -181,6 +185,7 @@ export default class UpdatePanelMem extends Component {
                 
                 <center>
                     <div className='mt-3'>
+                    <a href='/panalMember/panal_member'><input class='btn btn-info' type="button" value="Cancel" style={{width: 15+"%"}}/></a> &nbsp;&nbsp;&nbsp;
                         <input class='btn btn-warning' type="reset" value="Reset" style={{width: 15+"%"}}/> &nbsp;&nbsp;&nbsp;
                         <input class='btn btn-primary' type="submit" value="Update" style={{width: 15+"%"}}/> 
                     </div>

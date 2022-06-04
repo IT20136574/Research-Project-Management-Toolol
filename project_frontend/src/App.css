@@ -22,3 +22,14 @@
     margin-top:10px;
     margin-left: 350px;
 }
+
+.alignMarginN2{
+    margin-top:10px;
+    margin-left: 320px;
+}
+
+input:not(:placeholder-shown):invalid{
+    background-color:pink;
+    box-shadow:0 0 0 2px red;
+}
+  

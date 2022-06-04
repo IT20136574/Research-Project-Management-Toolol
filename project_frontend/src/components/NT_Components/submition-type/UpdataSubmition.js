@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-
+import {toast} from 'react-toastify';
 export default class UpdataSubmition extends Component {
     constructor(props){
         super(props);
@@ -76,8 +76,10 @@ export default class UpdataSubmition extends Component {
                 discription : "",
                 submitionType : ""
              })
-             window.location.href = '/submition';  
-             alert("update Successful")
+             toast.success('Submission Type Updated',{position:toast.POSITION.TOP_Right});
+             window.setTimeout(function() {
+                window.location.href = '/submition'; 
+             }, 3000)  
           }
         }).catch((error)=>{
            console.log(error)
@@ -86,33 +88,6 @@ export default class UpdataSubmition extends Component {
 
   render() {
     return (
-    //     <div className='alignMargin'>
-    //     <h2>Update Submition Type</h2>
-    //    <form method='POST' onSubmit={this.onSubmit}>
-    //         <label>Submition Title : </label> &nbsp;
-    //         <input type="text" name="submitionTitle" value={this.state.submitionTitle} onChange={this.handleInputChange} required/><br/><br/>
-
-    //         <label>Submition Started Date : </label> &nbsp;
-    //         <input type="text" name="submitionStartedDate"  value={this.state.submitionStartedDate} onChange={this.handleInputChange} required/><br/><br/>
-
-    //         <label>Deadline : </label> &nbsp;
-    //         <input type="text" name="deadline" value={this.state.deadline} onChange={this.handleInputChange} required/><br/><br/>
-
-    //         <label>Discription : </label> &nbsp;
-    //         <input type="text" name="discription" value={this.state.discription} onChange={this.handleInputChange} required/><br/><br/>
-
-    //         <label>Submition Type : </label> &nbsp;
-    //         <select name="submitionType" value={this.state.submitionType} onChange={this.handleInputChange}>
-    //             <option>choose file type</option>
-    //             <option valure="pdf">PDF</option>
-    //             <option valure="ptr">Presentaion</option>
-    //             <option valure="word">word</option>
-    //         </select><br/><br/>
-
-    //         <input type="submit" value="submit"/>
-    //     </form>
-
-    // </div>
 
     <div className='alignMarginN'>
     <div class="container">

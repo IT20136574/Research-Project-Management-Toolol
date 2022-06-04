@@ -7,7 +7,7 @@ import {
   } from "firebase/storage";
 import app from "../../../firebase";
 import axios from 'axios';
-
+import {toast} from 'react-toastify';
 export default function AddMarkingSchema() {
     const [mTittle, setmTittle] = useState("");
     const [DTittle, setDTittle] = useState("");
@@ -63,8 +63,10 @@ export default function AddMarkingSchema() {
                 console.log(newMarking)
                 axios.post("http://localhost:8070/marking/create",newMarking)
                 .then(()=>{
-                    alert("marking creation successful")
-                    window.location.href="/marking"
+                    toast.success('Marking Sheme Created',{position:toast.POSITION.TOP_Right});
+                    window.setTimeout(function() {
+                        window.location.href="/marking"
+                    }, 3000) 
                 }).catch((err)=>{
                     alert(err)
                 })
@@ -75,26 +77,6 @@ export default function AddMarkingSchema() {
     }
     
     return (
-    // <div className='alignMargin'>
-    //     <h2>Create Marking Schema</h2> <br/>
-    //     <form method='POST' onSubmit={sendData}>
-    //             <label>Marking Schema Title : </label> &nbsp;
-    //             <input type="text" name="mTittle" onChange={(e)=>{setmTittle(e.target.value)}}  required/><br/><br/>
-
-    //             <label>Display Title : </label> &nbsp;
-    //             <input type="text" name="DTittle" onChange={(e)=>{setDTittle(e.target.value)}} required/><br/><br/>
-
-    //             <label>Discription : </label> &nbsp;
-    //             <input type="text" name="discription" onChange={(e)=>{setdiscription(e.target.value)}} required/><br/><br/>
-
-    //             <label>File : </label> &nbsp;
-    //             <input type="file" name="fileUrl" onChange={(e) => setfileUrl(e.target.files[0])}/><br/><br/>
-                
-    //             <input type="submit" value="submit"/>
-       
-    //     </form>
-
-    // </div>
     <div className='alignMarginN'>
         <div class="container">
             <div class="main-body">

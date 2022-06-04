@@ -8,7 +8,7 @@ import {
     uploadBytesResumable,
   } from "firebase/storage";
 import app from "../../../firebase";
-
+import {toast} from 'react-toastify';
 export default function UpdateMarking() {
 const [mTittle, setmTittle] = useState("");
 const [DTittle, setDTittle] = useState("");
@@ -81,8 +81,10 @@ const params = useParams();
 
                 axios.put(`http://localhost:8070/marking/update/${id}`,updateMarking)
                 .then(()=>{
-                    alert("Marking update successful")
-                    window.location.href="/marking"
+                    toast.success('Marking Scheme Updated',{position:toast.POSITION.TOP_Right});
+                    window.setTimeout(function() {
+                        window.location.href="/marking"
+                    }, 3000)     
                 }).catch((err)=>{
                     alert(err)
                 })

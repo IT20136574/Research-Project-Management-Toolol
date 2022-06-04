@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-
+import {toast} from 'react-toastify';
 export default class UpdateStudent extends Component {
     constructor(props){
         super(props);
@@ -77,7 +77,11 @@ export default class UpdateStudent extends Component {
         //console.log(data)
         axios.put(`http://localhost:8070/viewRole/updateStudent/${id}`,data).then((res)=>{
            
-           if(res.data){      
+           if(res.data){   
+            toast.success('Update Successfull',{position:toast.POSITION.TOP_Right});
+            window.setTimeout(function() {
+               window.location.href = '/student';  
+            }, 3000)   
              
             this.setState({
                 name:"",
@@ -91,9 +95,7 @@ export default class UpdateStudent extends Component {
                 email:"",
                 status:"",
                 imageUrl:""
-             })
-             window.location.href = '/student';  
-             console.log("update Successful")
+             })  
           }
         }).catch((error)=>{
            console.log(error)
@@ -187,6 +189,7 @@ export default class UpdateStudent extends Component {
                 
                 <center>
                     <div className='mt-4'>
+                        <input class='btn btn-info' type="button" onClick={this.onBack} value="Cancel" style={{width: 15+"%"}}/>&nbsp;&nbsp;&nbsp;
                         <input class='btn btn-warning' type="reset" value="Reset" style={{width: 15+"%"}}/> &nbsp;&nbsp;&nbsp;
                         <input class='btn btn-primary' type="submit" value="Update" style={{width: 15+"%"}}/> 
                     </div>

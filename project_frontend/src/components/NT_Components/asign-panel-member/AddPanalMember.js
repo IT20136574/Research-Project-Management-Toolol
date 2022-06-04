@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
+import {toast} from 'react-toastify';
 export default class AddPanalMember extends Component {
     constructor(props){
         super(props);
@@ -97,13 +97,16 @@ export default class AddPanalMember extends Component {
         console.log(data)
         if(!(panelmemberId1 === panelmemberId2)){
             axios.post(`http://localhost:8070/panalmember/addPanelMembers/${id}`,data).then((res)=>{
-                alert(res.data.status)
-                window.location.href=`/showgroups/${"Accepted"}`
+                toast.success('Panel Members Allocated',{position:toast.POSITION.TOP_Right});
+                window.setTimeout(function() {
+                    window.location.href=`/showgroups/${"Accepted"}`
+                }, 3000)   
+                
             }).catch((e)=>{
                 alert(e)
             })
         }else{
-            console.log("you same panel members")
+            toast.warn('You Select Same Panel Members',{position:toast.POSITION.TOP_Right});
         }
     }
 

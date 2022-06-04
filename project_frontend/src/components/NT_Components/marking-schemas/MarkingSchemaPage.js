@@ -3,9 +3,20 @@ import {HiRefresh} from "react-icons/hi"
 import {RiAddCircleFill} from "react-icons/ri"
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import {Modal} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+import {FiAlertTriangle} from 'react-icons/fi'
 
 export default function MarkingSchemaPage() {
   const [markings, setmarkings] = useState([])
+  const [show, setShow] = useState(false);
+  const [id, setid] = useState("");
+
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setShow(true)
+    setid(id)
+  };
 
   useEffect(() => {
     axios.get("http://localhost:8070/marking/getMarkings").then((res)=>{
@@ -16,16 +27,13 @@ export default function MarkingSchemaPage() {
   }, [])
 
   onDelete = (id) =>{
-      if(window.confirm("Are you sure to delete this?")){
           axios.delete(`http://localhost:8070/marking/deleteMarking/${id}`).then((res)=>{
             if(res.data){
-              console.log("delete success!")
                window.location.reload();
             }
           }).catch((e)=>{
             console.log(e)
           })
-      }
   }
 
   filterData= (markings,searchKey) => {
@@ -102,13 +110,34 @@ export default function MarkingSchemaPage() {
                              <button type="button" onClick={()=>{this.onDelete(markings._id)}} class="btn btn-danger btn-rounded"><i class="fa fa-trash"></i></button> */}
 
                             <button type="button" onClick={()=>{this.onUpdate(markings._id)}} class="btn btn-outline-dark btn-floating"><i class="fa fa-pencil" style={{color:"blue"}}></i></button>&nbsp;&nbsp;
-                            <button type="button" onClick={()=>{this.onDelete(markings._id)}} class="btn btn-outline-dark btn-floating"><i class="fa fa-trash" style={{color:"red"}}></i></button>
+                            <Button type="button" onClick={()=>{handleShow(markings._id)}} variant="btn btn-outline-dark btn-floating"><i class="fa fa-trash" style={{color:"red"}}></i></Button>
                             </td>
                           </tr>
                     ))}
               </tbody>
   </table>
   </div>
+        <Modal show={show} onHide={handleClose} >
+                  <Modal.Body>
+                    <center>
+                    <FiAlertTriangle color="red" fontSize="3em" /><br/>
+                      <b>Are you sure?</b><br/>
+                      Do you really want to delete this file.<br/>
+                      This file cannot be restore
+
+                      </center>
+                      </Modal.Body>
+                      <Modal.Footer >
+                      <div className="mx-auto">
+                      <Button variant="danger" onClick={()=>{onDelete(id)}} style={{width: 170+"px"}}>
+                        Delete
+                      </Button> &nbsp; &nbsp;
+                        <Button variant="success" onClick={handleClose} style={{width: 170+"px"}}>
+                        Cancel
+                        </Button>
+                        </div>
+                      </Modal.Footer>
+                    </Modal>
 
               </div>
             </div>

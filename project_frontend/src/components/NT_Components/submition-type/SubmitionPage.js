@@ -1,15 +1,33 @@
 import React, { Component } from 'react'
 import {HiRefresh} from "react-icons/hi"
 import {RiAddCircleFill} from "react-icons/ri"
+import { FiAlertTriangle } from 'react-icons/fi';
+import {Modal} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import axios from 'axios'
 
 export default class SubmitionPage extends Component {
   constructor(props){
     super(props);
     this.state = {
-        submitionTypes : []
-    }
+        submitionTypes : [],
+        show: false,
+        id:""
+    };
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
 }
+showModal = (id) => {
+  this.setState({ 
+    show: true,
+    id:id
+   });
+
+};
+
+hideModal = () => {
+  this.setState({ show: false });
+};
 
 componentDidMount(){
     axios.get("http://localhost:8070/submition/getSubmition").then((res)=>{
@@ -42,16 +60,13 @@ axios.get(`http://localhost:8070/submition/getSubmition`).then(res =>{
 }
 
 onDelete(id){
-    if(window.confirm("Are you sure to delete this?")){
         axios.delete(`http://localhost:8070/submition/deleteSubmition/${id}`).then((res)=>{
           if(res.data){
-            console.log("delete success!")
              window.location.reload();
           }
         }).catch((e)=>{
           console.log(e)
         })
-    }
   }
 
 onUpdate(id){
@@ -59,13 +74,6 @@ onUpdate(id){
 }
   render() {
     return (
-        // <div className='alignMargin'>
-        //     <h2>Submition</h2>
-        //     <a href='/addsubmition'><button>Add Submition</button></a>
-        //     <br/><br/>
-        //     <h2>Submition Types</h2>
-        //     <DisplaySubmitionTypes/>
-        // </div>
         <div className='alignMarginN'>
         <div class="container">
             <div class="main-body">
@@ -120,7 +128,7 @@ onUpdate(id){
                                                 <button type="button" onClick={()=>{this.onDelete(submitionTypes._id)}} class="btn btn-danger btn-rounded"><i class="fa fa-trash"></i></button> */}
                                                 
                                                 <button type="button" onClick={()=>{this.onUpdate(submitionTypes._id)}} class="btn btn-outline-dark btn-floating"><i class="fa fa-pencil" style={{color:"blue"}}></i></button>&nbsp;&nbsp;
-                                                <button type="button" onClick={()=>{this.onDelete(submitionTypes._id)}} class="btn btn-outline-dark btn-floating"><i class="fa fa-trash" style={{color:"red"}}></i></button>
+                                                <Button type="button" onClick={()=>{this.showModal(submitionTypes._id)}} variant="btn btn-outline-dark btn-floating"><i class="fa fa-trash" style={{color:"red"}}></i></Button>
                                             
                                             </td>
                                           </tr>
@@ -128,6 +136,27 @@ onUpdate(id){
                               </tbody>
                   </table>
                   </div>
+                  <Modal show={this.state.show} onHide={this.hideModal} >
+                  <Modal.Body>
+                    <center>
+                    <FiAlertTriangle color="red" fontSize="3em" /><br/>
+                      <b>Are you sure?</b><br/>
+                      Do you really want to delete this file.<br/>
+                      This file cannot be restore
+
+                      </center>
+                      </Modal.Body>
+                      <Modal.Footer >
+                      <div className="mx-auto">
+                      <Button variant="danger" onClick={()=>{this.onDelete(this.state.id)}} style={{width: 170+"px"}}>
+                        Delete
+                      </Button> &nbsp; &nbsp;
+                        <Button variant="success" onClick={this.hideModal} style={{width: 170+"px"}}>
+                        Cancel
+                        </Button>
+                        </div>
+                      </Modal.Footer>
+                    </Modal>
     
                   </div>
                 </div>
