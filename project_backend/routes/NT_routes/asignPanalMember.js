@@ -67,6 +67,7 @@ router.route("/getuniuegroup/:id").get((req,res)=>{
 //register 2 panel members to group
 router.post("/addPanelMembers/:id",async (req,res)=>{
     const groupId = req.params.id
+    
     const Group = await group.findById(groupId)
     try{
     if(Group.panalmemberstatus === "Allocated"){
@@ -76,7 +77,7 @@ router.post("/addPanelMembers/:id",async (req,res)=>{
         throw new Error("There is no Group")
     }
 
-    //console.log(Group.panalmembers.length)
+    console.log(Group.panalmembers.length)
 
 
         const {
@@ -98,9 +99,9 @@ router.post("/addPanelMembers/:id",async (req,res)=>{
                     lname : PanalMember.lname,
                     staffid : PanalMember.staffid
                 }
-                if(Group.panalmembers.length === 2){
-                    throw new Error("panal members already added")
-                }
+                // if(Group.panalmembers.length === 2){
+                //     throw new Error("panal members already added")
+                // }
 
                 await group.findOneAndUpdate(
                     {_id : groupId},
@@ -116,7 +117,10 @@ router.post("/addPanelMembers/:id",async (req,res)=>{
 
                 
                 let groups = {
-                    _id : groupId
+                    _id : groupId,
+                    researchTopic_Info : Group.researchTopic_Info,
+                    groupMembers : Group.groupMembers,
+                    group_name : Group.group_name
                 }
                 
                 await staff.findOneAndUpdate(

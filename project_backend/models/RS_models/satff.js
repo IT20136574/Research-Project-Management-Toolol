@@ -83,7 +83,6 @@ const staffSchema = new mongoose.Schema({
           type :String,
           require:true
         },
-
           research_Topic: {
             type: String,
            //require: true
@@ -96,16 +95,49 @@ const staffSchema = new mongoose.Schema({
             type: String,
             //required: true
           }
-   
       }],
+
       
       groups: [{
         _id: {
           type: String,
           required: true,
           ref: "staff"
-        }
-    }],
+        },
+        research_Topic: {
+          type: String,
+         //require: true
+        },
+        group_name:{
+          type :String,
+          require:true
+        },
+        groupMembers: [{
+          _id: {
+            type: String,
+            required: true,
+            ref: "students"
+          },
+      
+          student_id: {
+            type: String,
+           //require: true
+          },
+          name: {
+            type: String,
+            //required: true
+          },
+          email: {
+            type: String,
+            //required: true
+          },
+          phone: {
+            type: String,
+            required: false
+          }
+        }],
+      }],
+
 
     file_Info: [{
 
@@ -127,8 +159,10 @@ const staffSchema = new mongoose.Schema({
       fileUrl: {
         type: String,
         //required: true
-      }
-    }]
+      },
+
+      }],
+
 }
 );
  
@@ -164,3 +198,7 @@ staffSchema.methods.generateAuthToken = async function () {
  
 const staff = mongoose.model("staff",staffSchema);
 module.exports = staff;
+ 
+ 
+ 
+

@@ -42,8 +42,9 @@ const submissionsRouter = require("./routes/DH_routes/submissions");
 const adminRouter = require("./routes/NT_routes/admin");
 const viewRoleRouter = require("./routes/NT_routes/viewRoles");
 const asignPanalMemberRouter = require("./routes/NT_routes/asignPanalMember");
-
-
+const documentRouter = require("./routes/NT_routes/document")
+const submitionRouter = require("./routes/NT_routes/submition")
+const markingRouter = require("./routes/NT_routes/marking")
 
 // rotues
 app.use("/student",studentRouter);
@@ -53,7 +54,9 @@ app.use("/panalmember",asignPanalMemberRouter);
 app.use("/studentGroup",studentGroupRouter);
 app.use("/sSupervisorGroup",sSupervisorRouter);
 app.use("/submitDocs",submissionsRouter);
-
+app.use("/document", documentRouter)
+app.use("/submition", submitionRouter)
+app.use("/marking", markingRouter)
 
 
 app.listen(PORT, () => {

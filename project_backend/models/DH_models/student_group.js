@@ -61,14 +61,36 @@ const studentGroupSchema = new mongoose.Schema({
       required: false
     }
   }],
+  
+  panalmembers: [{
+    _id: {
+      type: String,
+      required: true,
+      ref: "staff"
+    },
+    fname: {
+      type: String,
+    //  require: true
+    },
+    lname: {
+      type: String,
+      // required: true
+    },
+    staffid: {
+      type: String,
+      //required: true
+    }
+  }],
 
   AcceptedIdOfSupervisor:{
     type: String,
     trim: true
   },
 
-
-
+  panalmemberstatus: {
+    type:String,
+    //required: true
+  }
 
 });
 

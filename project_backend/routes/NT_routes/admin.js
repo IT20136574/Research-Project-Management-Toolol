@@ -9,7 +9,19 @@ let admin= require("../../models/NT_models/admin");
 //Admin Register to Web application
 router.post('/add', async (req, res) => {
     try {
-      const {fname, mname, lname, username, pno, nic, sliitid, email, password, imageUrl} = req.body
+      const {fname,lname, username, pno, nic, sliitid, email, password, imageUrl,dateCreated,lastUpdated} = req.body
+
+      if(!fname || !lname || !username || !pno || !nic || !sliitid || !email || !password || !imageUrl)
+      return res.status(400).json({error : "required"})
+
+      if(username.length < 6)
+      return res.status(400).json({error : "Username must be morthan 6 character"})
+
+      if(sliitid.length < 6)
+      return res.status(400).json({error : "SLIIT ID must be morthan 6 character"})
+
+      if(pno.length !=10)
+      return res.status(400).json({error : "Phone number must be 10 character"})
 
       //Check application has already created account using given email or SLIIT staff id  
       let admin1 = await admin.findOne({email})
@@ -23,13 +35,14 @@ router.post('/add', async (req, res) => {
       }
         admin1 = {
         fname : fname,
-        mname : mname,
         lname : lname,
         username :username,
         pno : pno,
         nic : nic,
         sliitid : sliitid,
         email : email,
+        dateCreated:dateCreated,
+        lastUpdated:lastUpdated,
         password : password,
         imageUrl : imageUrl
       }
@@ -94,18 +107,18 @@ router.delete("/delete", auth, async (req, res) => {
 //admin update
 router.put('/update', auth, async (req, res) => {
  
-  const {fname, mname, lname, username, pno, nic, sliitid, email, imageUrl} = req.body
+  const {fname, lname, username, pno, nic, sliitid, email, imageUrl,lastUpdated} = req.body
   try {
     const updateValus={
       fname : fname,
-      mname : mname,
       lname : lname,
       username :username,
       pno : pno,
       nic : nic,
       sliitid : sliitid,
       email : email,
-      imageUrl : imageUrl
+      imageUrl : imageUrl,
+      lastUpdated:lastUpdated
     };
 
     let admin1 = await admin.findOne({username})
