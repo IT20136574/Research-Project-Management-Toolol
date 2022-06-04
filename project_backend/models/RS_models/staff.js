@@ -10,6 +10,12 @@ const staffSchema = new mongoose.Schema({
         type : String,
         require:true
     },
+
+    lname:{
+      type : String,
+      require:true
+  },
+
  
  
     email:{

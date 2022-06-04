@@ -17,7 +17,7 @@ export default class ShowSpecificGroupToPanael extends Component {
         axios.get(`http://localhost:8070/staff/group/${id}`).then((res)=>{
           if (res.data.success){
             this.setState({
-              grp:res.data.group
+              grp:res.data.group.groupMembers
             });
       
             console.log(this.state.grp);
@@ -54,6 +54,27 @@ export default class ShowSpecificGroupToPanael extends Component {
       
       }
       
+      sendMarks = (e) =>{
+        e.preventDefault();
+
+   var id = this.props.match.params.id 
+    const { marks} = this.state;
+
+      const data = {marks:marks};
+      // console.log(data);
+    
+        axios.post(`http://localhost:8070/staff/mark/${id}`,data ).then(res=>{
+          
+                alert("Marks send successfull")
+                window.location.reload();
+               
+        }).catch((err)=>{
+            alert("error with feedback")
+        })
+    
+    }
+    
+
 
 
   render() {
@@ -94,7 +115,44 @@ export default class ShowSpecificGroupToPanael extends Component {
                
                  
       </div>
-      </div>
+      </div><br/><br/>
+
+
+      <div className="pt-0" align="center" background color="red">
+            <div className="shadow col-md-11 mt-8 mx-auto" id="cardcol">
+              
+              <div className="card-header py-3">
+              <h2 className="m-0 font-weight-bold text-dark" id="rs">Evaluate presentations  </h2><br/>
+    </div>     
+    <div class="card">
+              <div class="card-body">
+
+              <div className="container-sm">
+                    <div class="card">
+              <div class="card-body">
+               
+                <form onSubmit={this.sendMarks}>
+
+                <div class="form-floating mb-3">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                  name="marks"
+                  value={this.setState.marks}
+                  onChange={this.handleInputChange}></textarea>
+                     <label for="floatingInput">Overall Group Mark</label>
+                  </div>
+              
+             
+                <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+              </form>
+              </div><br/><br/><br/>
+            </div>
+            
+          <br/><br/>
+         </div>
+     </div>
+     </div>
+    </div><br/><br/><br/>
+   </div>
       </div>
     )
   }

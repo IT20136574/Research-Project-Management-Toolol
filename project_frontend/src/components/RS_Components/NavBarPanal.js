@@ -34,14 +34,11 @@ export default class NavBarPanal extends Component{
                 <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" style={{ fontSize:"18px"}} href="/phome">Home</a>
-                </li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 
                 <li class="nav-item">
-                    <a class="nav-link" style={{ fontSize:"18px"}} href="/eveluate">Evaluate Precentations</a>
-                </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <li class="nav-item">
-                    <a class="nav-link" style={{ fontSize:"18px"}} href="/pMtopics">Evaluate Topics</a>
-                </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="nav-link" style={{ fontSize:"18px"}} href="/pMtopics">Evaluate Topics & Precentations</a>
+                </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 
                 <li class="nav-item">
                     <a class="nav-link" style={{ fontSize:"18px"}} href="/pmark">Marking Schemes</a>

@@ -116,7 +116,7 @@ function StaffRegister(){
                         <select className="form-control" required="required" id="role" placeholder="role"  name="role" onChange={(e)=>{setrole(e.target.value);}}>
                             <option selected>Your Role     ex:- Supervisor</option>
                             <option value="supervisor">Supervisor</option>
-                            <option value="co-superviso">Co-upervisor</option>
+                            <option value="co-supervisor">Co-upervisor</option>
                             <option value="panal_member">Panel Member</option>
                         </select>
                         </div>

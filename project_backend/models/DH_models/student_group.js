@@ -85,6 +85,16 @@ const studentGroupSchema = new mongoose.Schema({
   topicFeedback: {
     type:String,
     //required: true
+  },
+  
+  precentation_Marks: {
+    type:String,
+    //required: true
+  },
+
+  AcceptedIdOfSupervisor: {
+    type:String,
+    //required: true
   }
  
 });

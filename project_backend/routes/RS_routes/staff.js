@@ -150,12 +150,9 @@ router.get("/sprofile", auth, async (req, res) => {
 router.get("/desplaysupertopics",auth, async (req, res) => {
   try {
     
-    const sup = await staff.findById(req.staff1.id);
-    var arr =[];
-    arr = sup.researchTopic_Info;
-    
+   
 
-    res.status(200).send({ status: "Supervisor data retrieved", researchTopic_Info: arr });
+    res.status(200).send({ status: "Supervisor data retrieved", researchTopic_Info: req.staff1 });
   } catch (error) {
      res.status(500).send({ status: "Error with retrieve", error: error.message });
    }
@@ -165,10 +162,10 @@ router.get("/desplaysupertopics",auth, async (req, res) => {
 
 
 //topic acception
-router.post("/addstatusAccept/:id", auth, async (req,res)=>{
+router.post("/addstatusAccept/:id1/:id2", async (req,res)=>{
 
-  const sup = await staff.findById(req.staff1._id);
-  const groupId = req.params.id
+  const sup = await staff.findById(req.params.id2);
+  const groupId = req.params.id1
   const Group = await group.findById(groupId);
   const topics = sup.researchTopic_Info;
 
@@ -181,14 +178,14 @@ router.post("/addstatusAccept/:id", auth, async (req,res)=>{
 //accepted new array creating
       if(id == groupId){
         await staff.findOneAndUpdate(
-          {_id:req.staff1._id },
+          {_id:req.params.id2 },
           {$push: {accepted_researchTopic_Info: arr1}},
           { new: true , upsert: true }
           
         )
 //delete from research topics array
         staff.findOneAndUpdate(
-          { _id: req.staff1._id },
+          { _id: req.params.id2 },
           { $pull: { researchTopic_Info: arr1 } },
           { new: true }
         )
@@ -215,6 +212,63 @@ router.post("/addstatusAccept/:id", auth, async (req,res)=>{
                 {panalmemberstatus : "Requested"},
                 {new : true, upsert : true}
             );
+            
+            Group.AcceptedIdOfSupervisor = sup._id;
+            await Group.save();
+
+     
+      };
+
+      res.status(200).send({status : "Topic status updated"})
+      
+      }catch(error){
+          res.status(500).send({error : error.message})
+      }
+ 
+});
+
+//topic acception
+router.post("/addstatusReject/:id1/:id2", async (req,res)=>{
+
+  const sup = await staff.findById(req.params.id2);
+  const groupId = req.params.id1
+  const Group = await group.findById(groupId);
+  const topics = sup.researchTopic_Info;
+
+
+  try{
+    //send accepted topics to specific model
+    for(var i = 0; i< topics.length; i++){
+      var arr1 = topics[i];
+      var id = arr1._id.toString();
+
+      if(id == groupId){
+   
+//delete from research topics array
+        staff.findOneAndUpdate(
+          { _id: req.params.id2 },
+          { $pull: { researchTopic_Info: arr1 } },
+          { new: true }
+        )
+          .then(arr1 => console.log(arr1))
+          .catch(err => console.log(err));
+  
+      }
+     }
+      
+
+  if(!Group){
+    throw new Error("Group not found")
+  }
+
+  if(Group.researchTopic_Status === "Requested"){
+
+              await group.findOneAndUpdate(
+                  {_id:groupId},
+                  {researchTopic_Status : "Rejected"},
+                  {new : true, upsert : true}
+              );
+            
      
       };
 
@@ -228,57 +282,6 @@ router.post("/addstatusAccept/:id", auth, async (req,res)=>{
 
 
 
-//topic Rejection
-
-router.post("/addstatusReject/:id", auth, async (req,res)=>{
-
-  const sup = await staff.findById(req.staff1._id);
-  const groupId = req.params.id
-  const Group = await group.findById(groupId)
-  const topics = sup.researchTopic_Info;
-
-  try{
-
-    for(var i = 0; i< topics.length; i++){
-      var arr1 = topics[i];
-      var id = arr1._id.toString();
-
-   //delete from research topics array
-      if(id == groupId){
-        staff.findOneAndUpdate(
-          { _id: req.staff1._id },
-          { $pull: { researchTopic_Info: arr1 } },
-          { new: true }
-        )
-          .then(arr1 => console.log(arr1))
-          .catch(err => console.log(err));
-  
-      }
-     }
-
-  
-  if(!Group){
-    throw new Error("Group not found")
-  }
-
-  if(Group.researchTopic_Status === "Requested"){
-
-              await group.findOneAndUpdate(
-                  {_id:groupId},
-                  {researchTopic_Status : "Rejected"},
-                  {new : true, upsert : true}
-              );
-              
-              
-      }
-
-      res.status(200).send({status : "Topic status updated"})
-      
-      }catch(error){
-          res.status(500).send({error : error.message})
-      }
- 
-});
 
 
 //get marking schemes to supervisours
@@ -299,24 +302,6 @@ router.get("/getmarkings",(req,res)=>{
 });
 
 
-
-
-//get project submitions to supervisours
-
-router.get("/getsubmitions",(req,res)=>{
-
-  submitions.find({}).exec((err,submitions)=>{
-      if(err){
-          return res.status(400).json({
-              error:err
-          });
-      }
-      return res.status(200).json({
-          success:true,
-          exitingsubmitions : submitions,
-      });
-  });
-});
 
 
 //get stutent groups for panel member
@@ -372,6 +357,43 @@ router.route('/group/:id').post(async(req,res)=>{
   
 });
 
+
+//Evaluate student presentations
+router.route('/mark/:id').post(async(req,res)=>{
+  try {
+
+    let Id = req.params.id;
+    var grp = await group.findById(Id);
+    var mark = req.body
+    grp.precentation_Marks = req.body.marks;
+  
+    await grp.save();
+    res.status(200).send({
+      status:"Marks send successfully",Marks:mark
+    })
+  } catch (error) {
+    res.status(500).send({
+      status:"error with Marks Sending",Error:error.message
+    })
+  }
+
+});
+
+
+//get stutent submissions for supervisors
+router.get("/desplaypanalsubmis",auth, async (req, res) => {
+  try {
+    
+    const sup = await staff.findById(req.staff1.id);
+    var arr =[];
+    arr = sup.file_Info;
+    
+
+    res.status(200).send({ status: "student submission data retrieved", file_Info: arr });
+  } catch (error) {
+     res.status(500).send({ status: "Error with retrieve", error: error.message });
+   }
+});
 
 
 

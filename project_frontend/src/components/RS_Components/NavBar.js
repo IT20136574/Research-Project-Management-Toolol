@@ -40,7 +40,7 @@ export default class NavBar extends Component{
                     <a class="nav-link" style={{ fontSize:"18px"}} href="/eveluate">Evaluate Documents</a>
                 </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <li class="nav-item">
-                    <a class="nav-link" style={{ fontSize:"18px"}} href="/topic">Project Chat</a>
+                    <a class="nav-link" style={{ fontSize:"18px"}} href="/chathome">Project Chat</a>
                 </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 
                 <li class="nav-item">

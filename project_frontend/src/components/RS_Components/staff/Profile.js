@@ -66,6 +66,30 @@ staffLogout(){
   }
 }
 
+onUpdate(){
+  window.location.href="/update"
+}
+
+
+async onDelete(){
+  const config = {
+      headers: {
+          Authorization: localStorage.getItem("Authorization")
+       }
+  }
+
+  if (window.confirm('Are you sure you wish to delete this Account?')) {
+      await axios.delete('http://localhost:8070/staff/sdelete', config).then((res) => {
+        localStorage.removeItem('Authorization')
+        alert("Your Account delete successfull")
+        window.location="/home"
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+  }
+}
+
 
   render() {
     return (
