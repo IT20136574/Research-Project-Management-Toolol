@@ -89,13 +89,20 @@ const studentGroupSchema = new mongoose.Schema({
   
   precentation_Marks: {
     type:String,
+    default: "Pending"
     //required: true
   },
 
   AcceptedIdOfSupervisor: {
     type:String,
     //required: true
-  }
+  },
+
+  Document_Marks: {
+    type:String,
+    default: "Pending"
+    //required: true
+  },
  
 });
  

@@ -397,4 +397,26 @@ router.get("/desplaypanalsubmis",auth, async (req, res) => {
 
 
 
+//Evaluate student documents
+router.route('/docmark/:id').post(async(req,res)=>{
+  try {
+
+    let Id = req.params.id;
+    var grp = await group.findById(Id);
+    var markz = req.body
+    grp.Document_Marks = req.body.marks;
+  
+    await grp.save();
+    res.status(200).send({
+      status:"Marks send successfully",Marks:markz
+    })
+  } catch (error) {
+    res.status(500).send({
+      status:"error with Marks Sending",Error:error.message
+    })
+  }
+
+});
+
+
 module.exports = router;
