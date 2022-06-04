@@ -1,11 +1,64 @@
 import React from "react";
 import { Component } from 'react';
 import 'typeface-quicksand';
-
+import axios from "axios";
 
 export default class Header extends Component {
 
+    constructor(props){
+        super(props);
+        this.state={
+          group:[],
+        }
+    }
 
+    componentDidMount(){
+        this.displayx();
+        }
+        
+        
+        displayx(){
+          try{
+                var config = {
+                    headers: {
+                    Authorization: localStorage.getItem("Authorization"),
+                    },
+                };
+        
+
+   
+                axios.get(`http://localhost:8070/student/getUser`,config).then(res =>{
+                if(res.data.status){
+
+                            this.setState({group:res.data.User});
+
+                
+                    }
+                    
+                 
+                    
+        
+                })
+            }catch(error){
+                console.log(error);
+                alert(error);
+            }
+            }
+
+
+            userLogout(){
+
+                if (window.confirm('Are you sure you wish to logout from this Account?')) {
+        
+                    localStorage.removeItem('Authorization')
+        
+                    alert("log out complete")
+        
+                    window.location = "/login"
+        
+                }
+        
+            }
 
     render() {
         return (
@@ -23,7 +76,7 @@ export default class Header extends Component {
                         alt="Black and White Portrait of a Man"
                         loading="lazy"
                     /><p>  &nbsp;&nbsp; </p>
-                <a class="navbar-brand" href="#!"><span style={{color: "#5e9693"}}>Reasearch</span><span style={{color: "#fff"}}>Management</span></a>
+                <a class="navbar-brand" href="#!"><span style={{color: "#5e9693"}}>Reasearch</span><span style={{color: "#ADD8E6"}}>Management</span></a>
                 <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
                     data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -38,45 +91,44 @@ export default class Header extends Component {
                         <a class="nav-link" href="/grpreg">Student Group</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/topic">Research Topic</a>
+                        <a class="nav-link" href="/grpTopic">Research Topic</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/supervisors">Supervisor</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#!">Reference</a>
+                        <a class="nav-link" href="/pannelDetails">Pannel</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/document">Submissions</a>
+                        <a class="nav-link" href="/submissions">Submissions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#!">Downloads</a>
+                        <a class="nav-link" href="/documents">Documents</a>
                     </li>
                     </ul>
                     <ul class="navbar-nav d-flex flex-row">
+
+          
                     <li class="nav-item me-3 me-lg-0">
                         <a class="nav-link" href="#!">
-                        <i class="fas fa-shopping-cart"></i>
+                        <button class="btn btn-light" onClick={()=>this.userLogout()}>
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<span>Log Out</span>
+                        </button>
                         </a>
                     </li>
-                    <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="#!">
-                        <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="#!">
-                        <i class="fab fa-instagram"></i>
-                        </a>
-                    </li>
+
+                    
+
+
+
                     <div>&nbsp;&nbsp;&nbsp;</div>
                     <li class="nav-item me-3 me-lg-0">
                         <a class="nav-link" href="#!">
                         <img
-                        src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                        src={this.state.group.imageUrl}
                         class="rounded-circle"
                         height="35"
-                        alt="Black and White Portrait of a Man"
+                        alt=""
                         loading="lazy"
                     />
 

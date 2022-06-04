@@ -105,6 +105,29 @@ const staffSchema = new mongoose.Schema({
           required: true,
           ref: "staff"
         }
+    }],
+
+    file_Info: [{
+
+      _id: {
+          type: mongoose.Schema.Types.ObjectId,
+          //required: true,
+          ref: "student_groups"
+      },
+      group_name: {
+        type: String,
+        //required: true
+      },
+
+      submitionTitle: {
+        type : String,
+        trim:true
+      },
+      
+      fileUrl: {
+        type: String,
+        //required: true
+      }
     }]
 }
 );

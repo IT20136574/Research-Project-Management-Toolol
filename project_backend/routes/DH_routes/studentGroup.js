@@ -103,6 +103,7 @@ const auth = require("../../middleware/auth");
         let groupMember1 = {
           _id: mem1._id,
           student_id: mem1.student_id,
+          imageUrl: mem1.imageUrl,
           name: mem1.name,
           email: mem1.email,
           phone: mem1.phone,
@@ -124,6 +125,27 @@ const auth = require("../../middleware/auth");
       
 
   });
+
+
+
+
+  //get group details
+  router.get("/grpDetails",auth, async (req,res)=>{
+    try{
+      const Student = await student.findById(req.Std._id);
+      const gid = Student.grp_id;
+      const Group = await group.findById(gid);
+
+      if(!Group){
+        throw new Error("Not registered in a group")
+      }
+
+      res.status(200).send({status:"Group details retrieved",groupDetais:Group});
+    }catch(error){
+      console.log(error);
+      res.status(500).send({status : "Error with retrieve",Error:error})
+    }
+  })
 
 
 
@@ -178,8 +200,10 @@ router.delete("/deleteMem/:id", async (req, res)=>{
 
                //update group status
                const status = "Not registered..";
+               const grp_id = "";
 
                member.status = status;
+               member.grp_id = grp_id;
       
                await member.save();
 
@@ -238,6 +262,12 @@ router.delete("/deleteMem/:id", async (req, res)=>{
             { $push: { researchTopic_Info: r_topicItems } },
             { new: true, upsert: true }
           )
+
+                      //update research topic status
+                      const grp_status = "Registered";
+                      Group.researchTopic_Status = grp_status;
+                      await Group.save();
+
           res.status(200).send({ status: "Research topic registered...!", researchTopic_Info: r_topicItems });
         } catch (error) {
           console.log(error.message);

@@ -28,9 +28,21 @@ router.post("/signup", async (req, res) => {
         pwd,
         imageUrl
       } = req.body;
+
+      if(!name || !nic || !faculty || !student_id || !batch || !specialization || !phone  || !DOB || !email || !pwd )
+      return res.status(400).json({error: "required"})
+
+      if(student_id.length != 10)
+      return res.status(400).json({error: "Invalid Student ID. Student ID must be 10 charaactors"})
+
+      if(nic.length < 9)
+      return res.status(400).json({error: "Invalid NIC. Student ID must be grated than 9 charaactors"})
+
+      if(phone.length != 10 )
+      return res.status(400).json({error: "Invalid Phone number. Phone number must be 10 charaactors"})
   
     
-      let student1 = await student.findOne({ email });
+    let student1 = await student.findOne({ email });
     if (student1) {
       throw new Error("User already exists");
     }
@@ -86,7 +98,17 @@ router.post("/signup", async (req, res) => {
         res.status(500).send({ error: error.message });
         console.log(error);
       }
-  
+    })
+
+
+    //get login user details
+    router.get("/getUser",auth, async (req,res)=>{
+      try{
+        res.status(200).send({status:"User fetched",User:req.Std});
+      }catch(error){
+        console.log(error);
+        res.status(500).send({error: error.message})
+      }
     })
 
 

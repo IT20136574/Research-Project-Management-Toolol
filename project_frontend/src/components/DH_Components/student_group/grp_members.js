@@ -11,7 +11,7 @@ export default class Member extends Component {
       this.state={
            member1_student_id:"",
            groupMembers:[],
-           visible:0
+           visible:"",
       }
   }
   
@@ -51,16 +51,18 @@ export default class Member extends Component {
   
     axios.get(`http://localhost:8070/studentGroup/display/${id}`).then(res =>{
     if(res.data.status){
+
             this.setState({
                 groupMembers:res.data.groupMembers
             });
 
-            console.log(this.state.groupMembers)
             const size = this.state.groupMembers.length
             console.log(size)
-            if(size <= 4){
-                this.setState({visible:4})
-                console.log(this.state)
+
+            if(size < 4){
+                this.setState({visible:"full"})
+            }else{
+                this.setState({visible:""})
             }
         }
 
@@ -112,24 +114,28 @@ componentDidMount(){
                     <div class="row justify-content-center mb-3">
                         <div class="col-md-12 col-xl-10">
 
-                            <form name="form" onSubmit={this.onSubmit}>
+                        {this.state.visible == "full" &&
+                                                    <form name="form" onSubmit={this.onSubmit}>
 
-                                <div className="d-flex align-items-center mb-3 pb-1">
-                                <center><i className="fa fa-users fa-2x me-3" style={{color: "#ff6219"}}></i>
-                                    <span className="h2 mb-0">Group Member Registration</span></center>
-                                </div>
+                                                    <div className="d-flex align-items-center mb-3 pb-1">
+                                                    <center><i className="fa fa-users fa-2x me-3" style={{color: "#ff6219"}}></i>
+                                                        <span className="h2 mb-0">Group Member Registration</span></center>
+                                                    </div>
+                    
+                                                    <h5 className="fw-normal mb-3 pb-3" style={{letterSpacing:"1px"}}>Student ID</h5>
+                    
+                                                    <div class="form-floating mb-3">
+                                                        <input type="text" class="form-control" name="member1_student_id" id="floatingInput" placeholder="name@example.com" onChange={this.handleInputChange} value={this.setState.member1_student_id}  required/>
+                                                        <label for="floatingInput">Student ID</label>
+                                                    </div>
+                    
+                                                    <div className="pt-1 mb-4">
+                                                        <button className="btn btn-dark btn-lg btn-block ml-4 mr-4" type="submit">Next</button>
+                                                    </div>
+                                                </form>
+                        
+                        }
 
-                                <h5 className="fw-normal mb-3 pb-3" style={{letterSpacing:"1px"}}>Student ID</h5>
-
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" name="member1_student_id" id="floatingInput" placeholder="name@example.com" onChange={this.handleInputChange} value={this.setState.member1_student_id}  required/>
-                                    <label for="floatingInput">Student ID</label>
-                                </div>
-
-                                <div className="pt-1 mb-4">
-                                    <button className="btn btn-dark btn-lg btn-block ml-4 mr-4" type="submit">Next</button>
-                                </div>
-                            </form>
                         </div>
                     </div>    
                 </div>
@@ -148,37 +154,9 @@ componentDidMount(){
                             
                            
                         </div>
-                        {/* <table className="table table-hover" style={{marginTop:'40px', background: "#F0FFFF" }} >
-                            <thead>
-                                <tr bgcolor="#D5D6EA">
-                                <th scope="col">No</th>
-                                <th scope="col">student_id</th>
-                                <th scope="col">name</th>
-                                <th scope="col">email</th>
-                                <th scope="col">phone</th>
 
-                                </tr>
-                            </thead>  
-                            <tbody>
-                                {this.state.groupMembers.map((groupMembers,index)=>(
-                                   <tr>
-                                        <th scope = "row">{index +1}</th>
-                                        <td>{groupMembers.student_id}</td>
-                                        <td>{groupMembers.name}</td>
-                                        <td>{groupMembers.email}</td>
-                                        <td>{groupMembers.phone}</td>
-                                        <td>
- 
-                                        <button type="submit" onClick={()=>this.onDelete(groupMembers._id)} >Remove</button>
-               
-                                        </td>
-                                    </tr>
-                                   
-                                ))}
-                            </tbody>
-                        </table> */}
 
-<table class="table align-middle mb-0 bg-white">
+                    <table class="table align-middle mb-0 bg-white">
                         <thead class="bg-light">
                             <tr>
                             <th>Name</th>

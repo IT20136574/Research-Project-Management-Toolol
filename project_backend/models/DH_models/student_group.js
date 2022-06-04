@@ -40,6 +40,10 @@ const studentGroupSchema = new mongoose.Schema({
       ref: "students"
     },
 
+    imageUrl: {
+      type: String,
+    },
+
     student_id: {
       type: String,
      //require: true
@@ -57,6 +61,12 @@ const studentGroupSchema = new mongoose.Schema({
       required: false
     }
   }],
+
+  AcceptedIdOfSupervisor:{
+    type: String,
+    trim: true
+  },
+
 
 
 

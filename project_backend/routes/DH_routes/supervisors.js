@@ -61,19 +61,14 @@ router.get("/displaySuper",auth, async (req, res) => {
   
   
   //request supervisor/co-supervisor
-  router.post("/requestSupervisor/:id", auth, async (req, res) => {
+  router.post("/requestSupervisor/:id1/:id2",async (req, res) => {
         
     try {
-      const Student = await student.findById(req.Std._id);
       const supervisor = await staff.findById(req.params.id);
-      const gid = Student.grp_id;
+      const gid = req.params.id2;
       const Group = await group.findById(gid);
   
-  
-      if (!Student) {
-        throw new Error('There is no Student')
-      }
-  
+
       if (!Group) {
         throw new Error('You are not registered in a group...!')
       }
@@ -99,7 +94,7 @@ router.get("/displaySuper",auth, async (req, res) => {
       };
   
       await staff.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: req.params.id1 },
         { $push: { researchTopic_Info: researchTopic_Info } },
         { new: true, upsert: true }
       )
