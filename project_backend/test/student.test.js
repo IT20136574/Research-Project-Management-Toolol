@@ -12,8 +12,6 @@ beforeAll(async () => {
 
     },
 
-
-
     (err) => {
         if (err) {
             console.error(err);
@@ -24,11 +22,7 @@ beforeAll(async () => {
 });
 
 
-
-
 it("Register to the system Admin without required field", async () => {
-
-
 
     const RequiredField = new Student({
         student_id: "IT20128418",
