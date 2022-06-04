@@ -8,60 +8,60 @@ const staffSchema = new mongoose.Schema({
  
     fname:{
         type : String,
-        require:true
+        required:true
     },
 
     lname:{
       type : String,
-      require:true
+      required:true
   },
 
  
  
     email:{
         type :String,
-        require:true,
+        required:true,
         lowercase: true
     },
  
     username:{
         type :String,
-        require:true
+        required:true
     },
  
     password:{
         type :String,
-        require:true
+        required:true
     },
  
     nic:{
         type :String,
-        require:true,
+        required:true,
     },
  
     staffid:{
         type :String,
-        require:true,
+        required:true,
     },
    
     field:{
         type :String,
-        require:true
+        required:true
     },
  
     phone:{
         type :String,
-        require:true
+        required:true
     },
    
     description:{
         type :String,
-        require:true
+        required:true
     },
  
     profileImage:{
         type:String,
-        require :true,
+        required :true,
     },
     role: {
         type:String,
@@ -137,9 +137,36 @@ const staffSchema = new mongoose.Schema({
           required: true,
           ref: "staff"
         }
+    }],
+
+    file_Info: [{
+      _id: {
+
+          type: mongoose.Schema.Types.ObjectId,
+          //required: true,
+          ref: "student_groups"
+      },
+
+      group_name: {
+        type: String,
+        //required: true
+
+      },
+      submitionTitle: {
+        type : String,
+        trim:true
+
+      },
+
+      fileUrl: {
+        type: String,
+
+        //required: true
+
+      }
+
     }]
-}
-);
+});
  
 //password encryption
 staffSchema.pre('save', async function(next){

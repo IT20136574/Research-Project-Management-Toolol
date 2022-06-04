@@ -31,7 +31,7 @@ export default class App extends Component {
     return (
        
         <Router>
-          {/* <ChatProvider> */}
+        
             <Switch>
             
             
@@ -53,12 +53,12 @@ export default class App extends Component {
 
   <ChatProvider>
 
-    <ChakraProvider>
+          <ChakraProvider>
 
             <Route path="/chathome"  component={ChatHome}/>
             <Route path="/chats"  component={ChatPage}/>
            
-            </ChakraProvider>
+          </ChakraProvider>
             
    </ChatProvider>         
       
