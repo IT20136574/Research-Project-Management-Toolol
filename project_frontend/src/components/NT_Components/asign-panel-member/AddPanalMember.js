@@ -122,50 +122,58 @@ export default class AddPanalMember extends Component {
               <center><h3 className="fw-bold mb-0">Allocate Panel Members</h3></center>
               <hr className='mt-4 mb-5' style={{height:3+"px"}}/>
               <form onSubmit={this.onsubmit}>
-              <div class="form-group row float-left">
-                        
-                            <label class="col-sm-2 col-form-label">Group Name :</label>
-                            <input type="text" class="form-control w-50" name="orgCategoryName" value={this.state.groupName}  required readOnly/>
-                            
-                        </div><br/>
-                            
-                        <div class="form-group row float-left">
-                            <label class="col-sm-2 col-form-label float-left">Research Topic :</label>
-                            <input type="text" class="form-control w-50" name="orgCategoryName" value={this.state.topic}  readOnly/>
-                            
-                        </div><br/>      
-                    <div class="form-group row">
-                                <label class="col-sm-2 col-form-label float-left">Panel Member 02 :</label>
-                                {/* <input type="Select" class="form-control w-50" name="orgCategoryName" required /> */}
-                                <select class="form-select w-50" aria-label="Default select example" onChange={this.onChangepanelMember1} required>
-                                <option selected> Select Panel Member 01</option>
+
+              <div className="row">
+                        <div className="col-md-12 mb-2">
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" name="groupName" id="groupName" value={this.state.groupName} placeholder="Group Name" readOnly/>
+                            <label for="floatingInput">Group Name</label>
+                        </div>
+                        </div>
+                </div>
+
+                <div className="row">
+                        <div className="col-md-12 mb-2">
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" name="topic" id="topic" value={this.state.topic} placeholder="Topic" readOnly/>
+                            <label for="floatingInput">Topic</label>
+                        </div>
+                        </div>
+                </div>
+
+                <div className="row">
+                        <div className="col-md-6 mb-4">
+                        <div class="form-floating mb-3">
+                        <select className="form-control" required="required" id="gender" placeholder="Gender"  name="gender" onChange={this.onChangepanelMember1}>
+                        <option selected> Select Panel Member 01</option>
                                 {this.state.specificPmembers1.map((specificPmembers1) => (
-                               <option key={specificPmembers1._id} value={specificPmembers1._id}>
-                                {specificPmembers1.fname+" "+specificPmembers1.lname}
-                            </option>
-                  ))}
-                        </select>  
-                            
-                        </div><br/>
-                        <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Panel Member 02 :</label>
-                                <select class="form-select w-50" aria-label="Default select example" onChange={this.onChangepanelMember2} required>
+                                    <option key={specificPmembers1._id} value={specificPmembers1._id}>
+                                        {specificPmembers1.fname+" "+specificPmembers1.lname}
+                                    </option>
+                                ))}
+                        </select>
+                        </div>
+                        </div>
+
+                        <div className="col-md-6 mb-4">
+                        <div class="form-floating mb-3">
+                        <select className="form-control" required="required" id="gender" placeholder="Gender"  name="gender" onChange={this.onChangepanelMember2}>
                                 <option selected> Select Panel Member 02</option>
-                                {this.state.specificPmembers1.map((specificPmembers1) => (
-                                <option key={specificPmembers1._id} value={specificPmembers1._id}>
+                                    {this.state.specificPmembers1.map((specificPmembers1) => (
+                                        <option key={specificPmembers1._id} value={specificPmembers1._id}>
                                     {specificPmembers1.fname+" "+specificPmembers1.lname}
                                 </option>
 
-                        ))}
-                        </select>  
-                            
-                        </div><br/>
+                                ))}
+                        </select>
+                        </div>
+                        </div>
+                        </div>
+        
                         <div className='mt-4'>
-                            <center><input type="reset" class="btn btn-warning" value="Reset" style={{width:150+"px"}}/> &nbsp;&nbsp; <input type="submit" class="btn btn-primary" value="Submit" style={{width:150+"px"}}/></center>
+                            <center> <a href='/showgroups/Accepted'><input class='btn btn-info' type="button" value="Cancel" style={{width: 15+"%"}}/></a> &nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-warning" value="Reset" style={{width:150+"px"}}/> &nbsp;&nbsp; <input type="submit" class="btn btn-primary" value="Allocate" style={{width:150+"px"}}/></center>
                         </div>
                         </form>
-      
-  
               </div>
             </div>
           </div>

@@ -53,39 +53,40 @@ export default class ViewCoSupervisor extends Component {
             <div class="col-md-12">
             <div class="card mb-2 mt-3" style={{width:94+"%",boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
                 <div class="card-body">
-                <h4 className="fw-bold mb-1">{this.state.fname} {this.state.lname}</h4><br/>
+                <h4 className="fw-bold mb-1">Co-Supervisor Profile</h4><br/>
 
                 <div className='row'>
                 <div className="col-md-6 mb-2">
                     <div class="form-floating mb-2">
                         <ul>
-                            <li>
+                            <li className='mt-3'>
                                 Name : {this.state.fname} {this.state.lname}
                             </li>
-                            <li>
+                            <li className='mt-3'>
                                 NIC : {this.state.nic}
                             </li>
-                            <li>
+                            <li className='mt-3'>
                                 Staff ID : {this.state.staffid}
                             </li>
-                            <li>
+                            <li className='mt-3'>
                                 User Name : {this.state.username}
                             </li>
-                            <li>
+                            <li className='mt-3'>
                                 Email : {this.state.email}
                             </li>
-                            <li>
+                            <li className='mt-3'>
                                 Phone Number : {this.state.phone}
                             </li>
-                            <li>
+                            <li className='mt-3'>
                                 Description : {this.state.description}
                             </li>
-                            <li>
+                            <li className='mt-3'>
                                 Field : {this.state.field}
                             </li>
                             </ul>
                         </div>
                     </div>
+                    <a href="/CoSupervisor/co-supervisor"><button className='btn btn-info' style={{width:15+"%"}}>Back</button></a>
                     </div>
                 </div>
                 </div>

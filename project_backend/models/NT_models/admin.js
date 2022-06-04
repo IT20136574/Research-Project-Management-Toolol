@@ -59,12 +59,12 @@ const adminSchema = new mongoose.Schema({
     
     dateCreated:{
         type:Date,
-        required: true
+        
     },
 
     lastUpdated:{
         type:Date,
-        required: true
+       
     },
     role:{
         type:String,

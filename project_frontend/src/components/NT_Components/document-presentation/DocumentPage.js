@@ -5,6 +5,8 @@ import { FiAlertTriangle } from 'react-icons/fi';
 import {Modal} from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
+import {toast} from 'react-toastify';
+
 
 export default class DocumentPage extends Component {
   constructor(props){
@@ -61,7 +63,12 @@ onDelete(id){
 
       axios.delete(`http://localhost:8070/document/deleteDocument/${id}`).then((res)=>{
         if(res.data){
-          window.location.reload();
+          this.setState({ show: false });
+          toast.error('Delete Successful..!',{position:toast.POSITION.TOP_Right});
+          window.setTimeout(function() {
+            window.location.reload();
+        }, 2000) 
+          
         }
       }).catch((e)=>{
         console.log(e)
@@ -129,21 +136,21 @@ onUpdate(id){
                         {
                             Documents.type === "Presentation" &&
                                 <div>
-                                    <td><a href={Documents.fileUrl}>Pesentation</a></td>
+                                    <td><a href={Documents.fileUrl}><i class="fa fa-file-powerpoint" aria-hidden="true" style={{color:"red", fontSize:"40px"}}></i> Download</a></td>
                                 </div> 
                         }
 
                         {
                             Documents.type === "PDF" &&
                                 <div>
-                                    <td><a href={Documents.fileUrl}>pdf</a></td>
+                                    <td><a href={Documents.fileUrl}><i class="fa fa-file-pdf" aria-hidden="true" style={{color:"red", fontSize:"40px"}}></i> Download</a></td>
                                 </div> 
                         }
 
                         {
-                            Documents.type === "word" &&
+                            Documents.type === "Word" &&
                                 <div>
-                                    <td><a href={Documents.fileUrl}>word</a></td>
+                                    <td><a href={Documents.fileUrl}> <i class="fa fa-file-word" aria-hidden="true" style={{color:"blue", fontSize:"40px"}}></i> Download</a></td>
                                 </div> 
                         }
 

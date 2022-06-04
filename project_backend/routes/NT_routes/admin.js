@@ -11,6 +11,18 @@ router.post('/add', async (req, res) => {
     try {
       const {fname,lname, username, pno, nic, sliitid, email, password, imageUrl,dateCreated,lastUpdated} = req.body
 
+      if(!fname || !lname || !username || !pno || !nic || !sliitid || !email || !password || !imageUrl)
+      return res.status(400).json({error : "required"})
+
+      if(username.length < 6)
+      return res.status(400).json({error : "Username must be morthan 6 character"})
+
+      if(sliitid.length < 6)
+      return res.status(400).json({error : "SLIIT ID must be morthan 6 character"})
+
+      if(pno.length !=10)
+      return res.status(400).json({error : "Phone number must be 10 character"})
+
       //Check application has already created account using given email or SLIIT staff id  
       let admin1 = await admin.findOne({email})
       let admin2 = await admin.findOne({sliitid})

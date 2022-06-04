@@ -5,6 +5,7 @@ import { FiAlertTriangle } from 'react-icons/fi';
 import {Modal} from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
+import {toast} from 'react-toastify';
 
 export default class SubmitionPage extends Component {
   constructor(props){
@@ -62,7 +63,11 @@ axios.get(`http://localhost:8070/submition/getSubmition`).then(res =>{
 onDelete(id){
         axios.delete(`http://localhost:8070/submition/deleteSubmition/${id}`).then((res)=>{
           if(res.data){
-             window.location.reload();
+            this.setState({ show: false });
+            toast.error('Delete Successful..!',{position:toast.POSITION.TOP_Right});
+            window.setTimeout(function() {
+              window.location.reload();
+          }, 2000) 
           }
         }).catch((e)=>{
           console.log(e)
@@ -122,8 +127,27 @@ onUpdate(id){
                                                 <td>{submitionTypes.submitionTitle}</td>
                                                 <td>{submitionTypes.submitionStartedDate}</td>
                                                 <td>{submitionTypes.deadline}</td>
-                                                <td>{submitionTypes.submitionType}</td>
-                                                <td style={{textAlign:"center"}}>
+                                                {
+                                                    submitionTypes.submitionType === "Presentation" &&
+                                                        <div>
+                                                            <td><i class="fa fa-file-powerpoint" aria-hidden="true" style={{color:"red", fontSize:"40px"}}></i>  File Type</td>
+                                                        </div> 
+                                                }
+
+                                                {
+                                                    submitionTypes.submitionType === "PDF" &&
+                                                        <div>
+                                                            <td><i class="fa fa-file-pdf" aria-hidden="true" style={{color:"red", fontSize:"40px"}}></i>  File Type</td>
+                                                        </div> 
+                                                }
+
+                                                {
+                                                    submitionTypes.submitionType === "Word" &&
+                                                        <div>
+                                                            <td> <i class="fa fa-file-word" aria-hidden="true" style={{color:"blue", fontSize:"40px"}}></i>  File Type</td>
+                                                        </div> 
+                                                }
+                                                                        <td style={{textAlign:"center"}}>
                                                 {/* <button type="button" onClick={()=>{this.onUpdate(submitionTypes._id)}} class="btn btn-primary btn-rounded"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;
                                                 <button type="button" onClick={()=>{this.onDelete(submitionTypes._id)}} class="btn btn-danger btn-rounded"><i class="fa fa-trash"></i></button> */}
                                                 

@@ -6,6 +6,7 @@
   "scripts": {
     "frontend": "npm start --prefix ../project_frontend",
     "start": "nodemon server.js",
+    "test": "jest --testEnvironment=node --runInBand ./test",
     "dev": "concurrently \"npm run start\" \"npm run frontend\""
   },
   "author": "",
@@ -24,5 +25,8 @@
     "nodemon": "^2.0.15",
     "react-toastify": "^8.2.0",
     "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0"
   }
 }

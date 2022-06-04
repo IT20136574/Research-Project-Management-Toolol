@@ -4,7 +4,7 @@ import {HiRefresh} from "react-icons/hi"
 import { FiAlertTriangle } from 'react-icons/fi';
 import {Modal} from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
-
+import {toast} from 'react-toastify';
 export default class PanalMemberMgtPage extends Component {
     constructor(props){
         super(props);
@@ -75,7 +75,11 @@ export default class PanalMemberMgtPage extends Component {
     onDelete(id){
           axios.delete(`http://localhost:8070/viewRole/deleteStaff/${id}`).then((res)=>{
             if(res.data){
-              window.location.reload();
+              this.setState({ show: false });
+              toast.error('Delete Successful..!',{position:toast.POSITION.TOP_Right});
+              window.setTimeout(function() {
+                window.location.reload();
+            }, 2000)
             }
           }).catch((e)=>{
             console.log(e)

@@ -57,44 +57,44 @@ export default class StudentView extends Component {
                 <div class="col-md-12">
                 <div class="card mb-2 mt-3" style={{width:94+"%",boxShadow:"0 30px 50px 0 rgba(0,0,0,0.2)"}}>
                     <div class="card-body">
-                    <h4 className="fw-bold mb-1">{this.state.name}</h4><br/>
+                    <h4 className="fw-bold mb-1">Student Profile</h4><br/>
 
                     <div className='row'>
                     <div className="col-md-6 mb-2">
                         <div class="form-floating mb-2">
                             <ul>
-                                <li>
+                                <li className='mt-3'>
                                     Name : {this.state.name}
                                 </li>
-                                <li>
+                                <li className='mt-3'>
                                     NIC : {this.state.nic}
                                 </li>
-                                <li>
+                                <li className='mt-3'>
                                     Student ID : {this.state.student_id}
                                 </li>
-                                <li>
+                                <li className='mt-3'>
                                     Date of Birth : {this.state.DOB}
                                 </li>
-                                <li>
+                                <li className='mt-3'>
                                     Email : {this.state.email}
                                 </li>
-                                <li>
+                                <li className='mt-3'>
                                     Phone Number : {this.state.phone}
                                 </li>
-                                <li>
+                                <li className='mt-3'>
                                     faculty : {this.state.faculty}
                                 </li>
-                                <li>
+                                <li className='mt-3'>
                                     Batch : {this.state.batch}
                                 </li>
-                                <li>
+                                <li className='mt-3'>
                                     Specialization : {this.state.specialization}
                                 </li>
-
-
                             </ul>
                         </div>
                     </div>
+
+                    <a href="/student"><button className='btn btn-info' style={{width:15+"%"}}>Back</button></a>
 
 
                     </div>

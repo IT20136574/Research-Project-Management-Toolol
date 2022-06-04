@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react'
 import "../../../asserts/IT20167028.css"
 import {HiRefresh} from "react-icons/hi"
+
 export default class ShowGroup extends Component {
     constructor(props){
         super(props);
@@ -106,7 +107,7 @@ export default class ShowGroup extends Component {
                           <td>{groups.researchTopic_Info[0].tags}</td>
 
                           <td style={{textAlign:"center"}}>
-                          &nbsp;<button class="btn btn-light btn-rounded" onClick={()=>this.onRedirectAddPanel(groups._id)}>Asign Panal Member</button> &nbsp;
+                          &nbsp;<button class="btn btn-primary btn-rounded" onClick={()=>this.onRedirectAddPanel(groups._id)}>Asign Panal Member</button> &nbsp;
 
                           </td>
                         </tr>                                  

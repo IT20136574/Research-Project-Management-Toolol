@@ -6,6 +6,7 @@ import axios from 'axios'
 import {Modal} from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import {FiAlertTriangle} from 'react-icons/fi'
+import {toast} from 'react-toastify';
 
 export default function MarkingSchemaPage() {
   const [markings, setmarkings] = useState([])
@@ -29,7 +30,11 @@ export default function MarkingSchemaPage() {
   onDelete = (id) =>{
           axios.delete(`http://localhost:8070/marking/deleteMarking/${id}`).then((res)=>{
             if(res.data){
-               window.location.reload();
+              setShow(false);
+              toast.error('Delete Successful..!',{position:toast.POSITION.TOP_Right});
+              window.setTimeout(function() {
+                window.location.reload();
+            }, 2000)
             }
           }).catch((e)=>{
             console.log(e)
@@ -104,7 +109,7 @@ export default function MarkingSchemaPage() {
                                 <td>{markings.mTittle}</td>
                                 <td>{markings.DTittle}</td>
                                 <td>{markings.discription}</td>
-                                <td><a href={markings.fileUrl}> File </a></td>
+                                <td><a href={markings.fileUrl}> <i class="fa fa-file-text" aria-hidden="true" style={{color:"blue", fontSize:"40px"}}></i> &nbsp; Download</a></td>
                                 <td style={{textAlign:"center"}}>
                             {/* <button type="button" onClick={()=>{this.onUpdate(markings._id)}} class="btn btn-primary btn-rounded"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;
                              <button type="button" onClick={()=>{this.onDelete(markings._id)}} class="btn btn-danger btn-rounded"><i class="fa fa-trash"></i></button> */}
