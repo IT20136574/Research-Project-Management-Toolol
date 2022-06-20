@@ -1,3 +1,291 @@
 .net{
     background-color: black;
 }
+
+
+
+
+#introCarousel,
+        .carousel-inner,
+        .carousel-item,
+        .carousel-item.active {
+          height: 100vh;
+        }
+
+        .carousel-item:nth-child(1) {
+          background-image: url('https://firebasestorage.googleapis.com/v0/b/researchprojectmanagemen-d4b3b.appspot.com/o/Home-Slider-1.jpg%20Mon%20May%2023%202022%2005%3A42%3A29%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=38f63995-7415-418e-8f99-71617b10c7c9');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center center;
+        }
+        .carousel-item:nth-child(2) {
+          background-image: url('https://firebasestorage.googleapis.com/v0/b/researchprojectmanagemen-d4b3b.appspot.com/o/research-word-concept-people-letters-icons-colored-flat-vector-illustration-white-background-research-word-concept-130743336%20(1).jpg%20Mon%20May%2023%202022%2005%3A52%3A47%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=8ec0bbd1-e275-49f4-b8ba-bc74d5d78d96');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center center;
+        }
+        .carousel-item:nth-child(3) {
+          background-image: url('https://firebasestorage.googleapis.com/v0/b/researchprojectmanagemen-d4b3b.appspot.com/o/Home-Slider-1.jpg%20Mon%20May%2023%202022%2005%3A42%3A29%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=38f63995-7415-418e-8f99-71617b10c7c9');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center center;
+        }
+
+        /* Height for devices larger than 576px */
+        @media (min-width: 992px) {
+ 
+          #introCarousel,
+          .carousel-inner,
+          .carousel-item,
+          .carousel-item.active {
+            height: 50vh;
+          }
+        }
+        .navbar-scroll .nav-link,
+        .navbar-scroll .navbar-toggler-icon,
+        .navbar-scroll .navbar-brand {
+          color: #fff;
+        }
+        
+        /* Color of the links AFTER scroll */
+        .navbar-scrolled .nav-link,
+        .navbar-scrolled .navbar-toggler-icon,
+        .navbar-scrolled .navbar-brand {
+          color: #fff;
+        }
+        
+        /* Color of the navbar AFTER scroll */
+        .navbar-scroll,
+        .navbar-scrolled {
+          background-color: #cbbcb1;
+        }
+        
+        .mask-custom {
+          backdrop-filter: blur(5px);
+          background-color: rgba(255, 255, 255, .15);
+        }
+        
+        .navbar-brand {
+          font-size: 1.75rem;
+          letter-spacing: 3px;
+        }
+        .cardd {
+            margin-right: 10px;
+            margin-left: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          }
+
+
+
+
+
+
+
+.mt-100{
+  margin-top:100px;
+}
+.cardd {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px 0 rgba(43,43,43,.1), 0 11px 6px -7px rgba(43,43,43,.1);
+  box-shadow: 0 0 5px 0 rgba(43,43,43,.1), 0 11px 6px -7px rgba(43,43,43,.1);
+  border: none;
+  margin-bottom: 30px;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+.cardd .cardd-header {
+  background-color: transparent;
+  border-bottom: none;
+  padding: 20px;
+  position: relative;
+}
+
+.cardd .cardd-header h5:after {
+  content: "";
+  background-color: #d2d2d2;
+  width: 101px;
+  height: 1px;
+  position: absolute;
+  bottom: 6px;
+  left: 20px;
+}
+
+.cardd .cardd-block {
+  padding: 1.25rem;
+}
+
+.dropzone.dz-clickable {
+  cursor: pointer;
+}
+
+.dropzone {
+  min-height: 150px;
+  border: 1px solid rgba(42,42,42,0.05);
+  background: rgba(204,204,204,0.15);
+  padding: 20px;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px 0 rgba(43,43,43,0.1);
+  box-shadow: inset 0 0 5px 0 rgba(43,43,43,0.1);
+}
+
+.m-t-20 {
+  margin-top: 20px;
+}
+
+.btn-primary, .sweet-alert button.confirm, .wizard>.actions a {
+  background-color: #4099ff;
+  border-color: #4099ff;
+  color: #fff;
+  cursor: pointer;
+  -webkit-transition: all ease-in .3s;
+  transition: all ease-in .3s;
+}
+
+.btn {
+  border-radius: 2px;
+  text-transform: capitalize;
+  font-size: 15px;
+  padding: 10px 19px;
+  cursor: pointer;
+}
+
+.item .item-content {
+  padding: 30px 35px;
+}
+.image-upload {
+  width: 100%;
+  height: 300px;
+  border: 1px dashed #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  position: relative;
+  text-align: center;
+  background: #f8f8f9;
+  color: #666;
+  overflow: hidden;
+}
+
+
+.item-wrapper form img {
+  margin-bottom: 20px;
+  width: auto;
+  height: auto;
+  max-height: 400px;
+  width: auto;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+
+.image-upload img {
+  height: 100%!important;
+  width: auto!important;
+  border-radius: 0px;
+  margin: 0 auto;
+}
+
+.image-upload i {
+  font-size: 6em;
+  color: #ccc;
+}
+
+
+.image-upload input {
+  cursor: pointer;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.item-wrapper input {
+  height: 43px;
+  line-height: 43px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+    
+
+
+
+
+          
+.alignMargin{
+    margin-top:10px;
+    margin-left: 280px;
+}
+
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 400px;
+    overflow: auto;
+    }
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+.alignMarginN{
+    margin-top:10px;
+    margin-left: 350px;
+}
+
+.alignMarginN2{
+    margin-top:10px;
+    margin-left: 320px;
+}
+
+input:not(:placeholder-shown):invalid{
+    background-color:pink;
+    box-shadow:0 0 0 2px red;
+}
+  
+/* ravi */
+
+::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.281);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+
+  
+ 
+  .img1{
+      width: 100%;
+      height: 40.1rem;
+  }
+
+  
+
+  
+  .cardR{
+    box-shadow: 0 30px 50px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-right: "11rem",
+  }
+  
+  .cardR:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+ 
+  .cardN2{
+    background-color: #C2DCF5;
+    padding: 20px 20px 20px 20px;
+    margin-left: 10px;
+    border-radius: 15px;
+  }
+  

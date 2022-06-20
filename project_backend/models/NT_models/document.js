@@ -13,19 +13,19 @@ const documentSchema = new mongoose.Schema({
         trim:true
     },
 
-    Uploaddate: {
-        type : String,
-        require:true,
-        trim:true
-    },
-
     discription: {
         type : String,
         require:true,
         trim:true
     },
 
-    filename: {
+    type: {
+        type : String,
+        require:true,
+        trim:true
+    },
+
+    fileUrl: {
         type : String,
         require:true,
         trim:true

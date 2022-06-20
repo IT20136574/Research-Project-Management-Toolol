@@ -1,88 +1,172 @@
 const mongoose = require('mongoose')
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-
-
+ 
+ 
 const staffSchema = new mongoose.Schema({
  
  
     fname:{
         type : String,
-        require:true
+        required:true
     },
- 
+
     lname:{
-        type :String,
-        require:true
-    },
+      type : String,
+      required:true
+  },
+
+ 
  
     email:{
         type :String,
-        require:true,
+        required:true,
         lowercase: true
     },
  
     username:{
         type :String,
-        require:true
+        required:true
     },
  
     password:{
         type :String,
-        require:true
+        required:true
     },
  
     nic:{
         type :String,
-        require:true,
+        required:true,
     },
-
+ 
     staffid:{
         type :String,
-        require:true,
+        required:true,
     },
-    
+   
     field:{
         type :String,
-        require:true
+        required:true
     },
-
+ 
     phone:{
         type :String,
-        require:true
+        required:true
     },
-    
+   
     description:{
         type :String,
-        require:true
+        required:true
     },
  
     profileImage:{
         type:String,
-        require :true,
+        required :true,
     },
     role: {
         type:String,
-        
+       
     },
-
-    researchTopic_Info: [
-        {
-          _id: {
-              type: String,
-              ref: "studentgroups"
-          }
-        }
-
-  ],
     tokens: [{
         token: {
           type: String,
           required: true,
         }
-      }]  
- 
-});
+      }],
+
+
+      researchTopic_Info: [{
+        _id: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: "student_groups"
+        },
+        group_name:{
+          type :String,
+          require:true
+        },
+          research_Topic: {
+            type: String,
+           //require: true
+          },
+          field: {
+            type: String,
+            //required: true
+          },
+          tags: {
+            type: String,
+            //required: true
+          }
+      }],
+
+      
+      groups: [{
+        _id: {
+          type: String,
+          required: true,
+          ref: "staff"
+        },
+        research_Topic: {
+          type: String,
+         //require: true
+        },
+        group_name:{
+          type :String,
+          require:true
+        },
+        groupMembers: [{
+          _id: {
+            type: String,
+            required: true,
+            ref: "students"
+          },
+      
+          student_id: {
+            type: String,
+           //require: true
+          },
+          name: {
+            type: String,
+            //required: true
+          },
+          email: {
+            type: String,
+            //required: true
+          },
+          phone: {
+            type: String,
+            required: false
+          }
+        }],
+      }],
+
+
+    file_Info: [{
+
+      _id: {
+          type: mongoose.Schema.Types.ObjectId,
+          //required: true,
+          ref: "student_groups"
+      },
+      group_name: {
+        type: String,
+        //required: true
+      },
+
+      submitionTitle: {
+        type : String,
+        trim:true
+      },
+      
+      fileUrl: {
+        type: String,
+        //required: true
+      },
+
+      }],
+
+}
+);
  
 //password encryption
 staffSchema.pre('save', async function(next){
@@ -116,3 +200,7 @@ staffSchema.methods.generateAuthToken = async function () {
  
 const staff = mongoose.model("staff",staffSchema);
 module.exports = staff;
+ 
+ 
+ 
+

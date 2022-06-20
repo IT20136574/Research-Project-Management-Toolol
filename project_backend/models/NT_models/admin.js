@@ -11,12 +11,6 @@ const adminSchema = new mongoose.Schema({
         trim:true
     },
 
-    mname: {
-        type : String,
-        require:true,
-        trim:true
-    },
-
     lname: {
         type : String,
         require:true,
@@ -61,7 +55,22 @@ const adminSchema = new mongoose.Schema({
 
     imageUrl: {
         type: String,
-      },
+    },
+    
+    dateCreated:{
+        type:Date,
+        
+    },
+
+    lastUpdated:{
+        type:Date,
+       
+    },
+    role:{
+        type:String,
+        default : "admin"
+    },
+
 
     tokens: [{
         token: {
@@ -86,7 +95,7 @@ adminSchema.methods.generateAuthToken = async function () {
     admin.tokens = admin.tokens.concat({ token });
     await admin.save();
     return token;
-  };
+};
  
   adminSchema.statics.findByCredentials = async (username, password) => {
     const admin1 = await admin.findOne({ username});
